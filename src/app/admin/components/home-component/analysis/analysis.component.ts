@@ -9,31 +9,26 @@ import { FilterModel } from 'src/app/admin/models/Filters.model';
 })
 export class AnalysisComponent implements OnInit {
 
-  resultiTable: any[] = []
+  resultiTable: any[] = [];
   page = 1;
   pageSize = 2;
   collectionSize = this.resultiTable.length;
-  filter: FilterModel;
-
-  from: any;
-  to: any;
-  bu: string;
-  task: string;
-  isFilterClicked= false;
+  filter: FilterModel = {} as FilterModel;
+  isFilterClicked = false;
 
   constructor(
     private analysisService: AnalysisApiService) { }
 
   ngOnInit() {
-    
+
   }
 
   search() {
-    this.isFilterClicked=true;
+    this.isFilterClicked = true;
     this.analysisService.getAnalysisResult(this.filter).
-    subscribe((results: any) => {
-      this.resultiTable = results;
-      this.collectionSize = this.resultiTable.length;
-    })
+      subscribe((results: any) => {
+        this.resultiTable = results;
+        this.collectionSize = this.resultiTable.length;
+      });
   }
 }

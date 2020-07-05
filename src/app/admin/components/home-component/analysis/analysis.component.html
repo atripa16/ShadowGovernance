@@ -5,7 +5,7 @@
         <ng-template ngbPanelHeader>
           <div class="d-flex align-items-center justify-content-between">
             <h5 class="m-0">Filters</h5>
-            <button ngbPanelToggle class="btn" style="background: transparent;"
+            <button ngbPanelToggle class="btn btn-link" style="background: transparent;"
               [ngClass]="!isOpen?'fa fa-angle-down':'fa fa-angle-up'" (click)="isOpen=!isOpen"></button>
           </div>
         </ng-template>
@@ -14,7 +14,7 @@
 
             <div class="input-group col-md-6  mt-4 row">
               <label for="fromDate" class="form-label col-md-4">From</label>
-              <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="from" ngbDatepicker
+              <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="filter.from" ngbDatepicker
                 #fromDate="ngbDatepicker" id='fromDate'>
               <div class="input-group-append">
                 <button class="btn btn-outline-secondary fa fa-calendar" (click)="fromDate.toggle()" type="button"></button>
@@ -22,7 +22,7 @@
             </div>
             <div class="input-group col-md-6  mt-4 row">
               <label for="toDate" class="form-label col-md-4">To</label>
-              <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="to" ngbDatepicker
+              <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="filter.to" ngbDatepicker
                 #toDate="ngbDatepicker" id='toDate'>
               <div class="input-group-append">
                 <button class="btn btn-outline-secondary fa fa-calendar" (click)="toDate.toggle()" type="button"></button>
@@ -30,14 +30,14 @@
             </div>
             <div class="form-group col-md-6  mt-4 row">
               <label for="bu" class="form-label col-md-4">BU</label>
-              <select class="form-control col-md-8" id="bu" [(ngModel)]="bu">
+              <select class="form-control col-md-8" id="bu" [(ngModel)]="filter.bu">
                 <option value='Demo'>Demo</option>
                 <option value='Demo2'>Demo2</option>
               </select>
             </div>
             <div class="form-group col-md-6  mt-4 row">
               <label for="task" class="form-label col-md-4">Task</label>
-              <select class="form-control col-md-8" id="task" [(ngModel)]="task">
+              <select class="form-control col-md-8" id="task" [(ngModel)]="filter.task">
                 <option value='task1'>task1</option>
                 <option value='task2'>task2</option>
               </select>

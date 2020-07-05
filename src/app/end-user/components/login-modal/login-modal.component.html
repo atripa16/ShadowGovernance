@@ -1,18 +1,17 @@
 <div class="modal-header">
-  <h4 class="modal-title" id="modal-title">Login Form</h4>
+  <h4 class="modal-title" id="modal-title">Login</h4>
   <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <div class="modal-body">
- <div class="form-group">
-   <input type="text" placeholder="Enter Username" class="form-control">
-   </div>
-   <div class="form-group">
+  <div class="form-group">
+    <input type="text" placeholder="Enter Username" class="form-control">
+  </div>
+  <div class="form-group">
     <input type="password" placeholder="Enter password" class="form-control">
-    </div>
+  </div>
 </div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
-  <button type="button" ngbAutofocus class="btn btn-success" (click)="login()">Login</button>
+<div class="text-center border border-top pb-2 rounded-bottom">
+    <button type="button" ngbAutofocus class="btn btn-success mt-2 px-5" (click)="login()">Login</button>
 </div>
