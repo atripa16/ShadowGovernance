@@ -1,0 +1,42 @@
+{
+    "taskDescriptions": [
+        {
+            "code": "code 1",
+            "description": "description 1"
+        },
+        {
+            "code": "code 2",
+            "description": "description 2"
+        },
+        {
+            "code": "code 3",
+            "description": "description 3"
+        },
+        {
+            "code": "code 4",
+            "description": "description 4"
+        },
+        {
+            "code": "other",
+            "description": "Other"
+        }
+    ],
+    "businessUnits":[
+        {
+            "code": "code 1",
+            "description": "Business Unit 1"
+        },
+        {
+            "code": "code 2",
+            "description": "Business Unit 2"
+        },
+        {
+            "code": "code 3",
+            "description": "Business Unit 3"
+        },
+        {
+            "code": "code 4",
+            "description": "Business Unit 4"
+        }
+    ]
+}

@@ -1,7 +1,21 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { AddResourceDetailsComponent } from './end-user/components/add-resource-details/add-resource-details.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: '',
+    component: AddResourceDetailsComponent
+  },
+  {
+    path: 'end-user',
+    loadChildren: 'src/app/end-user/end-user.module#EndUserModule'
+  },
+  {
+    path: 'admin',
+    loadChildren: 'src/app/admin/admin.module#AdminModule'
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -1,0 +1,121 @@
+<div class="container">
+  <h1 class="text-secondary m-2">Shadow Period Details</h1>
+  <form class="m-2">
+    <div class="row">
+      <div class="col-6">
+        <div class="form-group row">
+          <label for="firstNameId" class="control-label col-6">First Name:</label>
+          <div class="col-6">
+            <input type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group row">
+          <label for="projectMentorId" class="control-label col-6">Shadow Project Mentor:</label>
+          <div class="col-6">
+            <input type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <div class="form-group row">
+          <label for="capgeminiId" class="control-label col-6">Capgemini Id:</label>
+          <div class="col-6">
+            <input type="number" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group row">
+          <label for="currentDateId" class="control-label col-6">Date:</label>
+          <div class="input-group col-6">
+            <input #currentDate="ngbDatepicker" ngbDatepicker placeholder="YYYY-MM-DD" class="form-control"
+               id="currentDateId" />
+            <div class="input-group-append">
+              <button (click)="currentDate.toggle()" class="btn btn-outline-primary fa fa-calendar"
+                type="button"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <div class="form-group row">
+          <label for="capgeminiEmailId" class="control-label col-6">Capgemini Email:</label>
+          <div class="col-6">
+            <input type="email" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group row">
+          <label for="businessUnitId" class="control-label col-6">Business Unit (BU):</label>
+          <div class="input-group col-6">
+            <select class="form-control" id="businessUnitId">
+              <option *ngFor="let businessUnit of addUserDomainsModel.businessUnits" [value]="businessUnit.code">
+                {{businessUnit.description}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <div class="form-group row">
+          <label for="capgeminiEmailId" class="control-label col-6">Are you in Shadow?:</label>
+          <div class="col-6 text-center">
+            <div class="form-check form-check-inline p-2 m-0">
+              <div class="custom-control custom-radio col-6">
+                <input class="custom-control-input" required type="radio" id="yes" [value]="true" name="coHeading" />
+                <label class="custom-control-label small" for="yes">Yes</label>
+              </div>
+              <div class="custom-control custom-radio col-6">
+                <input class="custom-control-input" required type="radio" id="no" [value]="false" name="coHeading" />
+                <label class="custom-control-label small" for="no">No</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group row">
+          <label for="taskDescriptionId" class="control-label col-6">Task Description:</label>
+          <div class="input-group col-6">
+            <select class="form-control" id="taskDescriptionId">
+              <option *ngFor="let taskDescription of addUserDomainsModel.taskDescriptions"
+                [value]="taskDescription.code">
+                {{taskDescription.description}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <div class="form-group row">
+          <label for="projectNameId" class="control-label col-6">Shadow Project Name:</label>
+          <div class="col-6">
+            <input type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group row">
+          <div class="offset-6 col-6">
+            <textarea class="form-control"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="float-right">
+      <button type="button" class="btn btn-success mr-2">Cancel</button>
+      <button type="submit" class="btn btn-success">Submit</button>
+    </div>
+  </form>
+</div>
