@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { AnalysisApiService } from 'src/app/admin/services/analysis-api.service';
 import { FilterModel } from 'src/app/admin/models/Filters.model';
+import { NgbAccordion } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-analysis',
   templateUrl: './analysis.component.html',
   styleUrls: ['./analysis.component.scss']
 })
-export class AnalysisComponent implements OnInit {
+export class AnalysisComponent implements OnInit, AfterViewInit {
 
   resultiTable: any[] = [];
   page = 1;
@@ -17,7 +18,13 @@ export class AnalysisComponent implements OnInit {
   isFilterClicked = false;
 
   constructor(
-    private analysisService: AnalysisApiService) { }
+    private analysisService: AnalysisApiService,
+    private ngbAccordion: NgbAccordion
+  ) { }
+
+  ngAfterViewInit(): void {
+    this.ngbAccordion.expandAll();
+  }
 
   ngOnInit() {
 

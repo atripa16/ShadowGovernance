@@ -9,7 +9,11 @@ import { SharedModule } from '../shared/shared.module';
 import { AnalysisApiService } from './services/analysis-api.service';
 
 @NgModule({
-  declarations: [CreateUserComponent, AnalysisComponent, HomeComponentComponent],
+  declarations: [
+    CreateUserComponent,
+    AnalysisComponent,
+    HomeComponentComponent
+  ],
   imports: [
     CommonModule,
     AdminRoutingModule,
