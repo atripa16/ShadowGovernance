@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-modal',
@@ -10,11 +11,16 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class LoginModalComponent implements OnInit {
 
   constructor(
-    private modal: NgbActiveModal
+    public modal: NgbActiveModal,
+    private route: Router
   ) { }
 
   ngOnInit() {
 
   }
 
+  login(){
+    this.modal.close('Ok click');
+    this.route.navigate(['admin'])
+  }
 }
