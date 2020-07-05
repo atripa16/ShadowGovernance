@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateUserComponent implements OnInit {
 
+
+  fName: string;
+  lName:string;
+  email: string
+  accType: string;
+  
   constructor() { }
 
   ngOnInit() {
   }
 
+  createAccount() {
+
+  }
 }

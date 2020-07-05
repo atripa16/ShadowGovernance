@@ -1,3 +1,27 @@
-<p>
-  create-user works!
-</p>
+<form class="form-inline row h-100 p-4">
+
+  <div class="form-group col-md-6  mt-4 row">
+    <label for="firstName" class="form-label col-md-4">First Name</label>
+    <input type="text" class="form-control col-md-8" id="firstName" [ngModel]=fName >
+  </div>
+  <div class="form-group col-md-6  mt-4 row">
+    <label for="lastName" class="form-label col-md-4">Last Name</label>
+    <input type="text" class="form-control col-md-8" id="lastName" [ngModel]=lName >
+  </div>
+  <div class="form-group col-md-6  mt-4 row">
+    <label for="email" class="form-label col-md-4">Email</label>
+    <input type="text" class="form-control col-md-8" id="email" [ngModel]=email>
+  </div>
+  <div class="form-group col-md-6  mt-4 row">
+    <label for="accType" class="form-label col-md-4">Account Type</label>
+    <select class="form-control col-md-8" id="accType" [ngModel]=accType>
+      <option value='Admin'>Admin</option>
+      <option value='Reporting User'>Reporting User</option>
+    </select>
+  </div>
+
+  <div class="w-100 text-center mt-4">
+    <button class="btn btn-success" (click)=createAccount()>Create Account</button>
+  </div>
+
+</form>

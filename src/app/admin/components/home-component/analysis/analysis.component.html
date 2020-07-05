@@ -1,3 +1,112 @@
-<p>
-  analysis works!
-</p>
+<div class="p-2">
+  <div class="filter mb-4">
+    <ngb-accordion class="range-accordion">
+      <ngb-panel>
+        <ng-template ngbPanelHeader>
+          <div class="d-flex align-items-center justify-content-between">
+            <h5 class="m-0">Filters</h5>
+            <button ngbPanelToggle class="btn" style="background: transparent;"
+              [ngClass]="!isOpen?'fa fa-angle-down':'fa fa-angle-up'" (click)="isOpen=!isOpen"></button>
+          </div>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          <form class="form-inline row h-100 ">
+
+            <div class="input-group col-md-6  mt-4 row">
+              <label for="fromDate" class="form-label col-md-4">From</label>
+              <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="from" ngbDatepicker
+                #fromDate="ngbDatepicker" id='fromDate'>
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary fa fa-calendar" (click)="fromDate.toggle()" type="button"></button>
+              </div>
+            </div>
+            <div class="input-group col-md-6  mt-4 row">
+              <label for="toDate" class="form-label col-md-4">To</label>
+              <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="to" ngbDatepicker
+                #toDate="ngbDatepicker" id='toDate'>
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary fa fa-calendar" (click)="toDate.toggle()" type="button"></button>
+              </div>
+            </div>
+            <div class="form-group col-md-6  mt-4 row">
+              <label for="bu" class="form-label col-md-4">BU</label>
+              <select class="form-control col-md-8" id="bu" [(ngModel)]="bu">
+                <option value='Demo'>Demo</option>
+                <option value='Demo2'>Demo2</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6  mt-4 row">
+              <label for="task" class="form-label col-md-4">Task</label>
+              <select class="form-control col-md-8" id="task" [(ngModel)]="task">
+                <option value='task1'>task1</option>
+                <option value='task2'>task2</option>
+              </select>
+            </div>
+
+            <div class="w-100 text-right mt-4">
+              <button class="btn btn-success" (click)="search()">Search</button>
+            </div>
+
+          </form>
+        </ng-template>
+      </ngb-panel>
+    </ngb-accordion>
+  </div>
+  <ngb-accordion #acc="ngbAccordion" activeIds="resultTable" *ngIf= isFilterClicked>
+    <ngb-panel id="resultTable">
+      <ng-template ngbPanelHeader let-opened="opened">
+        <div class="d-flex align-items-center justify-content-between">
+          <h5 class="m-0">Results</h5>
+        </div>
+      </ng-template>
+
+      <ng-template ngbPanelContent>
+        <div class="result-table" *ngIf="resultiTable.length>0">
+          <table class="table table-md">
+            <thead>
+              <tr>
+                <th class="text-nowrap">Name</th>
+                <th class="text-nowrap">Capgemini ID</th>
+                <th class="text-nowrap">Capgemini Email</th>
+                <th class="text-nowrap">BU</th>
+                <th class="text-nowrap">Shadow Project Name</th>
+                <th class="text-nowrap">Shadow Project Mentor</th>
+                <th class="text-nowrap">Date</th>
+                <th class=" text-nowrap">Task Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let colVal of resultiTable">
+                <td class="  table-col-size-md text-truncate text-nowrap" placement="top" [ngbTooltip]="colVal?.name">{{colVal?.name}}</td>
+                <td class="  table-col-size-md text-truncate text-nowrap" placement="top" [ngbTooltip]="colVal?.capgId">{{colVal?.capgId}}</td>
+                <td class="  table-col-size-md text-truncate text-nowrap" placement="top" [ngbTooltip]="colVal?.capgEmail">{{colVal?.capgEmail}}</td>
+                <td class="  table-col-size-md text-truncate text-nowrap" placement="top" [ngbTooltip]="colVal?.bu">{{colVal?.bu}}</td>
+                <td class="  table-col-size-md text-truncate text-nowrap" placement="top" [ngbTooltip]="colVal?.shadowProjectName">{{colVal?.shadowProjectName}}</td>
+                <td class="  table-col-size-md text-truncate text-nowrap" placement="top" [ngbTooltip]="colVal?.shadowProjectMentor">{{colVal?.shadowProjectMentor}}</td>
+                <td class="  table-col-size-md text-truncate text-nowrap" placement="top" [ngbTooltip]="colVal?.date">{{colVal?.date}}</td>
+                <td class="  table-col-size-md text-truncate text-nowrap" placement="top" [ngbTooltip]="colVal?.taskDescription">{{colVal?.taskDescription}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+        <div class="d-flex justify-content-between p-2" *ngIf="resultiTable.length>0">
+          <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+          [maxSize]="4" [rotate]="true" [ellipses]="false">
+          </ngb-pagination>
+
+          <select class="custom-select" style="width: auto" [(ngModel)]="pageSize">
+            <option [ngValue]="2">2 items per page</option>
+            <option [ngValue]="4">4 items per page</option>
+            <option [ngValue]="6">6 items per page</option>
+          </select>
+        </div>
+        <span *ngIf="resultiTable.length==0"> No Results for this Filter </span>
+      </ng-template>
+    </ngb-panel>
+  </ngb-accordion>
+  <div class="w-100 text-right mt-2">
+    <button class="btn btn-warning pr-4 pl-4">Back</button>
+    <button class="btn btn-success ml-2" *ngIf="resultiTable.length>0">Export</button>
+  </div>
+</div>
