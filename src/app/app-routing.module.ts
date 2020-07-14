@@ -5,7 +5,8 @@ import { AddResourceDetailsComponent } from './end-user/components/add-resource-
 const routes: Routes = [
   {
     path: '',
-    component: AddResourceDetailsComponent
+    redirectTo: 'end-user',
+    pathMatch: 'full'
   },
   {
     path: 'end-user',

@@ -10,14 +10,14 @@ import { LoginModalComponent } from 'src/app/end-user/components/login-modal/log
 export class UserComponent implements OnInit {
 
   constructor(
-    private _ngbModal: NgbModal
+    private ngbModal: NgbModal
   ) { }
 
   ngOnInit() {
   }
 
   openLoginModal(): void {
-    this._ngbModal.open(LoginModalComponent, { centered: true });
+    this.ngbModal.open(LoginModalComponent, { centered: true });
   }
 
 }
