@@ -1,4 +1,5 @@
-  <h1 class="text-secondary m-2">Shadow Period Details</h1>
+<div>
+  <h1 class="text-secondary m-2">Shadow Details</h1>
   <form class="m-2">
     <div class="row">
       <div class="col-6">
@@ -10,12 +11,7 @@
         </div>
       </div>
       <div class="col-6">
-        <div class="form-group row">
-          <label for="projectMentorId" class="control-label col-6">Shadow Project Mentor:</label>
-          <div class="col-6">
-            <input type="text" class="form-control">
-          </div>
-        </div>
+        <button class="btn btn-success rounded-5">Fetch</button>
       </div>
     </div>
     <div class="row">
@@ -81,7 +77,7 @@
           </div>
         </div>
       </div>
-      <div class="col-6">
+      <!-- <div class="col-6">
         <div class="form-group row">
           <label for="taskDescriptionId" class="control-label col-6">Task Description:</label>
           <div class="input-group col-6">
@@ -93,7 +89,7 @@
             </select>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
     <div class="row">
       <div class="col-6">
@@ -106,14 +102,91 @@
       </div>
       <div class="col-6">
         <div class="form-group row">
+          <label for="projectMentorId" class="control-label col-6">Shadow Project Mentor:</label>
+          <div class="col-6">
+            <input type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="col-6">
+        <div class="form-group row">
           <div class="offset-6 col-6">
             <textarea class="form-control"></textarea>
           </div>
         </div>
+      </div> -->
+    </div>
+    <div class="w-100">
+      <div class="w-100 mb-4">
+        <h2 class="text-secondary m-2 d-inline">Task Description</h2>
+        <span class="pull-right">
+          <button class="btn btn-success" (click)='addRow()'>Add More Task</button>
+          <button class="btn btn-danger ml-3" (click)='deleteRow()'>Remove Task</button>
+        </span>
       </div>
+      <table class="w-100 table border">
+        <thead class="thead-light">
+          <tr>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+            <th>Saturday</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let task of fresherDetails.get('taskDesc').controls" [formGroup]='task'>
+            <td><select class="form-control" formControlName="monday">
+                <option *ngFor="let taskDescription of addUserDomainsModel.taskDescriptions"
+                  [value]="taskDescription.code">
+                  {{taskDescription.description}}
+                </option>
+              </select>
+            </td>
+            <td><select class="form-control" formControlName="tuesday">
+                <option *ngFor="let taskDescription of addUserDomainsModel.taskDescriptions"
+                  [value]="taskDescription.code">
+                  {{taskDescription.description}}
+                </option>
+              </select>
+            </td>
+            <td><select class="form-control" formControlName="wednesday">
+                <option *ngFor="let taskDescription of addUserDomainsModel.taskDescriptions"
+                  [value]="taskDescription.code">
+                  {{taskDescription.description}}
+                </option>
+              </select>
+            </td>
+            <td><select class="form-control" formControlName="thursday">
+                <option *ngFor="let taskDescription of addUserDomainsModel.taskDescriptions"
+                  [value]="taskDescription.code">
+                  {{taskDescription.description}}
+                </option>
+              </select>
+            </td>
+            <td><select class="form-control" formControlName="friday">
+                <option *ngFor="let taskDescription of addUserDomainsModel.taskDescriptions"
+                  [value]="taskDescription.code">
+                  {{taskDescription.description}}
+                </option>
+              </select>
+            </td>
+            <td><select class="form-control" formControlName="saturday">
+                <option *ngFor="let taskDescription of addUserDomainsModel.taskDescriptions"
+                  [value]="taskDescription.code">
+                  {{taskDescription.description}}
+                </option>
+              </select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
     <div class="float-right">
       <button type="button" class="btn btn-outline-secondary mr-2">Reset</button>
       <button type="submit" class="btn btn-success">Submit</button>
     </div>
   </form>
+</div>
