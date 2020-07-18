@@ -5,8 +5,8 @@
         <ng-template ngbPanelHeader>
           <div class="d-flex align-items-center ">
             
-            <button ngbPanelToggle class="btn btn-link accordian-button" style="background: transparent;"
-              [ngClass]="!isOpen?'fa fa-angle-down fa-1x font-weight-bold ':'fa fa-angle-up fa-1x font-weight-bold '" 
+            <button ngbPanelToggle class="btn btn-link accordian-button custom-border"
+              [ngClass]="!isOpen?'fa fa-chevron-down':'fa fa-chevron-up'" 
               (click)="isOpen=!isOpen"></button>
             <h5 class="ml-2 mt-1" [ngStyle]="!isOpen?{color:'#0070ad'}:{color:'#000000'}">Filters</h5>            
           </div>

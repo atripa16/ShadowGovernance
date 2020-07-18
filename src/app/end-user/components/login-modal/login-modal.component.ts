@@ -19,8 +19,8 @@ export class LoginModalComponent implements OnInit {
 
   }
 
-  login(){
-    this.modal.close('Ok click');
-    this.route.navigate(['admin'])
+  login(response: string) {
+    this.modal.close(response);
+    this.route.navigate(['admin']);
   }
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import * as moment from 'moment';
 import { AddUserDomainsModel } from '../../models/add-user-domains.model';
+import { WeekModel } from '../../models/week.model';
 import { EndUserDomainsApiService } from '../../services/end-user-domains-api.service';
 
 @Component({
@@ -11,10 +13,19 @@ import { EndUserDomainsApiService } from '../../services/end-user-domains-api.se
 export class AddResourceDetailsComponent implements OnInit {
 
   addUserDomainsModel: AddUserDomainsModel = {} as AddUserDomainsModel;
-
+  currWeekInfo: WeekModel[] = [
+    { date: null, day: null },
+    { date: null, day: null },
+    { date: null, day: null },
+    { date: null, day: null },
+    { date: null, day: null }
+  ];
+  calendarDays = [
+    'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'
+  ];
   fresherDetails = new FormGroup({
     taskDesc: new FormArray([this.createRow()])
-  })
+  });
   taskArr: FormArray;
 
   constructor(
@@ -25,6 +36,8 @@ export class AddResourceDetailsComponent implements OnInit {
     this.endUserDomainsApiService.loadAddUsersDomains().subscribe((addUserDomains: AddUserDomainsModel) => {
       this.addUserDomainsModel = addUserDomains;
     });
+    const now = moment();
+    this.setCurrWeekInfo(now);
   }
 
   createRow() {
@@ -47,4 +60,19 @@ export class AddResourceDetailsComponent implements OnInit {
     this.taskArr.removeAt(this.taskArr.length - 1);
   }
 
-}
+  prev() {
+    this.setCurrWeekInfo(moment(this.currWeekInfo[0].date, 'DD/MM/YYYY').subtract(2, 'days'));
+  }
+
+  next() {
+    this.setCurrWeekInfo(moment(this.currWeekInfo[4].date, 'DD/MM/YYYY').add(2, 'days'));
+  }
+
+  setCurrWeekInfo(currentDate: moment.Moment) {
+      for (let index = 0; index < 5; index++) {
+        this.currWeekInfo[index].day = this.calendarDays[index];
+        this.currWeekInfo[index].date = currentDate.clone().startOf('week').add(index + 1, 'day').format('DD/MM/YYYY');
+      }
+    }
+
+  }

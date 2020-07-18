@@ -17,7 +17,7 @@ export class UserComponent implements OnInit {
   }
 
   openLoginModal(): void {
-    this.ngbModal.open(LoginModalComponent, { centered: true });
+    this.ngbModal.open(LoginModalComponent, { centered: true, size: 'lg', windowClass: 'login-model' });
   }
 
 }
