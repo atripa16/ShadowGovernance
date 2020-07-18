@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { EndUserDomainsApiService } from '../../services/end-user-domains-api.service';
-import { OptionModel } from 'src/app/core/models/option.model';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { AddUserDomainsModel } from '../../models/add-user-domains.model';
-import { FormGroup, FormArray, FormControl } from '@angular/forms';
+import { EndUserDomainsApiService } from '../../services/end-user-domains-api.service';
 
 @Component({
   selector: 'app-add-resource-details',
@@ -35,8 +34,7 @@ export class AddResourceDetailsComponent implements OnInit {
       wednesday: new FormControl(),
       thursday: new FormControl(),
       friday: new FormControl(),
-      saturday: new FormControl()
-    })
+    });
   }
 
   addRow() {
@@ -45,9 +43,8 @@ export class AddResourceDetailsComponent implements OnInit {
   }
 
   deleteRow() {
-    
     this.taskArr = this.fresherDetails.get('taskDesc') as FormArray;
-    this.taskArr.removeAt(this.taskArr.length-1);
+    this.taskArr.removeAt(this.taskArr.length - 1);
   }
 
 }

@@ -1,12 +1,14 @@
-<div class="p-2">
+<div class="p-2 mt-3">
   <div class="filter mb-4">
     <ngb-accordion #filterAccordion class="range-accordion">
       <ngb-panel>
         <ng-template ngbPanelHeader>
-          <div class="d-flex align-items-center justify-content-between">
-            <h5 class="m-0">Filters</h5>
-            <button ngbPanelToggle class="btn btn-link" style="background: transparent;"
-              [ngClass]="!isOpen?'fa fa-angle-down':'fa fa-angle-up'" (click)="isOpen=!isOpen"></button>
+          <div class="d-flex align-items-center ">
+            
+            <button ngbPanelToggle class="btn btn-link accordian-button" style="background: transparent;"
+              [ngClass]="!isOpen?'fa fa-angle-down fa-1x font-weight-bold ':'fa fa-angle-up fa-1x font-weight-bold '" 
+              (click)="isOpen=!isOpen"></button>
+            <h5 class="ml-2 mt-1" [ngStyle]="!isOpen?{color:'#0070ad'}:{color:'#000000'}">Filters</h5>            
           </div>
         </ng-template>
         <ng-template ngbPanelContent>
@@ -44,7 +46,7 @@
             </div>
 
             <div class="w-100 text-right mt-4">
-              <button class="btn btn-success" (click)="search()">Search</button>
+              <button class="btn custom-button" (click)="search()">Search</button>
             </div>
 
           </form>
@@ -56,7 +58,7 @@
     <ngb-panel id="resultTable">
       <ng-template ngbPanelHeader let-opened="opened">
         <div class="d-flex align-items-center justify-content-between">
-          <h5 class="m-0">Results</h5>
+          <h5 class="m-0 text-header">Results</h5>
         </div>
       </ng-template>
 
@@ -106,7 +108,6 @@
     </ngb-panel>
   </ngb-accordion>
   <div class="w-100 text-right mt-2">
-    <button class="btn btn-warning pr-4 pl-4">Back</button>
-    <button class="btn btn-success ml-2" *ngIf="resultTable.length>0">Export</button>
+    <button class="btn custom-button" *ngIf="resultTable.length>0">Export</button>
   </div>
 </div>
