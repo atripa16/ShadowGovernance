@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit, ViewChild, AfterViewChecked, ChangeDe
 import { AnalysisApiService } from 'src/app/admin/services/analysis-api.service';
 import { FilterModel } from 'src/app/admin/models/Filters.model';
 import { NgbAccordion } from '@ng-bootstrap/ng-bootstrap';
+import { OptionModel } from 'src/app/core/models/option.model';
 
 @Component({
   selector: 'app-analysis',
@@ -11,6 +12,8 @@ import { NgbAccordion } from '@ng-bootstrap/ng-bootstrap';
 export class AnalysisComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   resultTable: any[] = [];
+  tasks: OptionModel[] = [{ code: 't1', description: 'Task 1' }];
+  bu: OptionModel[] = [{ code: 'bu1', description: 'Business 1' }];
   page = 1;
   pageSize = 2;
   collectionSize = this.resultTable.length;
@@ -29,7 +32,7 @@ export class AnalysisComponent implements OnInit, AfterViewInit, AfterViewChecke
   }
 
   ngAfterViewInit(): void {
-   this.filterAccordion.expandAll();
+    this.filterAccordion.expandAll();
   }
 
   ngOnInit() {

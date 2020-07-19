@@ -3,12 +3,13 @@
   <form class="m-2">
     <div class="row">
       <div class="col-6">
-        <div class="form-group row">
+        <app-custom-input [type]="'number'" [label]="'Capgemini Id'"></app-custom-input>
+        <!-- <div class="form-group row">
           <label for="firstNameId" class="control-label col-6">Capgemini Id:</label>
           <div class="col-6">
             <input type="text" class="form-control">
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="col-6">
         <button class="btn custom-button">Fetch</button>
@@ -16,12 +17,13 @@
     </div>
     <div class="row">
       <div class="col-6">
-        <div class="form-group row">
+        <app-custom-input [type]="'text'" [label]="'Name'"></app-custom-input>
+        <!-- <div class="form-group row">
           <label for="capgeminiId" class="control-label col-6">Name:</label>
           <div class="col-6">
             <input type="number" class="form-control">
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="col-6">
         <!-- <div class="form-group row">
@@ -39,15 +41,17 @@
     </div>
     <div class="row">
       <div class="col-6">
-        <div class="form-group row">
+        <app-custom-input [type]="'email'" [label]="'Capgemini Email'"></app-custom-input>
+        <!-- <div class="form-group row">
           <label for="capgeminiEmailId" class="control-label col-6">Capgemini Email:</label>
           <div class="col-6">
             <input type="email" class="form-control">
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="col-6">
-        <div class="form-group row">
+        <app-custom-dropdown [options]="addUserDomainsModel.businessUnits" [label]="'Business Unit (BU)'"></app-custom-dropdown>
+        <!-- <div class="form-group row">
           <label for="businessUnitId" class="control-label col-6">Business Unit (BU):</label>
           <div class="input-group col-6">
             <select class="form-control" id="businessUnitId">
@@ -56,7 +60,7 @@
               </option>
             </select>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="row">
@@ -80,20 +84,22 @@
     </div>
     <div class="row">
       <div class="col-6">
-        <div class="form-group row">
+        <app-custom-input [type]="'text'" [label]="'Shadow Project Name'"></app-custom-input>
+        <!-- <div class="form-group row">
           <label for="projectNameId" class="control-label col-6">Shadow Project Name:</label>
           <div class="col-6">
             <input type="text" class="form-control">
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="col-6">
-        <div class="form-group row">
+        <app-custom-input [type]="'text'" [label]="'Shadow Project Mentor'"></app-custom-input>
+        <!-- <div class="form-group row">
           <label for="projectMentorId" class="control-label col-6">Shadow Project Mentor:</label>
           <div class="col-6">
             <input type="text" class="form-control">
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="row">
@@ -129,40 +135,50 @@
         </thead>
         <tbody>
           <tr *ngFor="let task of fresherDetails.get('taskDesc').controls" [formGroup]='task'>
-            <td><select class="form-control" formControlName="monday">
+            <td>
+              <app-input-dropdown [options]="tasks" [placeholder]="'Choose/ Enter Task'"></app-input-dropdown>
+              <!-- <select class="form-control" formControlName="monday">
                 <option *ngFor="let taskDescription of addUserDomainsModel.taskDescriptions"
                   [value]="taskDescription.code">
                   {{taskDescription.description}}
                 </option>
-              </select>
+              </select> -->
             </td>
-            <td><select class="form-control" formControlName="tuesday">
+            <td>
+              <app-input-dropdown [options]="tasks" [placeholder]="'Choose/ Enter Task'"></app-input-dropdown>
+              <!-- <select class="form-control" formControlName="tuesday">
                 <option *ngFor="let taskDescription of addUserDomainsModel.taskDescriptions"
                   [value]="taskDescription.code">
                   {{taskDescription.description}}
                 </option>
-              </select>
+              </select> -->
             </td>
-            <td><select class="form-control" formControlName="wednesday">
+            <td>
+              <app-input-dropdown [options]="tasks" [placeholder]="'Choose/ Enter Task'"></app-input-dropdown>
+              <!-- <select class="form-control" formControlName="wednesday">
                 <option *ngFor="let taskDescription of addUserDomainsModel.taskDescriptions"
                   [value]="taskDescription.code">
                   {{taskDescription.description}}
                 </option>
-              </select>
+              </select> -->
             </td>
-            <td><select class="form-control" formControlName="thursday">
+            <td>
+              <app-input-dropdown [options]="tasks" [placeholder]="'Choose/ Enter Task'"></app-input-dropdown>
+              <!-- <select class="form-control" formControlName="thursday">
                 <option *ngFor="let taskDescription of addUserDomainsModel.taskDescriptions"
                   [value]="taskDescription.code">
                   {{taskDescription.description}}
                 </option>
-              </select>
+              </select> -->
             </td>
-            <td><select class="form-control" formControlName="friday">
+            <td>
+              <app-input-dropdown [options]="tasks" [placeholder]="'Choose/ Enter Task'"></app-input-dropdown>
+              <!-- <select class="form-control" formControlName="friday">
                 <option *ngFor="let taskDescription of addUserDomainsModel.taskDescriptions"
                   [value]="taskDescription.code">
                   {{taskDescription.description}}
                 </option>
-              </select>
+              </select> -->
             </td>
           </tr>
         </tbody>

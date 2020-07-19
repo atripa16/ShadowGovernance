@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import { AddUserDomainsModel } from '../../models/add-user-domains.model';
 import { WeekModel } from '../../models/week.model';
 import { EndUserDomainsApiService } from '../../services/end-user-domains-api.service';
+import { OptionModel } from 'src/app/core/models/option.model';
 
 @Component({
   selector: 'app-add-resource-details',
@@ -20,6 +21,8 @@ export class AddResourceDetailsComponent implements OnInit {
     { date: null, day: null },
     { date: null, day: null }
   ];
+
+  tasks: OptionModel[] = [{ code: 't1', description: 'Tasks 1' }];
   calendarDays = [
     'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'
   ];
@@ -69,10 +72,10 @@ export class AddResourceDetailsComponent implements OnInit {
   }
 
   setCurrWeekInfo(currentDate: moment.Moment) {
-      for (let index = 0; index < 5; index++) {
-        this.currWeekInfo[index].day = this.calendarDays[index];
-        this.currWeekInfo[index].date = currentDate.clone().startOf('week').add(index + 1, 'day').format('DD/MM/YYYY');
-      }
+    for (let index = 0; index < 5; index++) {
+      this.currWeekInfo[index].day = this.calendarDays[index];
+      this.currWeekInfo[index].date = currentDate.clone().startOf('week').add(index + 1, 'day').format('DD/MM/YYYY');
     }
-
   }
+
+}

@@ -1,0 +1,45 @@
+.input-group{
+    box-shadow: 5px 5px 0 0 rgba(43,10,61,.2) !important;
+    
+}
+.form-control{
+    box-shadow: none !important;
+    border-color: #000000 !important;
+    &:hover{
+        border-color: #0070ad !important;
+    }
+    &:focus{
+    border:2px solid #0070ad !important;
+    }
+
+}
+
+.label-sec {
+    margin: 0 0 5px;
+    top: -8px;
+    font: .75rem/1.33 "ubuntu",Verdana,Arial,sans-serif;
+    letter-spacing: .2px;
+    position: absolute;
+    z-index: 10 !important;
+    left: 8px;
+    color: #666;
+    padding: 0 8px;
+    background: #fff;
+}
+.field-wrap{
+    display: flex;
+    flex-direction: column;
+    flex-flow: wrap;
+    margin-bottom: 32px;
+    position: relative;
+}
+.errorStyle{
+    box-shadow: 5px 5px 0 0 rgba(255,48,77,.2) !important;
+}
+.error-border{
+    border-bottom: 1px solid #ff304d !important;
+}
+.errorText{
+    color: #ff304d;
+}
+  

@@ -1,0 +1,83 @@
+.options-control{
+    overflow-x: auto;
+    overflow-y: auto;
+    position: absolute;
+    width: 100%;
+    background: #ffffff;
+    z-index: 1;
+    border-bottom-color: #007bff;
+    border-bottom-style: solid;
+    border-bottom-width: thin;
+    border-left-color: #007bff;
+    border-left-style: solid;
+    border-left-width: thin;
+    border-right-color: #007bff;
+    border-right-style: solid;
+    border-right-width: thin;
+    max-height: 200px;
+    cursor: pointer;
+}
+.remove-margin {
+    margin-bottom: 0px;
+}
+
+.option{
+    color: #0070ad;
+    padding: 7px 4px 2px 5px;
+    min-height: 34px;
+    &:hover{
+        background: #0070ad;
+        color: white;
+    }
+}
+
+.add-margin {
+    margin-bottom: 20px;
+}
+
+.outer
+{
+  width: 100%;
+  max-height: 100%;
+  position: relative;
+}
+
+.inner
+{
+  width: 100%;
+  position: absolute;
+  max-height: 100%;
+}
+
+.form-control{
+    border-color: #000000 !important;
+    box-shadow: 5px 5px 0 0 rgba(43,10,61,.2) !important;
+    &:hover{
+        border-color: #0070ad !important;
+    }
+    &:focus{
+    border:1px solid #0070ad !important;
+    }
+}
+
+.label-sec {
+    margin: 0 0 5px;
+    top: -8px;
+    font: .75rem/1.33 "ubuntu",Verdana,Arial,sans-serif;
+    letter-spacing: .2px;
+    position: absolute;
+    z-index: 1;
+    left: 8px;
+    color: #666;
+    padding: 0 8px;
+    background: #fff;
+}
+.field-wrap{
+    display: flex;
+    flex-direction: column;
+    flex-flow: wrap;
+    margin-bottom: 32px;
+    position: relative;
+}
+
+  
