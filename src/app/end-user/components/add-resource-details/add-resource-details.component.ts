@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, NgForm } from '@angular/forms';
 import * as moment from 'moment';
 import { AddUserDomainsModel } from '../../models/add-user-domains.model';
 import { WeekModel } from '../../models/week.model';
@@ -27,6 +27,13 @@ export class AddResourceDetailsComponent implements OnInit {
     'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'
   ];
   fresherDetails = new FormGroup({
+    capgId: new FormControl(''),
+    name: new FormControl(''),
+    email: new FormControl(''),
+    bu: new FormControl(''),
+    isShadow: new FormControl(''),
+    projName: new FormControl(''),
+    mentorName: new FormControl(''),
     taskDesc: new FormArray([this.createRow()])
   });
   taskArr: FormArray;
@@ -53,6 +60,11 @@ export class AddResourceDetailsComponent implements OnInit {
     });
   }
 
+  addDetails(shadowForm: NgForm) {
+    console.log('shadow', shadowForm.value);
+
+  }
+
   addRow() {
     this.taskArr = this.fresherDetails.get('taskDesc') as FormArray;
     this.taskArr.push(this.createRow());
@@ -76,6 +88,10 @@ export class AddResourceDetailsComponent implements OnInit {
       this.currWeekInfo[index].day = this.calendarDays[index];
       this.currWeekInfo[index].date = currentDate.clone().startOf('week').add(index + 1, 'day').format('DD/MM/YYYY');
     }
+  }
+
+  onSubmit() {
+    console.log(this.fresherDetails.value);
   }
 
 }

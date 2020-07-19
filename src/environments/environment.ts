@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
 
-  apiUrl: 'assets/mock'
+  // apiUrl: 'assets/mock'
+  apiUrl: 'http://localhost:8080'
 };
 
 /*

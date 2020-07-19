@@ -1,15 +1,9 @@
 <div>
   <h1 class="text-secondary m-2">Enter your details</h1>
-  <form class="m-2">
+  <form [formGroup]="fresherDetails" class="m-2" (ngSubmit)="addDetails(shadowForm)">
     <div class="row">
       <div class="col-6">
-        <app-custom-input [type]="'number'" [label]="'Capgemini Id'"></app-custom-input>
-        <!-- <div class="form-group row">
-          <label for="firstNameId" class="control-label col-6">Capgemini Id:</label>
-          <div class="col-6">
-            <input type="text" class="form-control">
-          </div>
-        </div> -->
+        <app-custom-input formControlName="capgId" [type]="'number'" [label]="'Capgemini Id'"></app-custom-input>
       </div>
       <div class="col-6">
         <button class="btn custom-button">Fetch</button>
@@ -17,50 +11,18 @@
     </div>
     <div class="row">
       <div class="col-6">
-        <app-custom-input [type]="'text'" [label]="'Name'"></app-custom-input>
-        <!-- <div class="form-group row">
-          <label for="capgeminiId" class="control-label col-6">Name:</label>
-          <div class="col-6">
-            <input type="number" class="form-control">
-          </div>
-        </div> -->
+        <app-custom-input formControlName="name" [type]="'text'" [label]="'Name'"></app-custom-input>
       </div>
       <div class="col-6">
-        <!-- <div class="form-group row">
-          <label for="currentDateId" class="control-label col-6">Date:</label>
-          <div class="input-group col-6">
-            <input #currentDate="ngbDatepicker" ngbDatepicker placeholder="YYYY-MM-DD" class="form-control"
-               id="currentDateId" />
-            <div class="input-group-append">
-              <button (click)="currentDate.toggle()" class="btn btn-outline-secondary fa fa-calendar"
-                type="button"></button>
-            </div>
-          </div>
-        </div> -->
       </div>
     </div>
     <div class="row">
       <div class="col-6">
-        <app-custom-input [type]="'email'" [label]="'Capgemini Email'"></app-custom-input>
-        <!-- <div class="form-group row">
-          <label for="capgeminiEmailId" class="control-label col-6">Capgemini Email:</label>
-          <div class="col-6">
-            <input type="email" class="form-control">
-          </div>
-        </div> -->
+        <!-- [pattern]="'^([a-z0-9_-.]+)@(capgemini.com)$'" -->
+        <app-custom-input formControlName="email"  [type]="'email'" [label]="'Capgemini Email'"></app-custom-input>
       </div>
       <div class="col-6">
-        <app-custom-dropdown [options]="addUserDomainsModel.businessUnits" [label]="'Business Unit (BU)'"></app-custom-dropdown>
-        <!-- <div class="form-group row">
-          <label for="businessUnitId" class="control-label col-6">Business Unit (BU):</label>
-          <div class="input-group col-6">
-            <select class="form-control" id="businessUnitId">
-              <option *ngFor="let businessUnit of addUserDomainsModel.businessUnits" [value]="businessUnit.code">
-                {{businessUnit.description}}
-              </option>
-            </select>
-          </div>
-        </div> -->
+        <app-custom-dropdown formControlName="bu" [options]="addUserDomainsModel.businessUnits" [label]="'Business Unit (BU)'"></app-custom-dropdown>
       </div>
     </div>
     <div class="row">
@@ -70,11 +32,11 @@
           <div class="col-6">
             <div class="form-check form-check-inline p-2 m-0">
               <div class="custom-control custom-radio col-6">
-                <input class="custom-control-input" required type="radio" id="yes" [value]="true" name="coHeading" />
+                <input class="custom-control-input" name="isShadow" formControlName="isShadow" required type="radio" id="yes" [value]="true">
                 <label class="custom-control-label small" for="yes">Yes</label>
               </div>
               <div class="custom-control custom-radio col-6">
-                <input class="custom-control-input" required type="radio" id="no" [value]="false" name="coHeading" />
+                <input class="custom-control-input" name="isShadow" formControlName="isShadow" required type="radio" id="no" [value]="false" >
                 <label class="custom-control-label small" for="no">No</label>
               </div>
             </div>
@@ -84,22 +46,10 @@
     </div>
     <div class="row">
       <div class="col-6">
-        <app-custom-input [type]="'text'" [label]="'Shadow Project Name'"></app-custom-input>
-        <!-- <div class="form-group row">
-          <label for="projectNameId" class="control-label col-6">Shadow Project Name:</label>
-          <div class="col-6">
-            <input type="text" class="form-control">
-          </div>
-        </div> -->
+        <app-custom-input [type]="'text'" formControlName="projName" [label]="'Shadow Project Name'"></app-custom-input>
       </div>
       <div class="col-6">
-        <app-custom-input [type]="'text'" [label]="'Shadow Project Mentor'"></app-custom-input>
-        <!-- <div class="form-group row">
-          <label for="projectMentorId" class="control-label col-6">Shadow Project Mentor:</label>
-          <div class="col-6">
-            <input type="text" class="form-control">
-          </div>
-        </div> -->
+        <app-custom-input [type]="'text'" formControlName="mentorName" [label]="'Shadow Project Mentor'"></app-custom-input>
       </div>
     </div>
     <div class="row">
@@ -127,66 +77,33 @@
               <p>{{currWeek.day}}</p>
               <p>{{currWeek.date}}</p>
             </th>
-            <!-- <th>Tuesday</th>
-            <th>Wednesday</th>
-            <th>Thursday</th>
-            <th>Friday</th> -->
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let task of fresherDetails.get('taskDesc').controls" [formGroup]='task'>
             <td>
-              <app-input-dropdown [options]="tasks" [placeholder]="'Choose/ Enter Task'"></app-input-dropdown>
-              <!-- <select class="form-control" formControlName="monday">
-                <option *ngFor="let taskDescription of addUserDomainsModel.taskDescriptions"
-                  [value]="taskDescription.code">
-                  {{taskDescription.description}}
-                </option>
-              </select> -->
+              <app-input-dropdown [options]="tasks" formControlName="monday" [placeholder]="'Choose/ Enter Task'"></app-input-dropdown>
             </td>
             <td>
-              <app-input-dropdown [options]="tasks" [placeholder]="'Choose/ Enter Task'"></app-input-dropdown>
-              <!-- <select class="form-control" formControlName="tuesday">
-                <option *ngFor="let taskDescription of addUserDomainsModel.taskDescriptions"
-                  [value]="taskDescription.code">
-                  {{taskDescription.description}}
-                </option>
-              </select> -->
+              <app-input-dropdown [options]="tasks" formControlName="tuesday" [placeholder]="'Choose/ Enter Task'"></app-input-dropdown>
             </td>
             <td>
-              <app-input-dropdown [options]="tasks" [placeholder]="'Choose/ Enter Task'"></app-input-dropdown>
-              <!-- <select class="form-control" formControlName="wednesday">
-                <option *ngFor="let taskDescription of addUserDomainsModel.taskDescriptions"
-                  [value]="taskDescription.code">
-                  {{taskDescription.description}}
-                </option>
-              </select> -->
+              <app-input-dropdown [options]="tasks" formControlName="wednesday" [placeholder]="'Choose/ Enter Task'"></app-input-dropdown>
             </td>
             <td>
-              <app-input-dropdown [options]="tasks" [placeholder]="'Choose/ Enter Task'"></app-input-dropdown>
-              <!-- <select class="form-control" formControlName="thursday">
-                <option *ngFor="let taskDescription of addUserDomainsModel.taskDescriptions"
-                  [value]="taskDescription.code">
-                  {{taskDescription.description}}
-                </option>
-              </select> -->
+              <app-input-dropdown [options]="tasks" formControlName="thursday" [placeholder]="'Choose/ Enter Task'"></app-input-dropdown>
             </td>
             <td>
-              <app-input-dropdown [options]="tasks" [placeholder]="'Choose/ Enter Task'"></app-input-dropdown>
-              <!-- <select class="form-control" formControlName="friday">
-                <option *ngFor="let taskDescription of addUserDomainsModel.taskDescriptions"
-                  [value]="taskDescription.code">
-                  {{taskDescription.description}}
-                </option>
-              </select> -->
+              <app-input-dropdown [options]="tasks" formControlName="friday" [placeholder]="'Choose/ Enter Task'"></app-input-dropdown>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
-    <div class="float-right">
-      <button type="button" class="btn custom-button">Reset</button>
-      <button type="submit" class="btn custom-button">Submit</button>
-    </div>
+    
   </form>
+    <div class="float-right">
+      <button type="button"  class="btn custom-button">Reset</button>
+      <button type="button" (click)=onSubmit() class="btn custom-button">Submit</button>
+    </div>
 </div>

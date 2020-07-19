@@ -10,7 +10,8 @@ import { environment } from 'src/environments/environment';
 })
 export class EndUserDomainsApiService {
 
-  readonly LOAD_ADD_USERS_DOMAINS = environment.apiUrl + '/end-user/mockTaskDescriptions.json';
+  // readonly LOAD_ADD_USERS_DOMAINS = environment.apiUrl + '/end-user/mockTaskDescriptions.json';
+  readonly LOAD_ADD_USERS_DOMAINS = environment.apiUrl + '/loadBusinessUnits';
 
   constructor(
     private http: HttpClient

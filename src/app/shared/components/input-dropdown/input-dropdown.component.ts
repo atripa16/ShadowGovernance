@@ -41,14 +41,14 @@ export class InputDropdownComponent implements OnInit, ControlValueAccessor {
     let isContainVal = true;
     this.searchValue = value;
     this.options.forEach(choice => {
-      if (choice.value === this.searchValue) {
+      if (choice.description === this.searchValue) {
         isContainVal = false;
-        this.onChange({ id: choice.id, value });
+        this.onChange({ code: choice.code, description: value });
       }
     });
     if (this.onChange !== undefined && this.onChange != null) {
       if (isContainVal) {
-        this.onChange({ id: this.defaultKey, value });
+        this.onChange({ code: this.defaultKey, description: value });
       }
     }
   }

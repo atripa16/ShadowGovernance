@@ -4,17 +4,14 @@
       <ngb-panel>
         <ng-template ngbPanelHeader>
           <div class="d-flex align-items-center ">
-            
             <button ngbPanelToggle class="btn btn-link accordian-button custom-border"
-              [ngClass]="!isOpen?'fa fa-chevron-down':'fa fa-chevron-up'" 
-              (click)="isOpen=!isOpen"></button>
-            <h5 class="ml-2 mt-1" [ngStyle]="!isOpen?{color:'#0070ad'}:{color:'#000000'}">Filters</h5>            
+              [ngClass]="!isOpen?'fa fa-chevron-down':'fa fa-chevron-up'" (click)="isOpen=!isOpen"></button>
+            <h5 class="ml-2 mt-1" [ngStyle]="!isOpen?{color:'#0070ad'}:{color:'#000000'}">Filters</h5>
           </div>
         </ng-template>
         <ng-template ngbPanelContent>
-          <form class="form-inline row h-100 ">
-
-            <div class="input-group col-md-6  mt-4 row">
+          <form class="row">
+            <div class="col-6">
               <app-date [label]="'From'"></app-date>
               <!-- <label for="fromDate" class="form-label col-md-4">From</label>
               <input class="form-control" placeholder="yyyy-mm-dd" name="fromDate" [(ngModel)]="filter.from" ngbDatepicker
@@ -23,7 +20,7 @@
                 <button class="btn btn-outline-secondary fa fa-calendar" (click)="fromDate.toggle()" type="button"></button>
               </div> -->
             </div>
-            <div class="input-group col-md-6  mt-4 row">
+            <div class="col-6">
               <app-date [label]="'To'"></app-date>
               <!-- <label for="toDate" class="form-label col-md-4">To</label>
               <input class="form-control" placeholder="yyyy-mm-dd" name="toDate" [(ngModel)]="filter.to" ngbDatepicker
@@ -32,24 +29,24 @@
                 <button class="btn btn-outline-secondary fa fa-calendar" (click)="toDate.toggle()" type="button"></button>
               </div> -->
             </div>
-            <div class="col-md-6  mt-4">
-              <app-custom-dropdown [options]="bu" [label]="'Business Unit (BU)'"></app-custom-dropdown>
-              <!-- <label for="bu" class="form-label col-md-4">BU</label>
+              <div class="col-6">
+                <app-custom-dropdown [options]="bu" [label]="'Business Unit (BU)'"></app-custom-dropdown>
+                <!-- <label for="bu" class="form-label col-md-4">BU</label>
               <select class="form-control col-md-8" id="bu" name="bu" [(ngModel)]="filter.bu">
                 <option value='Demo'>Demo</option>
                 <option value='Demo2'>Demo2</option>
               </select> -->
-            </div>
-            <div class="col-md-6  mt-4">
-              <app-custom-dropdown [options]="tasks" [label]="'Task'"></app-custom-dropdown>
-              <!-- <label for="task" class="form-label col-md-4">Task</label>
+              </div>
+              <div class="col-6">
+                <app-custom-dropdown [options]="tasks" [label]="'Task'"></app-custom-dropdown>
+                <!-- <label for="task" class="form-label col-md-4">Task</label>
               <select class="form-control col-md-8" id="task "name="task" [(ngModel)]="filter.task">
                 <option value='task1'>task1</option>
                 <option value='task2'>task2</option>
               </select> -->
-            </div>
+              </div>
 
-            <div class="w-100 text-right mt-4">
+            <div class="w-100 text-center mt-4">
               <button class="btn custom-button" (click)="search()">Search</button>
             </div>
 
@@ -58,7 +55,7 @@
       </ngb-panel>
     </ngb-accordion>
   </div>
-  <ngb-accordion #acc="ngbAccordion" activeIds="resultTable" *ngIf= isFilterClicked>
+  <ngb-accordion #acc="ngbAccordion" activeIds="resultTable" *ngIf=isFilterClicked>
     <ngb-panel id="resultTable">
       <ng-template ngbPanelHeader let-opened="opened">
         <div class="d-flex align-items-center justify-content-between">
@@ -83,22 +80,30 @@
             </thead>
             <tbody>
               <tr *ngFor="let colVal of resultTable">
-                <td class="  table-col-size-md text-truncate text-nowrap" placement="top" [ngbTooltip]="colVal?.name">{{colVal?.name}}</td>
-                <td class="  table-col-size-md text-truncate text-nowrap" placement="top" [ngbTooltip]="colVal?.capgId">{{colVal?.capgId}}</td>
-                <td class="  table-col-size-md text-truncate text-nowrap" placement="top" [ngbTooltip]="colVal?.capgEmail">{{colVal?.capgEmail}}</td>
-                <td class="  table-col-size-md text-truncate text-nowrap" placement="top" [ngbTooltip]="colVal?.bu">{{colVal?.bu}}</td>
-                <td class="  table-col-size-md text-truncate text-nowrap" placement="top" [ngbTooltip]="colVal?.shadowProjectName">{{colVal?.shadowProjectName}}</td>
-                <td class="  table-col-size-md text-truncate text-nowrap" placement="top" [ngbTooltip]="colVal?.shadowProjectMentor">{{colVal?.shadowProjectMentor}}</td>
-                <td class="  table-col-size-md text-truncate text-nowrap" placement="top" [ngbTooltip]="colVal?.date">{{colVal?.date}}</td>
-                <td class="  table-col-size-md text-truncate text-nowrap" placement="top" [ngbTooltip]="colVal?.taskDescription">{{colVal?.taskDescription}}</td>
+                <td class="  table-col-size-md text-truncate text-nowrap" placement="top" [ngbTooltip]="colVal?.name">
+                  {{colVal?.name}}</td>
+                <td class="  table-col-size-md text-truncate text-nowrap" placement="top" [ngbTooltip]="colVal?.capgId">
+                  {{colVal?.capgId}}</td>
+                <td class="  table-col-size-md text-truncate text-nowrap" placement="top"
+                  [ngbTooltip]="colVal?.capgEmail">{{colVal?.capgEmail}}</td>
+                <td class="  table-col-size-md text-truncate text-nowrap" placement="top" [ngbTooltip]="colVal?.bu">
+                  {{colVal?.bu}}</td>
+                <td class="  table-col-size-md text-truncate text-nowrap" placement="top"
+                  [ngbTooltip]="colVal?.shadowProjectName">{{colVal?.shadowProjectName}}</td>
+                <td class="  table-col-size-md text-truncate text-nowrap" placement="top"
+                  [ngbTooltip]="colVal?.shadowProjectMentor">{{colVal?.shadowProjectMentor}}</td>
+                <td class="  table-col-size-md text-truncate text-nowrap" placement="top" [ngbTooltip]="colVal?.date">
+                  {{colVal?.date}}</td>
+                <td class="  table-col-size-md text-truncate text-nowrap" placement="top"
+                  [ngbTooltip]="colVal?.taskDescription">{{colVal?.taskDescription}}</td>
               </tr>
             </tbody>
           </table>
 
         </div>
         <div class="d-flex justify-content-between p-2" *ngIf="resultTable.length>0">
-          <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
-          [maxSize]="4" [rotate]="true" [ellipses]="false">
+          <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" [maxSize]="4"
+            [rotate]="true" [ellipses]="false">
           </ngb-pagination>
 
           <select class="custom-select" style="width: auto" [(ngModel)]="pageSize">
