@@ -15,6 +15,7 @@ import { ControlValueAccessor, NgModel, NG_VALUE_ACCESSOR } from '@angular/forms
 export class CustomDropdownComponent implements OnInit, ControlValueAccessor {
 
     @Input() label = '';
+    @Input() name=''
     @Input() required: true | false = false;
     @ViewChild('modelRef') modelRef: NgModel;
     onChange: (value: any) => void;

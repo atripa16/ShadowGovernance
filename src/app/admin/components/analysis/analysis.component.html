@@ -13,37 +13,19 @@
           <form class="row">
             <div class="col-6">
               <app-date [label]="'From'"></app-date>
-              <!-- <label for="fromDate" class="form-label col-md-4">From</label>
-              <input class="form-control" placeholder="yyyy-mm-dd" name="fromDate" [(ngModel)]="filter.from" ngbDatepicker
-                #fromDate="ngbDatepicker" id='fromDate'>
-              <div class="input-group-append">
-                <button class="btn btn-outline-secondary fa fa-calendar" (click)="fromDate.toggle()" type="button"></button>
-              </div> -->
+              
             </div>
             <div class="col-6">
               <app-date [label]="'To'"></app-date>
-              <!-- <label for="toDate" class="form-label col-md-4">To</label>
-              <input class="form-control" placeholder="yyyy-mm-dd" name="toDate" [(ngModel)]="filter.to" ngbDatepicker
-                #toDate="ngbDatepicker" id='toDate'>
-              <div class="input-group-append">
-                <button class="btn btn-outline-secondary fa fa-calendar" (click)="toDate.toggle()" type="button"></button>
-              </div> -->
+              
             </div>
               <div class="col-6">
                 <app-custom-dropdown [options]="bu" [label]="'Business Unit (BU)'"></app-custom-dropdown>
-                <!-- <label for="bu" class="form-label col-md-4">BU</label>
-              <select class="form-control col-md-8" id="bu" name="bu" [(ngModel)]="filter.bu">
-                <option value='Demo'>Demo</option>
-                <option value='Demo2'>Demo2</option>
-              </select> -->
+                
               </div>
               <div class="col-6">
                 <app-custom-dropdown [options]="tasks" [label]="'Task'"></app-custom-dropdown>
-                <!-- <label for="task" class="form-label col-md-4">Task</label>
-              <select class="form-control col-md-8" id="task "name="task" [(ngModel)]="filter.task">
-                <option value='task1'>task1</option>
-                <option value='task2'>task2</option>
-              </select> -->
+                
               </div>
 
             <div class="w-100 text-center mt-4">

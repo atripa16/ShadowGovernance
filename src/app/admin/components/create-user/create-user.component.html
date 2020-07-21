@@ -1,7 +1,7 @@
 <div class="p-2 mt-3">
   <ngb-accordion #acc="ngbAccordion" activeIds="AccountDetails">
     <ngb-panel id="AccountDetails">
-      <ng-template ngbPanelHeader let-opened="opened">
+      <ng-template ngbPanelHeader >
         <div class="d-flex align-items-center justify-content-between ">
           <h5 class="m-0 text-header">Account Details</h5>
         </div>
@@ -10,29 +10,18 @@
       <ng-template ngbPanelContent>
         <form class="row">
 
-          <div class="col-6">
-            <app-custom-input [type]="'text'" [label]="'First Name'"></app-custom-input>
-            <!-- <label for="firstNameId" class="form-label col-md-4">First Name</label>
-            <input type="text" class="form-control col-md-8" name="firstName" id="firstNameId" [(ngModel)]=fName> -->
-          </div>
-          <div class="col-6">
-            <app-custom-input [type]="'text'" [label]="'Last Name'"></app-custom-input>
-            <!-- <label for="lastNameId" class="form-label col-md-4">Last Name</label>
-            <input type="text" class="form-control col-md-8" name="lastName" id="lastNameId" [(ngModel)]=lName> -->
-          </div>
-          <div class="col-6">
-            <app-custom-input [type]="'email'" [label]="'Email'"></app-custom-input>
-            <!-- <label for="emailId" class="form-label col-md-4">Email</label>
-            <input type="text" class="form-control col-md-8" name="email" id="emailId" [(ngModel)]=email> -->
-          </div>
-          <div class="col-6">
-            <app-custom-dropdown [options]="types" [label]="'Type'"></app-custom-dropdown>
-            <!-- <label for="accTypeId" class="form-label col-md-4">Type</label>
-            <select class="form-control col-md-8" id="accTypeId" name="accType" [(ngModel)]=accType>
-              <option value='Admin'>Admin</option>
-              <option value='Reporting User'>Reporting User</option>
-            </select> -->
-          </div>
+          <div class="col-md-6  mt-4">
+            <app-custom-input [type]="'text'" [label]="'First Name'" [name]="'fname'" [(ngModel)]="user.firstName"></app-custom-input>
+            </div>
+          <div class="col-md-6  mt-4">
+            <app-custom-input [type]="'text'" [label]="'Last Name'" [name]="'lname'" [(ngModel)]="user.lastName"></app-custom-input>
+            </div>
+          <div class="col-md-6  mt-4">
+            <app-custom-input [type]="'email'" [label]="'Email'" [name]="'email'" [(ngModel)]="user.userEmail"></app-custom-input>
+           </div>
+          <div class="col-md-6  mt-4">
+            <app-custom-dropdown [options]="roles" [label]="'Type'" [name]="'type'" [(ngModel)]="user.code"></app-custom-dropdown>
+            </div>
           <div class="w-100 text-center mt-4">
             <button class="btn custom-button" (click)=createAccount()>Create Account</button>
           </div>

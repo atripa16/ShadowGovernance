@@ -17,6 +17,7 @@ export class CustomInputComponent implements OnInit, ControlValueAccessor {
     @Input() placeholder = '';
     @Input() label = '';
     @Input() type = '';
+    @Input() name='';
     @Input() required: true | false = false;
     @ViewChild('modelRef') modelRef: NgModel;
     onChange: (value: any) => void;
