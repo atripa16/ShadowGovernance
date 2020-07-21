@@ -14,15 +14,8 @@
         <app-custom-input formControlName="name" [type]="'text'" [label]="'Name'"></app-custom-input>
       </div>
       <div class="col-6">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-6">
         <!-- [pattern]="'^([a-z0-9_-.]+)@(capgemini.com)$'" -->
-        <app-custom-input formControlName="email"  [type]="'email'" [label]="'Capgemini Email'"></app-custom-input>
-      </div>
-      <div class="col-6">
-        <app-custom-dropdown formControlName="bu" [options]="addUserDomainsModel.businessUnits" [label]="'Business Unit (BU)'"></app-custom-dropdown>
+        <app-custom-input formControlName="email" [type]="'email'" [label]="'Capgemini Email'"></app-custom-input>
       </div>
     </div>
     <div class="row">
@@ -32,11 +25,13 @@
           <div class="col-6">
             <div class="form-check form-check-inline p-2 m-0">
               <div class="custom-control custom-radio col-6">
-                <input class="custom-control-input" name="isShadow" formControlName="isShadow" required type="radio" id="yes" [value]="true">
+                <input (click)="setShadow($event.target.value)" class="custom-control-input" name="isShadow" formControlName="isShadow" required type="radio"
+                  id="yes" value="true">
                 <label class="custom-control-label small" for="yes">Yes</label>
               </div>
               <div class="custom-control custom-radio col-6">
-                <input class="custom-control-input" name="isShadow" formControlName="isShadow" required type="radio" id="no" [value]="false" >
+                <input (click)="setShadow($event.target.value)" class="custom-control-input" name="isShadow" formControlName="isShadow" required type="radio"
+                  id="no" value="false">
                 <label class="custom-control-label small" for="no">No</label>
               </div>
             </div>
@@ -44,66 +39,81 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-6">
-        <app-custom-input [type]="'text'" formControlName="projName" [label]="'Shadow Project Name'"></app-custom-input>
+    <div *ngIf="inShadow">
+      <div class="row">
+        <div class="col-6">
+          <app-custom-dropdown formControlName="bu" [options]="addUserDomainsModel.businessUnits"
+            [label]="'Business Unit (BU)'"></app-custom-dropdown>
+        </div>
       </div>
-      <div class="col-6">
-        <app-custom-input [type]="'text'" formControlName="mentorName" [label]="'Shadow Project Mentor'"></app-custom-input>
+      <div class="row">
+        <div class="col-6">
+          <app-custom-input [type]="'text'" formControlName="projName" [label]="'Shadow Project Name'">
+          </app-custom-input>
+        </div>
+        <div class="col-6">
+          <app-custom-input [type]="'text'" formControlName="mentorName" [label]="'Shadow Project Mentor'">
+          </app-custom-input>
+        </div>
+      </div>
+      <div class="row">
+        <div class="w-100 my-2">
+          <h2 class="text-secondary my-auto d-inline">Task Description</h2>
+          <span class="pull-right">
+            <button class="btn custom-button my-auto" (click)='addRow()'>Add More Task</button>
+            <button class="btn custom-button my-auto" (click)='deleteRow()'>Remove Task</button>
+          </span>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between m-1">
+        <a (click)="prev()" routerLinkActive="icon-border" class="header-font-size btn-link btn border icon-border">
+          <i class="fa fa-chevron-left"></i>
+        </a>
+        <a (click)="next()" routerLinkActive="icon-border" class="header-font-size btn-link btn border icon-border">
+          <i class="fa fa-chevron-right"></i>
+        </a>
+      </div>
+      <div class="row">
+        <table class="w-100 table border">
+          <thead class="thead-light">
+            <tr>
+              <th *ngFor="let currWeek of currWeekInfo">
+                <p>{{currWeek.day}}</p>
+                <p>{{currWeek.date}}</p>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let task of fresherDetails.get('taskDesc').controls" [formGroup]='task'>
+              <td>
+                <app-input-dropdown [options]="addUserDomainsModel.taskDescriptions" formControlName="monday"
+                  [placeholder]="'Choose/ Enter Task'"></app-input-dropdown>
+              </td>
+              <td>
+                <app-input-dropdown [options]="addUserDomainsModel.taskDescriptions" formControlName="tuesday"
+                  [placeholder]="'Choose/ Enter Task'"></app-input-dropdown>
+              </td>
+              <td>
+                <app-input-dropdown [options]="addUserDomainsModel.taskDescriptions" formControlName="wednesday"
+                  [placeholder]="'Choose/ Enter Task'"></app-input-dropdown>
+              </td>
+              <td>
+                <app-input-dropdown [options]="addUserDomainsModel.taskDescriptions" formControlName="thursday"
+                  [placeholder]="'Choose/ Enter Task'"></app-input-dropdown>
+              </td>
+              <td>
+                <app-input-dropdown [options]="addUserDomainsModel.taskDescriptions" formControlName="friday"
+                  [placeholder]="'Choose/ Enter Task'"></app-input-dropdown>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
-    <div class="row">
-      <div class="w-100 my-2">
-        <h2 class="text-secondary my-auto d-inline">Task Description</h2>
-        <span class="pull-right">
-          <button class="btn custom-button my-auto" (click)='addRow()'>Add More Task</button>
-          <button class="btn custom-button my-auto" (click)='deleteRow()'>Remove Task</button>
-        </span>
-      </div>
-    </div>
-    <div class="d-flex justify-content-between m-1">
-      <a (click)="prev()" routerLinkActive="icon-border" class="header-font-size btn-link btn border icon-border">
-        <i class="fa fa-chevron-left"></i>
-      </a>
-      <a (click)="next()" routerLinkActive="icon-border" class="header-font-size btn-link btn border icon-border">
-        <i class="fa fa-chevron-right"></i>
-      </a>
-    </div>
-    <div class="row">
-      <table class="w-100 table border">
-        <thead class="thead-light">
-          <tr>
-            <th *ngFor="let currWeek of currWeekInfo">
-              <p>{{currWeek.day}}</p>
-              <p>{{currWeek.date}}</p>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let task of fresherDetails.get('taskDesc').controls" [formGroup]='task'>
-            <td>
-              <app-input-dropdown [options]="tasks" formControlName="monday" [placeholder]="'Choose/ Enter Task'"></app-input-dropdown>
-            </td>
-            <td>
-              <app-input-dropdown [options]="tasks" formControlName="tuesday" [placeholder]="'Choose/ Enter Task'"></app-input-dropdown>
-            </td>
-            <td>
-              <app-input-dropdown [options]="tasks" formControlName="wednesday" [placeholder]="'Choose/ Enter Task'"></app-input-dropdown>
-            </td>
-            <td>
-              <app-input-dropdown [options]="tasks" formControlName="thursday" [placeholder]="'Choose/ Enter Task'"></app-input-dropdown>
-            </td>
-            <td>
-              <app-input-dropdown [options]="tasks" formControlName="friday" [placeholder]="'Choose/ Enter Task'"></app-input-dropdown>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    
+
   </form>
-    <div class="float-right">
-      <button type="button"  class="btn custom-button">Reset</button>
-      <button type="button" (click)=onSubmit() class="btn custom-button">Submit</button>
-    </div>
+  <div class="float-right">
+    <button type="button" class="btn custom-button">Reset</button>
+    <button type="button" (click)=onSubmit() class="btn custom-button">Submit</button>
+  </div>
 </div>

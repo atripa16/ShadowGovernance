@@ -22,6 +22,7 @@ export class AddResourceDetailsComponent implements OnInit {
     { date: null, day: null }
   ];
 
+  inShadow: boolean;
   tasks: OptionModel[] = [{ code: 't1', description: 'Tasks 1' }];
   calendarDays = [
     'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'
@@ -50,6 +51,14 @@ export class AddResourceDetailsComponent implements OnInit {
     this.setCurrWeekInfo(now);
   }
 
+  setShadow(isShadow: string) {
+    if (isShadow === 'true') {
+      this.inShadow = true;
+    } else {
+      this.inShadow = false;
+    }
+  }
+
   createRow() {
     return new FormGroup({
       monday: new FormControl(),
@@ -58,11 +67,6 @@ export class AddResourceDetailsComponent implements OnInit {
       thursday: new FormControl(),
       friday: new FormControl(),
     });
-  }
-
-  addDetails(shadowForm: NgForm) {
-    console.log('shadow', shadowForm.value);
-
   }
 
   addRow() {
