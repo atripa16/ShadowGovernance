@@ -9,15 +9,16 @@ import { User } from '../models/User.model';
 })
 export class AddUserApiService {
 
-  readonly registerUsr = environment.apiUrl + '/addNewUser'
+  readonly registerUsr = environment.apiUrl + '/addNewUser';
   readonly roles = environment.apiUrl + '/loadRoles';
 
-  constructor(private _httpClient:HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
-  registerUser(user:User){
-    return this._httpClient.post(this.registerUsr,user);
+  registerUser(user: User) {
+    return this.httpClient.post(this.registerUsr, user);
   }
-  getRoles(){
-    return this._httpClient.get<OptionModel[]>(this.roles);
+
+  getRoles() {
+    return this.httpClient.get<OptionModel[]>(this.roles);
   }
 }

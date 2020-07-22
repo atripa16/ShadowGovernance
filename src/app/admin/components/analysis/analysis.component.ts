@@ -1,8 +1,8 @@
-import { Component, OnInit, AfterViewInit, ViewChild, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
-import { AnalysisApiService } from 'src/app/admin/services/analysis-api.service';
-import { FilterModel } from 'src/app/admin/models/Filters.model';
+import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { NgbAccordion } from '@ng-bootstrap/ng-bootstrap';
-import { OptionModel } from 'src/app/core/models/option.model';
+import { FilterModel } from 'src/app/admin/models/Filters.model';
+import { AnalysisApiService } from 'src/app/admin/services/analysis-api.service';
+import { AddUserDomainsModel } from 'src/app/end-user/models/add-user-domains.model';
 
 @Component({
   selector: 'app-analysis',
@@ -12,8 +12,7 @@ import { OptionModel } from 'src/app/core/models/option.model';
 export class AnalysisComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   resultTable: any[] = [];
-  tasks: OptionModel[] = [{ code: 't1', description: 'Task 1' }];
-  bu: OptionModel[] = [{ code: 'bu1', description: 'Business 1' }];
+  addUserDomainsModel: AddUserDomainsModel = {} as AddUserDomainsModel;
   page = 1;
   pageSize = 2;
   collectionSize = this.resultTable.length;
@@ -36,6 +35,9 @@ export class AnalysisComponent implements OnInit, AfterViewInit, AfterViewChecke
   }
 
   ngOnInit() {
+    this.analysisService.loadAnalysisDomains().subscribe((addUserDomains: AddUserDomainsModel) => {
+      this.addUserDomainsModel = addUserDomains;
+    });
   }
 
   search() {

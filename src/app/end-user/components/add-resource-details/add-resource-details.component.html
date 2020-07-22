@@ -1,21 +1,21 @@
 <div>
   <h1 class="text-secondary m-2">Enter your details</h1>
-  <form [formGroup]="fresherDetails" class="m-2" (ngSubmit)="addDetails(shadowForm)">
+  <form [formGroup]="fresherDetails" class="m-2">
     <div class="row">
       <div class="col-6">
-        <app-custom-input formControlName="capgId" [type]="'number'" [label]="'Capgemini Id'"></app-custom-input>
+        <app-custom-input [required]="true" formControlName="capgId" [type]="'number'" [label]="'Capgemini Id'"></app-custom-input>
       </div>
       <div class="col-6">
-        <button class="btn custom-button">Fetch</button>
+        <button (click)="fetchEmpData()" [disabled]="isFetchDisabled" class="btn custom-button">Fetch</button>
       </div>
     </div>
     <div class="row">
       <div class="col-6">
-        <app-custom-input formControlName="name" [type]="'text'" [label]="'Name'"></app-custom-input>
+        <app-custom-input [required]="true" formControlName="name" [type]="'text'" [label]="'Name'"></app-custom-input>
       </div>
       <div class="col-6">
         <!-- [pattern]="'^([a-z0-9_-.]+)@(capgemini.com)$'" -->
-        <app-custom-input formControlName="email" [type]="'email'" [label]="'Capgemini Email'"></app-custom-input>
+        <app-custom-input [required]="true" formControlName="email" [type]="'email'" [label]="'Capgemini Email'"></app-custom-input>
       </div>
     </div>
     <div class="row">
@@ -61,7 +61,7 @@
           <h2 class="text-secondary my-auto d-inline">Task Description</h2>
           <span class="pull-right">
             <button class="btn custom-button my-auto" (click)='addRow()'>Add More Task</button>
-            <button class="btn custom-button my-auto" (click)='deleteRow()'>Remove Task</button>
+            <button [disabled]="isRemoveTaskDisabled" class="btn custom-button my-auto" (click)='deleteRow()'>Remove Task</button>
           </span>
         </div>
       </div>
@@ -110,10 +110,9 @@
         </table>
       </div>
     </div>
-
   </form>
   <div class="text-right w-100 custom-margin">
     <button type="button" class="btn custom-button">Reset</button>
-    <button type="button" (click)=onSubmit() class="btn custom-button">Submit</button>
+    <button type="button" (click)="insertEmpData()" class="btn custom-button">Submit</button>
   </div>
 </div>

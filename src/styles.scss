@@ -86,6 +86,11 @@ ngb-accordion{
     border-color: #0070ad;
 }
 
+.custom-button:disabled{
+  background-color: #ECECEC ;
+  color: #666666;
+  border-color: #ECECEC;
+}
 // round arrows
 .icon-border{
   border-width: 2px !important;
