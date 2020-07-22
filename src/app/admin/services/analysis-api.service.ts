@@ -8,7 +8,7 @@ import { AddUserDomainsModel } from 'src/app/end-user/models/add-user-domains.mo
 @Injectable()
 export class AnalysisApiService {
 
-  readonly FETCH_ANALYSIS_DOMAINS = environment.apiUrl + '/admin/analysisResultTable.json';
+  readonly FETCH_ANALYSIS_DOMAINS = 'assets/mock/admin/AnalysisResultTable.json';
   readonly LOAD_ADD_USERS_DOMAINS = environment.apiUrl + '/loadBusinessUnits';
 
 
