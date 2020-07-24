@@ -13,9 +13,9 @@ export class EndUserDomainsApiService {
   // readonly LOAD_ADD_USERS_DOMAINS = environment.apiUrl + '/end-user/mockTaskDescriptions.json';
   readonly LOAD_ADD_USERS_DOMAINS = environment.apiUrl + '/loadBusinessUnits';
 
-  readonly FETCH_END_USER_DOMAINS = environment.apiUrl + '/change';
+  readonly FETCH_END_USER_DOMAINS = environment.apiUrl + '/getEmployee/';
 
-  readonly INSERT_END_USER_DETAILS = environment.apiUrl + '/change';
+  readonly INSERT_END_USER_DETAILS = environment.apiUrl + '/loadRoles';
 
   constructor(
     private http: HttpClient
