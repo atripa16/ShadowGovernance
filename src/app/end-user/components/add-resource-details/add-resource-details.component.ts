@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
-import { OptionModel } from 'src/app/core/models/option.model';
 import { AddUserDomainsModel } from '../../models/add-user-domains.model';
 import { EmployeeInfo } from '../../models/employee-data.model';
 import { WeekModel } from '../../models/week.model';
 import { EndUserDomainsApiService } from '../../services/end-user-domains-api.service';
+import { AddUserApiService } from 'src/app/admin/services/add-user-api.service';
+import { EndUserApiService } from '../../services/end-user-api.service';
+import { TaskDescription } from '../../models/task-description.model';
 
 @Component({
   selector: 'app-add-resource-details',
@@ -15,6 +17,7 @@ import { EndUserDomainsApiService } from '../../services/end-user-domains-api.se
 export class AddResourceDetailsComponent implements OnInit {
 
   addUserDomainsModel: AddUserDomainsModel = {} as AddUserDomainsModel;
+  employeeInfo: EmployeeInfo = {} as EmployeeInfo;
   currWeekInfo: WeekModel[] = [
     { date: null, day: null },
     { date: null, day: null },
@@ -41,8 +44,17 @@ export class AddResourceDetailsComponent implements OnInit {
   taskArr: FormArray;
 
   constructor(
+    private endUserApiService: EndUserApiService,
     private endUserDomainsApiService: EndUserDomainsApiService
   ) { }
+
+  currDatesArray(): string[] {
+    const currentWeekDates: string[] = [];
+    this.currWeekInfo.forEach((currDay) => {
+      currentWeekDates.push(currDay.date);
+    });
+    return currentWeekDates;
+  }
 
   ngOnInit() {
     this.endUserDomainsApiService.loadAddUsersDomains().subscribe((addUserDomains: AddUserDomainsModel) => {
@@ -97,10 +109,15 @@ export class AddResourceDetailsComponent implements OnInit {
 
   prev() {
     this.setCurrWeekInfo(moment(this.currWeekInfo[0].date, 'DD/MM/YYYY').subtract(2, 'days'));
+    this.endUserApiService.loadCurrWeekTasks(this.fresherDetails.controls.capgId.value, this.currDatesArray())
+      .subscribe((taskInfo: TaskDescription[]) => {
+        this.setTaskData(taskInfo);
+      });
   }
 
   next() {
     this.setCurrWeekInfo(moment(this.currWeekInfo[4].date, 'DD/MM/YYYY').add(2, 'days'));
+    this.endUserApiService.loadCurrWeekTasks(this.fresherDetails.controls.capgId.value, this.currDatesArray());
   }
 
   setCurrWeekInfo(currentDate: moment.Moment) {
@@ -111,16 +128,41 @@ export class AddResourceDetailsComponent implements OnInit {
   }
 
   fetchEmpData(): void {
-    console.log('id', this.fresherDetails.controls.capgId.value);
+    this.endUserApiService.fetchEndUserDetails(this.fresherDetails.controls.capgId.value,
+      this.currDatesArray()).subscribe((empData: EmployeeInfo) => {
+        this.patchFormData(empData);
+        this.fresherDetails.controls.name.setValue(empData.name);
+        this.fresherDetails.controls.email.setValue(empData.email);
+        this.fresherDetails.controls.bu.setValue(empData.bu);
+        this.fresherDetails.controls.isShadow.setValue(empData.isShadow);
+        this.fresherDetails.controls.projName.setValue(empData.projName);
+        this.fresherDetails.controls.mentorName.setValue(empData.mentorName);
+        this.fresherDetails.controls.taskDesc.setValue(empData.taskDesc);
+      });
+  }
 
-    this.endUserDomainsApiService.fetchEndUserDetails(this.fresherDetails.controls.capgId.value).subscribe((empData: EmployeeInfo) => {
-      this.fresherDetails.controls.name.setValue(empData.name);
-      this.fresherDetails.controls.email.setValue(empData.email);
+  patchFormData(empData: EmployeeInfo): void {
+    this.fresherDetails.patchValue({
+      name: empData.name,
+      email: empData.email,
+      bu: empData.bu,
+      isShadow: empData.isShadow,
+      projName: empData.projName,
+      mentorName: empData.mentorName,
+    });
+    this.setTaskData(empData.taskDesc);
+  }
+
+  setTaskData(taskInfo: TaskDescription[]): void {
+    this.fresherDetails.patchValue({
+      taskDesc: taskInfo
     });
   }
 
   insertEmpData() {
-    console.log(this.fresherDetails.value);
+    this.employeeInfo = { ...this.fresherDetails.value };
+    this.employeeInfo.date = this.currDatesArray();
+    this.endUserApiService.insertEndUserDetails(this.employeeInfo).subscribe();
   }
 
 }

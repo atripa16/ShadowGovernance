@@ -3,6 +3,7 @@ import { NgbAccordion } from '@ng-bootstrap/ng-bootstrap';
 import { FilterModel } from 'src/app/admin/models/Filters.model';
 import { AnalysisApiService } from 'src/app/admin/services/analysis-api.service';
 import { AddUserDomainsModel } from 'src/app/end-user/models/add-user-domains.model';
+import { AdminDomainsModel } from '../../models/admin-domains.model';
 
 @Component({
   selector: 'app-analysis',
@@ -12,7 +13,7 @@ import { AddUserDomainsModel } from 'src/app/end-user/models/add-user-domains.mo
 export class AnalysisComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   resultTable: any[] = [];
-  addUserDomainsModel: AddUserDomainsModel = {} as AddUserDomainsModel;
+  adminDomainsModel: AdminDomainsModel = {} as AdminDomainsModel;
   page = 1;
   pageSize = 2;
   collectionSize = this.resultTable.length;
@@ -35,8 +36,8 @@ export class AnalysisComponent implements OnInit, AfterViewInit, AfterViewChecke
   }
 
   ngOnInit() {
-    this.analysisService.loadAnalysisDomains().subscribe((addUserDomains: AddUserDomainsModel) => {
-      this.addUserDomainsModel = addUserDomains;
+    this.analysisService.loadAnalysisDomains().subscribe((adminDomainsModel: AdminDomainsModel) => {
+      this.adminDomainsModel = adminDomainsModel;
     });
   }
 

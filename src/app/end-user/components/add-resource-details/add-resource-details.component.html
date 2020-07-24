@@ -14,7 +14,6 @@
         <app-custom-input [required]="true" formControlName="name" [type]="'text'" [label]="'Name'"></app-custom-input>
       </div>
       <div class="col-6">
-        <!-- [pattern]="'^([a-z0-9_-.]+)@(capgemini.com)$'" -->
         <app-custom-input [required]="true" formControlName="email" [type]="'email'" [label]="'Capgemini Email'"></app-custom-input>
       </div>
     </div>
@@ -113,6 +112,6 @@
   </form>
   <div class="text-right w-100 custom-margin">
     <button type="button" class="btn custom-button">Reset</button>
-    <button type="button" (click)="insertEmpData()" class="btn custom-button">Submit</button>
+    <button type="button" [disabled]="fresherDetails.invalid" (click)="insertEmpData()" class="btn custom-button">Submit</button>
   </div>
 </div>

@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FilterModel } from '../models/Filters.model';
-import { environment } from 'src/environments/environment';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AddUserDomainsModel } from 'src/app/end-user/models/add-user-domains.model';
+import { environment } from 'src/environments/environment';
+import { FilterModel } from '../models/Filters.model';
+import { AdminDomainsModel } from '../models/admin-domains.model';
 
 @Injectable()
 export class AnalysisApiService {
@@ -12,11 +12,13 @@ export class AnalysisApiService {
   readonly LOAD_ADD_USERS_DOMAINS = environment.apiUrl + '/loadBusinessUnits';
 
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
 
-  loadAnalysisDomains(): Observable<AddUserDomainsModel> {
-    return this.http.get<AddUserDomainsModel>(this.LOAD_ADD_USERS_DOMAINS);
+  loadAnalysisDomains(): Observable<AdminDomainsModel> {
+    return this.http.get<AdminDomainsModel>(this.LOAD_ADD_USERS_DOMAINS);
   }
 
   getAnalysisResult(filters: FilterModel): Observable<any> {
