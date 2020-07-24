@@ -117,7 +117,10 @@ export class AddResourceDetailsComponent implements OnInit {
 
   next() {
     this.setCurrWeekInfo(moment(this.currWeekInfo[4].date, 'DD/MM/YYYY').add(2, 'days'));
-    this.endUserApiService.loadCurrWeekTasks(this.fresherDetails.controls.capgId.value, this.currDatesArray());
+    this.endUserApiService.loadCurrWeekTasks(this.fresherDetails.controls.capgId.value, this.currDatesArray())
+      .subscribe((taskInfo: TaskDescription[]) => {
+        this.setTaskData(taskInfo);
+      });
   }
 
   setCurrWeekInfo(currentDate: moment.Moment) {
