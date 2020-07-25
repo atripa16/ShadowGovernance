@@ -1,8 +1,14 @@
-  <div class="row border-bottom">
-    <div [routerLink]="['end-user']" class="text-left btn btn-link col-6">
-     <img src='assets/img/Capgemini.PNG'>
-    </div>
-    <div class="col-6 my-auto text-right">
-      <button (click)="openLoginModal()" class="header-font-size btn-link btn custom-link">Login</button>
-    </div>
+<div class="row border-bottom">
+  <div [routerLink]="['end-user']" class="text-left btn btn-link col-6">
+    <img src='assets/img/Capgemini.PNG'>
   </div>
+  <div class="col-6 my-auto text-right">
+    <span *ngIf="currentUser" class="header-font-size">Welcome {{currentUser.firstName}}</span>
+    <button (click)="openLoginModal()" class="header-font-size btn-link btn custom-link">Login</button>
+    <button (click)="changePassword()" class="header-font-size btn-link btn custom-link" *ngIf="currentUser">Change
+      Password</button>
+    <button (click)="logout()" class="header-font-size btn-link btn custom-link">Logout</button>
+
+  </div>
+</div>
+{{currentUserObservable | async}}

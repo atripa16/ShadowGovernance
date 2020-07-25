@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Router } from '@angular/router';
+import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AuthenticationApiService } from 'src/app/core/services/authentication-api.service';
+import { first } from 'rxjs/operators';
+import { LoginModel } from 'src/app/core/models/login.model';
+import { ErrorComponent } from 'src/app/home/components/error/error.component';
+import { error } from 'util';
 
 @Component({
   selector: 'app-login-modal',
@@ -10,17 +15,34 @@ import { Router } from '@angular/router';
 })
 export class LoginModalComponent implements OnInit {
 
+  returnUrl: string;
+
   constructor(
     public modal: NgbActiveModal,
-    private route: Router
+    private ngbModal: NgbModal,
+    private route: Router,
+    private activatedRoute: ActivatedRoute,
+    private authenticationService: AuthenticationApiService
   ) { }
 
-  ngOnInit() {
+  loginModel: LoginModel = {} as LoginModel;
 
+  ngOnInit() {
+    this.returnUrl = this.activatedRoute.snapshot.queryParams.returnUrl || '/admin';
   }
 
   login(response: string) {
     this.modal.close(response);
-    this.route.navigate(['admin']);
+    // this.route.navigate(['admin']);
+    this.authenticationService.login(this.loginModel)
+      .pipe(first())
+      .subscribe(data => {
+        this.route.navigate([this.returnUrl]);
+      },
+        err => {
+          const ngbModalRef: NgbModalRef = this.ngbModal.open(ErrorComponent,
+            { centered: true, backdrop: 'static', keyboard: false });
+          ngbModalRef.componentInstance.errorMessage = err.message;
+        });
   }
 }

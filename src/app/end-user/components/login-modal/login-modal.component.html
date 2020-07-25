@@ -5,9 +5,9 @@
     </button>
   </div>
   <div class="modal-body border-bottom">
-    <app-custom-input [type]="'text'" [placeholder]="'Enter capgemini user id'" [label]="'User Id'"></app-custom-input>
+    <app-custom-input [type]="'text'" name="userName" [(ngModel)]="loginModel.userName" [placeholder]="'Enter capgemini user id'" [label]="'User Id'"></app-custom-input>
 
-    <app-custom-input [type]="'password'" [placeholder]="'Enter Password'" [label]="'Password'"></app-custom-input>
+    <app-custom-input [type]="'password'" name="password" [(ngModel)]="loginModel.password" [placeholder]="'Enter Password'" [label]="'Password'"></app-custom-input>
     <!-- <div class="form-group">
       <input type="text" placeholder="Enter Username" class="form-control">
     </div>
