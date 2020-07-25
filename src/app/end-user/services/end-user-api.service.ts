@@ -14,7 +14,7 @@ export class EndUserApiService {
 
   readonly FETCH_END_USER_DOMAINS = environment.apiUrl + '/getEmployee/';
 
-  readonly INSERT_END_USER_DETAILS = environment.apiUrl + '/loadRoles';
+  readonly INSERT_END_USER_DETAILS = environment.apiUrl + '/addEmployee';
 
   constructor(
     private http: HttpClient
