@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponentComponent } from './components/home-component/home-component.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { AnalysisComponent } from './components/analysis/analysis.component';
 import { GetUserRole } from './Resolver/get-user-roles.resolver';
-import { AuthGuard } from '../core/guards/auth-guard.service';
+import { AuthGuard } from './guards/auth-guard.service';
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponentComponent,
+    component: HomeComponent,
     canActivate: [AuthGuard],
     children: [
       {
