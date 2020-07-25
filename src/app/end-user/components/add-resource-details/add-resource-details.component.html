@@ -14,7 +14,7 @@
         <app-custom-input [required]="true" formControlName="name" [type]="'text'" [label]="'Name'"></app-custom-input>
       </div>
       <div class="col-6">
-        <app-custom-input [required]="true" formControlName="email" [type]="'email'" [label]="'Capgemini Email'"></app-custom-input>
+        <app-custom-input [required]="true" [placeholder]="'abc@capgemini.com'" [pattern]="'^[_a-z0-9-\\+]+(\\.[_a-z0-9-]+)*@capgemini.com$'" [errorMessage]="'Please enter valid email.'" formControlName="email" [type]="'text'" [label]="'Capgemini Email'"></app-custom-input>
       </div>
     </div>
     <div class="row">

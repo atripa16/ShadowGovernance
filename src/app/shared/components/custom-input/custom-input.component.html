@@ -1,8 +1,8 @@
 <div class="field-wrap ">
-    <label class="label-sec ml-1" for="text-input" *ngIf="label" [ngClass]="{'errorText':(modelRef.control?.errors && (modelRef.control.touched || modelRef.control.dirty))}"> {{label |titlecase}}
+    <label class="label-sec ml-1" [for]="name" *ngIf="label" [ngClass]="{'errorText':(modelRef.control?.errors && (modelRef.control.touched || modelRef.control.dirty))}"> {{label |titlecase}}
         <span *ngIf='required'> *</span>
     </label>
-    <input [type]="type" [name]="name" class="form-control box-Shadow rounded-0" [required]="required" [placeholder]="placeholder" id="text-input" [(ngModel)]=value
+    <input [type]="type" [name]="name" class="form-control box-Shadow rounded-0" [required]="required" [placeholder]="placeholder" [id]="name" [(ngModel)]=value
          (ngModelChange)="valueChange($event)" [disabled]='disabled' #modelRef="ngModel" [pattern]='pattern'
         [ngClass]="{'errorStyle':(modelRef.control?.errors && (modelRef.control.touched || modelRef.control.dirty))}">
     <div *ngIf="modelRef.control.errors && (modelRef.control.touched || modelRef.control.dirty)">
