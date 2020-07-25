@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnInit, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnInit, Renderer2, AfterViewChecked } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -12,7 +12,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   styleUrls: ['./input-dropdown.component.scss']
 })
 
-export class InputDropdownComponent implements OnInit, ControlValueAccessor {
+export class InputDropdownComponent implements OnInit, ControlValueAccessor, AfterViewChecked {
 
 
   @Input() label = '';
@@ -38,6 +38,9 @@ export class InputDropdownComponent implements OnInit, ControlValueAccessor {
   }
 
   writeValue(value: string): void {
+    if (!this.options) {
+      this.options = [];
+    }
     let isContainVal = true;
     this.searchValue = value;
     this.options.forEach(choice => {

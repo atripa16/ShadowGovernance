@@ -1,7 +1,7 @@
 <div class="field-wrap ">
-  <label class="label-sec ml-1" for="text-input" *ngIf="label"> {{label |titlecase}} <span *ngIf='required'> * </span></label>
+  <label class="label-sec ml-1" [for]="name" *ngIf="label"> {{label |titlecase}} <span *ngIf='required'> * </span></label>
   <div class="outer remove-margin" (blur)="removeShowOptions()">
-    <input class="form-control box-Shadow rounded-0" id="text-input"  [placeholder]="placeholder"  [(ngModel)]=searchValue (ngModelChange)="searchValueChange($event)"
+    <input class="form-control box-Shadow rounded-0" [id]="name"  [placeholder]="placeholder"  [(ngModel)]=searchValue (ngModelChange)="searchValueChange($event)"
     autocomplete="off" (focus)="addShowOptions()" >
     <div class="options-control" *ngIf="showOptions !== undefined && showOptions !== null && showOptions?.length > 0">
       <ng-container *ngFor="let choice of showOptions">
