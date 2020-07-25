@@ -1,5 +1,6 @@
 import { AfterViewChecked, ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NgModel, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-date',
@@ -15,6 +16,10 @@ import { ControlValueAccessor, NgModel, NG_VALUE_ACCESSOR } from '@angular/forms
 export class CustomDateComponent implements OnInit, ControlValueAccessor, AfterViewChecked {
 
 
+    @Input() minDate: NgbDateStruct;
+    @Input() maxDate: NgbDateStruct;
+    @Input() startDate: NgbDateStruct;
+    @Input() name: string;
     @Input() placeholder = '';
     @Input() label = '';
     @Input() required: true | false = false;

@@ -1,9 +1,10 @@
 import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { NgbAccordion } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordion, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { combineLatest } from 'rxjs';
 import { FilterModel } from 'src/app/admin/models/Filters.model';
 import { AnalysisApiService } from 'src/app/admin/services/analysis-api.service';
-import { AddUserDomainsModel } from 'src/app/end-user/models/add-user-domains.model';
 import { AdminDomainsModel } from '../../models/admin-domains.model';
+import { RequestFilterModel } from '../../models/RequestFilter.model';
 
 @Component({
   selector: 'app-analysis',
@@ -15,12 +16,14 @@ export class AnalysisComponent implements OnInit, AfterViewInit, AfterViewChecke
   resultTable: any[] = [];
   adminDomainsModel: AdminDomainsModel = {} as AdminDomainsModel;
   page = 1;
-  pageSize = 2;
+  pageSize = 10;
   collectionSize = this.resultTable.length;
   filter: FilterModel = {} as FilterModel;
   isFilterClicked = false;
   activeIds = [];
   @ViewChild('filterAccordion') filterAccordion: NgbAccordion;
+  readonly DELIMITER = '/';
+  currentPage = 0;
 
   constructor(
     private analysisService: AnalysisApiService,
@@ -43,10 +46,29 @@ export class AnalysisComponent implements OnInit, AfterViewInit, AfterViewChecke
 
   search() {
     this.isFilterClicked = true;
-    this.analysisService.getAnalysisResult(this.filter).
-      subscribe((results: any) => {
+    let startIndex: number = this.page * this.pageSize;
+    let endIndex: number = startIndex + this.pageSize;
+    let requestModel: RequestFilterModel = this.getDataInValidFormat(this.filter, startIndex, endIndex);
+
+    combineLatest(this.analysisService.getAnalysisResultTotalCount(requestModel),this.analysisService.getAnalysisResult(requestModel)).
+      subscribe(([recordCount,results]: [number,any]) => {
         this.resultTable = results;
-        this.collectionSize = this.resultTable.length;
+        this.collectionSize = recordCount;
       });
+  }
+
+  getDataInValidFormat(filterModel: FilterModel, startIndex: number, endIndex: number): RequestFilterModel {
+    let requestModel = {} as RequestFilterModel;
+    requestModel.bu = filterModel.bu ? filterModel.bu : '';
+    requestModel.endIndex = endIndex;
+    requestModel.from = this.formatDate(filterModel.from);
+    requestModel.task = filterModel.task ? filterModel.task : '';
+    requestModel.to = this.formatDate(filterModel.to);
+    requestModel.startIndex = startIndex
+    return requestModel;
+  }
+
+  formatDate(date: NgbDateStruct | null): string {
+    return date ? date.day + this.DELIMITER + date.month + this.DELIMITER + date.year : '';
   }
 }

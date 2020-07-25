@@ -1,15 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { FilterModel } from '../models/Filters.model';
 import { AdminDomainsModel } from '../models/admin-domains.model';
+import { RequestFilterModel } from '../models/RequestFilter.model';
 
 @Injectable()
 export class AnalysisApiService {
-
+ 
   readonly FETCH_ANALYSIS_DOMAINS = 'assets/mock/admin/AnalysisResultTable.json';
   readonly LOAD_ADD_USERS_DOMAINS = environment.apiUrl + '/loadBusinessUnits';
+  readonly FETCH_ANALYSIS_RESULT_COUNT = environment.apiUrl + '/getTotalCount';
 
 
   constructor(
@@ -21,8 +22,14 @@ export class AnalysisApiService {
     return this.http.get<AdminDomainsModel>(this.LOAD_ADD_USERS_DOMAINS);
   }
 
-  getAnalysisResult(filters: FilterModel): Observable<any> {
+  getAnalysisResult(filters: RequestFilterModel): Observable<any> {
     // return this.http.post(this.FETCH_ANALYSIS_DOMAINS, filters);
     return this.http.get<any>(this.FETCH_ANALYSIS_DOMAINS);
   }
+
+  getAnalysisResultTotalCount(filters: RequestFilterModel): Observable<number> {
+    return of(40);
+    //return this.http.post<number>(this.FETCH_ANALYSIS_RESULT_COUNT,filters);
+  }
+
 }

@@ -9,9 +9,11 @@ const routes: Routes = [
   {
     path: '', component: HomeComponentComponent,
     children: [
-      {path: '',redirectTo:'analysis',pathMatch:'full'},
-      { path: 'create-user', component: CreateUserComponent, 
-    resolve:{ roles:GetUserRole} },
+      { path: '', redirectTo: 'analysis', pathMatch: 'full' },
+      {
+        path: 'create-user', component: CreateUserComponent,
+        resolve: { roles: GetUserRole }
+      },
       { path: 'analysis', component: AnalysisComponent }
     ]
   }

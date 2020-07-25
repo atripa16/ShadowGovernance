@@ -1,8 +1,8 @@
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+
 export interface FilterModel {
-    from: string;
-    to: string;
+    from: NgbDateStruct;
+    to: NgbDateStruct;
     bu: string;
     task: string;
-    startIndex: number;
-    endIndex: number;
 }
