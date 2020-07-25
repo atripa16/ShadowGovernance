@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, ViewChild, AfterViewChecked } from '@angular/core';
 import { ControlValueAccessor, NgModel, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -12,12 +12,12 @@ import { ControlValueAccessor, NgModel, NG_VALUE_ACCESSOR } from '@angular/forms
     styleUrls: ['./custom-input.component.scss']
 })
 
-export class CustomInputComponent implements OnInit, ControlValueAccessor {
+export class CustomInputComponent implements OnInit, ControlValueAccessor, AfterViewChecked {
 
     @Input() placeholder = '';
     @Input() label = '';
     @Input() type = '';
-    @Input() name='';
+    @Input() name = '';
     @Input() required: true | false = false;
     @ViewChild('modelRef') modelRef: NgModel;
     onChange: (value: any) => void;
@@ -28,7 +28,7 @@ export class CustomInputComponent implements OnInit, ControlValueAccessor {
     @Input() pattern = '';
 
     constructor(
-        private _changeD: ChangeDetectorRef
+        private changeD: ChangeDetectorRef
     ) { }
 
     ngOnInit(): void {
@@ -56,7 +56,7 @@ export class CustomInputComponent implements OnInit, ControlValueAccessor {
     }
 
     ngAfterViewChecked(): void {
-        this._changeD.detectChanges();
+        this.changeD.detectChanges();
     }
 
 }
