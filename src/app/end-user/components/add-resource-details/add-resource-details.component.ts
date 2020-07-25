@@ -65,14 +65,11 @@ export class AddResourceDetailsComponent implements OnInit {
     const now = moment();
     this.setCurrWeekInfo(now);
     this.fresherDetails.valueChanges.subscribe((formData) => {
-      console.log('formdata', formData);
-
       if (formData.capgId) {
         this.isFetchDisabled = false;
       } else {
         this.isFetchDisabled = true;
       }
-
       if (formData.taskDesc.length > 1) {
         this.isRemoveTaskDisabled = false;
       } else {

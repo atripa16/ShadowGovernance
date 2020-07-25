@@ -1,5 +1,5 @@
 <div class="field-wrap ">
-    <label class="label-sec ml-1" for="text-input" *ngIf="label"
+    <label class="label-sec ml-1" [for]="name" *ngIf="label"
         [ngClass]="{'errorText':(modelRef.control?.errors && (modelRef.control.touched || modelRef.control.dirty))}">
         {{label |titlecase}}
         <span *ngIf='required'> *</span>
@@ -7,7 +7,7 @@
     <div class="input-group "
         [ngClass]="{'errorStyle':(modelRef.control?.errors && (modelRef.control.touched || modelRef.control.dirty))}">
         <input (click)="currentDate.toggle()" class="form-control  custom-control box-Shadow rounded-0" [required]="required" 
-        autocomplete="off" [placeholder]="placeholder" id="text-input" [(ngModel)]=value (ngModelChange)="valueChange($event)"
+        autocomplete="off" [placeholder]="placeholder" [id]="name" [(ngModel)]=value (ngModelChange)="valueChange($event)"
         [minDate]="minDate" [name]="name" [maxDate]="maxDate" [startDate]="startDate"   [disabled]='disabled' datepicker-append-to-body="true" #modelRef="ngModel" [pattern]='pattern'
             #currentDate="ngbDatepicker" ngbDatepicker [ngClass]="{'error-border':(modelRef.control?.errors && (modelRef.control.touched || modelRef.control.dirty))}">
         <!-- <div class="input-group-append ">

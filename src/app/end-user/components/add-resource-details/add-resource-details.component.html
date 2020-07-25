@@ -3,7 +3,9 @@
   <form [formGroup]="fresherDetails" class="m-2">
     <div class="row">
       <div class="col-6">
-        <app-custom-input [required]="true" formControlName="capgId" [type]="'number'" [label]="'Capgemini Id'"></app-custom-input>
+        <app-custom-input [errorMessage]="'Please enter valid capgemini id. Eg: 123456'"
+          [placeholder]="'Enter your capgemini id'" [pattern]="'^[0-9]{1,15}$'" [required]="true"
+          formControlName="capgId" [type]="'number'" [label]="'Capgemini Id'"></app-custom-input>
       </div>
       <div class="col-6">
         <button (click)="fetchEmpData()" [disabled]="isFetchDisabled" class="btn custom-button">Fetch</button>
@@ -11,10 +13,15 @@
     </div>
     <div class="row">
       <div class="col-6">
-        <app-custom-input [required]="true" formControlName="name" [type]="'text'" [label]="'Name'"></app-custom-input>
+        <app-custom-input [errorMessage]="'Please enter valid full name. Eg: Ajay Mehta'"
+          [placeholder]="'Enter your full name'" [required]="true" formControlName="name" [type]="'text'"
+          [label]="'Name'"></app-custom-input>
       </div>
       <div class="col-6">
-        <app-custom-input [required]="true" [placeholder]="'abc@capgemini.com'" [pattern]="'^[_a-z0-9-\\+]+(\\.[_a-z0-9-]+)*@capgemini.com$'" [errorMessage]="'Please enter valid email.'" formControlName="email" [type]="'text'" [label]="'Capgemini Email'"></app-custom-input>
+        <app-custom-input [required]="true" [placeholder]="'Enter capgemini email'"
+          [pattern]="'^[_a-z0-9-\\+]+(\\.[_a-z0-9-]+)*@capgemini.com$'"
+          [errorMessage]="'Please enter valid email. Eg: abc@capgemini.com'" formControlName="email" [type]="'text'"
+          [label]="'Capgemini Email'"></app-custom-input>
       </div>
     </div>
     <div class="row">
@@ -24,13 +31,13 @@
           <div class="col-6">
             <div class="form-check form-check-inline p-2 m-0">
               <div class="custom-control custom-radio col-6">
-                <input (click)="setShadow($event.target.value)" class="custom-control-input" name="isShadow" formControlName="isShadow" required type="radio"
-                  id="yes" value="true">
+                <input (click)="setShadow($event.target.value)" class="custom-control-input" name="isShadow"
+                  formControlName="isShadow" required type="radio" id="yes" value="true">
                 <label class="custom-control-label small" for="yes">Yes</label>
               </div>
               <div class="custom-control custom-radio col-6">
-                <input (click)="setShadow($event.target.value)" class="custom-control-input" name="isShadow" formControlName="isShadow" required type="radio"
-                  id="no" value="false">
+                <input (click)="setShadow($event.target.value)" class="custom-control-input" name="isShadow"
+                  formControlName="isShadow" required type="radio" id="no" value="false">
                 <label class="custom-control-label small" for="no">No</label>
               </div>
             </div>
@@ -47,11 +54,13 @@
       </div>
       <div class="row">
         <div class="col-6">
-          <app-custom-input [required]="true" [type]="'text'" formControlName="projName" [label]="'Shadow Project Name'">
+          <app-custom-input [required]="true" [type]="'text'" formControlName="projName"
+            [label]="'Shadow Project Name'">
           </app-custom-input>
         </div>
         <div class="col-6">
-          <app-custom-input [required]="true" [type]="'text'" formControlName="mentorName" [label]="'Shadow Project Mentor'">
+          <app-custom-input [required]="true" [type]="'text'" formControlName="mentorName"
+            [label]="'Shadow Project Mentor'">
           </app-custom-input>
         </div>
       </div>
@@ -60,7 +69,8 @@
           <h2 class="text-secondary my-auto d-inline">Task Description</h2>
           <span class="pull-right">
             <button class="btn custom-button my-auto" (click)='addRow()'>Add More Task</button>
-            <button [disabled]="isRemoveTaskDisabled" class="btn custom-button my-auto" (click)='deleteRow()'>Remove Task</button>
+            <button [disabled]="isRemoveTaskDisabled" class="btn custom-button my-auto" (click)='deleteRow()'>Remove
+              Task</button>
           </span>
         </div>
       </div>
@@ -112,6 +122,7 @@
   </form>
   <div class="text-right w-100 custom-margin">
     <button type="button" class="btn custom-button">Reset</button>
-    <button type="button" [disabled]="fresherDetails.invalid" (click)="insertEmpData()" class="btn custom-button">Submit</button>
+    <button type="button" [disabled]="fresherDetails.invalid" (click)="insertEmpData()"
+      class="btn custom-button">Submit</button>
   </div>
 </div>
