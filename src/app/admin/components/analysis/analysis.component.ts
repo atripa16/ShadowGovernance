@@ -5,6 +5,8 @@ import { FilterModel } from 'src/app/admin/models/Filters.model';
 import { AnalysisApiService } from 'src/app/admin/services/analysis-api.service';
 import { AdminDomainsModel } from '../../models/admin-domains.model';
 import { RequestFilterModel } from '../../models/RequestFilter.model';
+import { CommonDomainsApiService } from 'src/app/shared/services/common-domains-api.service';
+import { CommonDomainsModel } from 'src/app/shared/models/common-domains.model';
 
 @Component({
   selector: 'app-analysis',
@@ -14,7 +16,7 @@ import { RequestFilterModel } from '../../models/RequestFilter.model';
 export class AnalysisComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   resultTable: any[] = [];
-  adminDomainsModel: AdminDomainsModel = {} as AdminDomainsModel;
+  commonDomainsModel: CommonDomainsModel = {} as CommonDomainsModel;
   page = 1;
   pageSize = 10;
   collectionSize = this.resultTable.length;
@@ -27,6 +29,7 @@ export class AnalysisComponent implements OnInit, AfterViewInit, AfterViewChecke
 
   constructor(
     private analysisService: AnalysisApiService,
+    private commonDomainsApiService: CommonDomainsApiService,
     private changeDetectorRef: ChangeDetectorRef
   ) { }
 
@@ -39,32 +42,32 @@ export class AnalysisComponent implements OnInit, AfterViewInit, AfterViewChecke
   }
 
   ngOnInit() {
-    this.analysisService.loadAnalysisDomains().subscribe((adminDomainsModel: AdminDomainsModel) => {
-      this.adminDomainsModel = adminDomainsModel;
+    this.commonDomainsApiService.loadCommonDomains().subscribe((commonDomainsModel: CommonDomainsModel) => {
+      this.commonDomainsModel = commonDomainsModel;
     });
   }
 
   search() {
     this.isFilterClicked = true;
-    let startIndex: number = this.page * this.pageSize;
-    let endIndex: number = startIndex + this.pageSize;
-    let requestModel: RequestFilterModel = this.getDataInValidFormat(this.filter, startIndex, endIndex);
+    const startIndex: number = this.page * this.pageSize;
+    const endIndex: number = startIndex + this.pageSize;
+    const requestModel: RequestFilterModel = this.getDataInValidFormat(this.filter, startIndex, endIndex);
 
-    combineLatest(this.analysisService.getAnalysisResultTotalCount(requestModel),this.analysisService.getAnalysisResult(requestModel)).
-      subscribe(([recordCount,results]: [number,any]) => {
+    combineLatest(this.analysisService.getAnalysisResultTotalCount(requestModel), this.analysisService.getAnalysisResult(requestModel)).
+      subscribe(([recordCount, results]: [number, any]) => {
         this.resultTable = results;
         this.collectionSize = recordCount;
       });
   }
 
   getDataInValidFormat(filterModel: FilterModel, startIndex: number, endIndex: number): RequestFilterModel {
-    let requestModel = {} as RequestFilterModel;
+    const requestModel = {} as RequestFilterModel;
     requestModel.bu = filterModel.bu ? filterModel.bu : '';
     requestModel.endIndex = endIndex;
     requestModel.from = this.formatDate(filterModel.from);
     requestModel.task = filterModel.task ? filterModel.task : '';
     requestModel.to = this.formatDate(filterModel.to);
-    requestModel.startIndex = startIndex
+    requestModel.startIndex = startIndex;
     return requestModel;
   }
 

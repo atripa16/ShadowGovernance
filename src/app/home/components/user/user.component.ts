@@ -13,6 +13,7 @@ import { Observable } from 'rxjs';
 })
 export class UserComponent implements OnInit {
   currentUser: User;
+  userName: string;
   currentUserObservable: Observable<User>;
 
   constructor(
@@ -25,6 +26,9 @@ export class UserComponent implements OnInit {
   ngOnInit() {
     this.currentUser = this.authenticationService.currentUserValue;
     this.currentUserObservable = this.authenticationService.currentUserObservable;
+    this.currentUserObservable.subscribe((user: User) => {
+      this.userName = user.firstName;
+    });
   }
 
   logout(): void {

@@ -41,7 +41,7 @@
     <div *ngIf="inShadow">
       <div class="row">
         <div class="col-6">
-          <app-custom-dropdown formControlName="bu" [options]="addUserDomainsModel.businessUnits"
+          <app-custom-dropdown formControlName="bu" [options]="commonDomainsModel.businessUnits"
             [label]="'Business Unit (BU)'"></app-custom-dropdown>
         </div>
       </div>
@@ -85,23 +85,23 @@
           <tbody>
             <tr *ngFor="let task of fresherDetails.get('taskDesc').controls" [formGroup]='task'>
               <td>
-                <app-input-dropdown [options]="addUserDomainsModel.taskDescriptions" formControlName="monday"
+                <app-input-dropdown [options]="commonDomainsModel.taskDescriptions" formControlName="monday"
                   [placeholder]="'Choose/ Enter Task'"></app-input-dropdown>
               </td>
               <td>
-                <app-input-dropdown [options]="addUserDomainsModel.taskDescriptions" formControlName="tuesday"
+                <app-input-dropdown [options]="commonDomainsModel.taskDescriptions" formControlName="tuesday"
                   [placeholder]="'Choose/ Enter Task'"></app-input-dropdown>
               </td>
               <td>
-                <app-input-dropdown [options]="addUserDomainsModel.taskDescriptions" formControlName="wednesday"
+                <app-input-dropdown [options]="commonDomainsModel.taskDescriptions" formControlName="wednesday"
                   [placeholder]="'Choose/ Enter Task'"></app-input-dropdown>
               </td>
               <td>
-                <app-input-dropdown [options]="addUserDomainsModel.taskDescriptions" formControlName="thursday"
+                <app-input-dropdown [options]="commonDomainsModel.taskDescriptions" formControlName="thursday"
                   [placeholder]="'Choose/ Enter Task'"></app-input-dropdown>
               </td>
               <td>
-                <app-input-dropdown [options]="addUserDomainsModel.taskDescriptions" formControlName="friday"
+                <app-input-dropdown [options]="commonDomainsModel.taskDescriptions" formControlName="friday"
                   [placeholder]="'Choose/ Enter Task'"></app-input-dropdown>
               </td>
             </tr>

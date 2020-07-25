@@ -3,12 +3,20 @@
     <img src='assets/img/Capgemini.PNG'>
   </div>
   <div class="col-6 my-auto text-right">
-    <span *ngIf="currentUser" class="header-font-size">Welcome {{currentUser.firstName}}</span>
-    <button (click)="openLoginModal()" class="header-font-size btn-link btn custom-link">Login</button>
-    <button (click)="changePassword()" class="header-font-size btn-link btn custom-link" *ngIf="currentUser">Change
-      Password</button>
-    <button (click)="logout()" class="header-font-size btn-link btn custom-link">Logout</button>
-
+    <span *ngIf="currentUserObservable | async; else elseBlock"
+      class="header-font-size btn my-auto label-header"><b>Welcome</b>
+      {{userName}}</span>
+    <ng-template #elseBlock>
+      <button (click)="openLoginModal()" class="header-font-size btn-link btn custom-link">
+        Login
+      </button>
+    </ng-template>
+    <button (click)="changePassword()" class="header-font-size btn-link btn custom-link"
+      *ngIf="currentUserObservable | async">
+      Change Password
+    </button>
+    <button *ngIf="currentUserObservable | async" (click)="logout()" class="header-font-size btn-link btn custom-link">
+      Logout
+    </button>
   </div>
 </div>
-{{currentUserObservable | async}}

@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
-import { AddUserDomainsModel } from '../../models/add-user-domains.model';
+import { CommonDomainsModel } from 'src/app/shared/models/common-domains.model';
+import { CommonDomainsApiService } from 'src/app/shared/services/common-domains-api.service';
 import { EmployeeInfo } from '../../models/employee-data.model';
-import { WeekModel } from '../../models/week.model';
-import { EndUserDomainsApiService } from '../../services/end-user-domains-api.service';
-import { AddUserApiService } from 'src/app/admin/services/add-user-api.service';
-import { EndUserApiService } from '../../services/end-user-api.service';
 import { TaskDescription } from '../../models/task-description.model';
+import { WeekModel } from '../../models/week.model';
+import { EndUserApiService } from '../../services/end-user-api.service';
 
 @Component({
   selector: 'app-add-resource-details',
@@ -16,7 +15,7 @@ import { TaskDescription } from '../../models/task-description.model';
 })
 export class AddResourceDetailsComponent implements OnInit {
 
-  addUserDomainsModel: AddUserDomainsModel = {} as AddUserDomainsModel;
+  commonDomainsModel: CommonDomainsModel = {} as CommonDomainsModel;
   employeeInfo: EmployeeInfo = {} as EmployeeInfo;
   currWeekInfo: WeekModel[] = [
     { date: null, day: null },
@@ -45,7 +44,7 @@ export class AddResourceDetailsComponent implements OnInit {
 
   constructor(
     private endUserApiService: EndUserApiService,
-    private endUserDomainsApiService: EndUserDomainsApiService
+    private commonDomainsApiService: CommonDomainsApiService
   ) { }
 
   currDatesArray(): string[] {
@@ -57,8 +56,8 @@ export class AddResourceDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.endUserDomainsApiService.loadAddUsersDomains().subscribe((addUserDomains: AddUserDomainsModel) => {
-      this.addUserDomainsModel = addUserDomains;
+    this.commonDomainsApiService.loadCommonDomains().subscribe((commonDomainsModel: CommonDomainsModel) => {
+      this.commonDomainsModel = commonDomainsModel;
     });
     const now = moment();
     this.setCurrWeekInfo(now);

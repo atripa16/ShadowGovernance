@@ -13,20 +13,22 @@
           <form class="row">
             <div class="col-6">
               <app-date [label]="'From'" [name]="'from'" [(ngModel)]="filter.from"></app-date>
-              
+
             </div>
             <div class="col-6">
               <app-date [label]="'To'" [name]="'to'" [minDate]="filter.from" [(ngModel)]="filter.to"></app-date>
-              
+
             </div>
-              <div class="col-6">
-                <app-custom-dropdown [options]="adminDomainsModel.businessUnits" [label]="'Business Unit (BU)'" [name]="'bu'" [(ngModel)]="filter.bu"></app-custom-dropdown>
-                
-              </div>
-              <div class="col-6">
-                <app-custom-dropdown [options]="adminDomainsModel.taskDescriptions" [label]="'Task'" [name]="'task'" [(ngModel)]="filter.task"></app-custom-dropdown>
-                
-              </div>
+            <div class="col-6">
+              <app-custom-dropdown [options]="commonDomainsModel.businessUnits" [label]="'Business Unit (BU)'"
+                [name]="'bu'" [(ngModel)]="filter.bu"></app-custom-dropdown>
+
+            </div>
+            <div class="col-6">
+              <app-custom-dropdown [options]="commonDomainsModel.taskDescriptions" [label]="'Task'" [name]="'task'"
+                [(ngModel)]="filter.task"></app-custom-dropdown>
+
+            </div>
 
             <div class="w-100 text-center mt-4">
               <button class="btn custom-button" (click)="search()">Search</button>
