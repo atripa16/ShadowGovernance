@@ -25,7 +25,9 @@ export class UserComponent implements OnInit {
   ngOnInit() {
     this.currentUserObservable = this.authenticationService.currentUserObservable;
     this.currentUserObservable.subscribe((user: User) => {
-      this.userName = user.firstName;
+      if (user) {
+        this.userName = user.firstName;
+      }
     });
   }
 

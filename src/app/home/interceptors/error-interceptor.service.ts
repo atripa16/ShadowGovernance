@@ -18,7 +18,7 @@ export class ErrorInterceptorService implements HttpInterceptor {
     return next.handle(req).pipe(
       catchError((httpErrorResponse: HttpErrorResponse) => {
         let errorMessage = '';
-        if (httpErrorResponse.status > 400 && localStorage.getItem('showErrorPopup') === 'true') {
+        if (httpErrorResponse.status > 400) {
           errorMessage = httpErrorResponse.error.message;
           const ngbModalRef: NgbModalRef = this.ngbModal.open(ErrorComponent,
             { centered: true, backdrop: 'static', keyboard: false });

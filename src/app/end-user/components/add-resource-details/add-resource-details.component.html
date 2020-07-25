@@ -41,17 +41,17 @@
     <div *ngIf="inShadow">
       <div class="row">
         <div class="col-6">
-          <app-custom-dropdown formControlName="bu" [options]="commonDomainsModel.businessUnits"
+          <app-custom-dropdown [required]="true" formControlName="bu" [options]="commonDomainsModel.businessUnits"
             [label]="'Business Unit (BU)'"></app-custom-dropdown>
         </div>
       </div>
       <div class="row">
         <div class="col-6">
-          <app-custom-input [type]="'text'" formControlName="projName" [label]="'Shadow Project Name'">
+          <app-custom-input [required]="true" [type]="'text'" formControlName="projName" [label]="'Shadow Project Name'">
           </app-custom-input>
         </div>
         <div class="col-6">
-          <app-custom-input [type]="'text'" formControlName="mentorName" [label]="'Shadow Project Mentor'">
+          <app-custom-input [required]="true" [type]="'text'" formControlName="mentorName" [label]="'Shadow Project Mentor'">
           </app-custom-input>
         </div>
       </div>
