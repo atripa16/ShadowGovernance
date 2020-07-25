@@ -7,6 +7,8 @@ import { EmployeeInfo } from '../../models/employee-data.model';
 import { TaskDescription } from '../../models/task-description.model';
 import { WeekModel } from '../../models/week.model';
 import { EndUserApiService } from '../../services/end-user-api.service';
+import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { SuccessComponent } from 'src/app/home/components/success/success.component';
 
 @Component({
   selector: 'app-add-resource-details',
@@ -44,6 +46,7 @@ export class AddResourceDetailsComponent implements OnInit {
 
   constructor(
     private endUserApiService: EndUserApiService,
+    private ngbModal: NgbModal,
     private commonDomainsApiService: CommonDomainsApiService
   ) { }
 
@@ -164,7 +167,12 @@ export class AddResourceDetailsComponent implements OnInit {
   insertEmpData() {
     this.employeeInfo = { ...this.fresherDetails.value };
     this.employeeInfo.date = this.currDatesArray();
-    this.endUserApiService.insertEndUserDetails(this.employeeInfo).subscribe();
+    this.endUserApiService.insertEndUserDetails(this.employeeInfo).subscribe(() => {
+
+    });
+
+    const ngbModalRef: NgbModalRef = this.ngbModal.open(SuccessComponent, { centered: true, backdrop: 'static', keyboard: false });
+    ngbModalRef.componentInstance.successMessage = 'Details Inserted Successfully!';
   }
 
 }

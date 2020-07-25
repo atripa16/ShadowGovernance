@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { OptionModel } from 'src/app/core/models/option.model';
 import { environment } from 'src/environments/environment';
-import { User } from '../models/User.model';
+import { User } from 'src/app/core/models/user.model';
 
 @Injectable({
   providedIn: 'root'

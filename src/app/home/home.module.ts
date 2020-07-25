@@ -5,12 +5,14 @@ import { SharedModule } from '../shared/shared.module';
 import { HomeRoutingModule } from './home-routing.module';
 import { FooterComponent } from './components/footer/footer.component';
 import { ErrorComponent } from './components/error/error.component';
+import { SuccessComponent } from './components/success/success.component';
 
 @NgModule({
   declarations: [
     UserComponent,
     FooterComponent,
-    ErrorComponent
+    ErrorComponent,
+    SuccessComponent
   ],
   imports: [
     CommonModule,
@@ -20,10 +22,12 @@ import { ErrorComponent } from './components/error/error.component';
   exports: [
     UserComponent,
     FooterComponent,
-    ErrorComponent
+    ErrorComponent,
+    SuccessComponent
   ],
   entryComponents: [
-    ErrorComponent
+    ErrorComponent,
+    SuccessComponent
   ]
 })
 export class HomeModule { }

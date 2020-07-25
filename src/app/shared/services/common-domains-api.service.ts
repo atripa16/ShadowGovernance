@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AddUserDomainsModel } from 'src/app/end-user/models/add-user-domains.model';
 import { CommonDomainsModel } from '../models/common-domains.model';
 import { shareReplay } from 'rxjs/operators';
 

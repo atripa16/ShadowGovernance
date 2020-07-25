@@ -3,10 +3,9 @@ import { NgbAccordion, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { combineLatest } from 'rxjs';
 import { FilterModel } from 'src/app/admin/models/Filters.model';
 import { AnalysisApiService } from 'src/app/admin/services/analysis-api.service';
-import { AdminDomainsModel } from '../../models/admin-domains.model';
-import { RequestFilterModel } from '../../models/RequestFilter.model';
-import { CommonDomainsApiService } from 'src/app/shared/services/common-domains-api.service';
 import { CommonDomainsModel } from 'src/app/shared/models/common-domains.model';
+import { CommonDomainsApiService } from 'src/app/shared/services/common-domains-api.service';
+import { RequestFilterModel } from '../../models/RequestFilter.model';
 
 @Component({
   selector: 'app-analysis',

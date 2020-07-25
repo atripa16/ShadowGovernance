@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { OptionModel } from 'src/app/core/models/option.model';
-import { User } from '../../models/User.model';
 import { AddUserApiService } from '../../services/add-user-api.service';
+import { User } from 'src/app/core/models/user.model';
 
 @Component({
   selector: 'app-create-user',
@@ -11,22 +11,24 @@ import { AddUserApiService } from '../../services/add-user-api.service';
 })
 export class CreateUserComponent implements OnInit {
 
-  user : User = {} as User;
+  user: User = {} as User;
 
-  roles: OptionModel={} as OptionModel;
+  roles: OptionModel = {} as OptionModel;
 
-  constructor(private _addUserApiService:AddUserApiService,
-    private activatedRoute: ActivatedRoute) { }
+  constructor(
+    private addUserApiService: AddUserApiService,
+    private activatedRoute: ActivatedRoute
+  ) { }
 
   ngOnInit() {
     this.activatedRoute.data.subscribe((data) => {
       console.log(data);
-      
+
       this.roles = data.roles;
-      });
+    });
   }
 
   createAccount() {
-    this._addUserApiService.registerUser(this.user).subscribe();
+    this.addUserApiService.registerUser(this.user).subscribe();
   }
 }

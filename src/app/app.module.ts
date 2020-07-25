@@ -4,10 +4,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
+import { JwtInterceptor } from './core/interceptors/jwt-interceptor.service';
 import { EndUserModule } from './end-user/end-user.module';
 import { HomeModule } from './home/home.module';
-import { JwtInterceptor } from './core/interceptors/jwt-interceptor.service';
-import { fakeBackendProvider } from './core/interceptors/fake-backend-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +23,7 @@ import { fakeBackendProvider } from './core/interceptors/fake-backend-intercepto
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     // provider used to create fake backend
-    fakeBackendProvider
+    // fakeBackendProvider
   ],
   bootstrap: [AppComponent]
 })

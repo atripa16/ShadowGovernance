@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { LoginModalComponent } from 'src/app/end-user/components/login-modal/login-modal.component';
-import { AuthenticationApiService } from 'src/app/core/services/authentication-api.service';
-import { User } from 'src/app/admin/models/User.model';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
+import { AuthenticationApiService } from 'src/app/core/services/authentication-api.service';
+import { LoginModalComponent } from 'src/app/end-user/components/login-modal/login-modal.component';
+import { User } from 'src/app/core/models/user.model';
 
 @Component({
   selector: 'app-user',
@@ -12,7 +12,6 @@ import { Observable } from 'rxjs';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
-  currentUser: User;
   userName: string;
   currentUserObservable: Observable<User>;
 
@@ -24,7 +23,6 @@ export class UserComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.currentUser = this.authenticationService.currentUserValue;
     this.currentUserObservable = this.authenticationService.currentUserObservable;
     this.currentUserObservable.subscribe((user: User) => {
       this.userName = user.firstName;
@@ -32,7 +30,6 @@ export class UserComponent implements OnInit {
   }
 
   logout(): void {
-    console.log('logout');
     this.authenticationService.logout();
     this.router.navigate(['/end-user']);
   }
