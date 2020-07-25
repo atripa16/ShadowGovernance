@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class EndUserApiService {
 
-  readonly LOAD_CURR_WEEK_TASKS = environment.apiUrl + '/change';
+  readonly LOAD_CURR_WEEK_TASKS = environment.apiUrl + '/getTasksForSelectedWeek';
 
   readonly FETCH_END_USER_DOMAINS = environment.apiUrl + '/getEmployee/';
 
