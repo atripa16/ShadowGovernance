@@ -22,8 +22,6 @@ export class CreateUserComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.data.subscribe((data) => {
-      console.log(data);
-
       this.roles = data.roles;
     });
   }

@@ -28,7 +28,7 @@ export class LoginModalComponent implements OnInit {
   loginModel: LoginModel = {} as LoginModel;
 
   ngOnInit() {
-    this.returnUrl = this.activatedRoute.snapshot.queryParams.returnUrl || '/admin';
+    this.returnUrl = this.activatedRoute.snapshot.queryParams.returnUrl || '/user/admin';
   }
 
   login(response: string) {
@@ -37,7 +37,11 @@ export class LoginModalComponent implements OnInit {
     this.authenticationService.login(this.loginModel)
       .pipe(first())
       .subscribe(data => {
+        if(data.role==='analyst'){
+          this.route.navigate(['/user/analyst']);
+        }else{
         this.route.navigate([this.returnUrl]);
+        }
       },
         err => {
           const ngbModalRef: NgbModalRef = this.ngbModal.open(ErrorComponent,

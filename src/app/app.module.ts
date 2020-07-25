@@ -7,6 +7,7 @@ import { CoreModule } from './core/core.module';
 import { JwtInterceptor } from './core/interceptors/jwt-interceptor.service';
 import { EndUserModule } from './end-user/end-user.module';
 import { HomeModule } from './home/home.module';
+import { fakeBackendProvider } from './core/interceptors/fake-backend-interceptor.service'
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { HomeModule } from './home/home.module';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     // provider used to create fake backend
-    // fakeBackendProvider
+    //fakeBackendProvider
   ],
   bootstrap: [AppComponent]
 })

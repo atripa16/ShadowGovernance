@@ -8,7 +8,7 @@ import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'admin',
     component: HomeComponent,
     canActivate: [AuthGuard],
     children: [
@@ -21,6 +21,22 @@ const routes: Routes = [
         path: 'create-user',
         component: CreateUserComponent,
         resolve: { roles: GetUserRole }
+      },
+      {
+        path: 'analysis',
+        component: AnalysisComponent
+      }
+    ]
+  },
+  {
+    path: 'analysis',
+    component: HomeComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        redirectTo: 'analysis',
+        pathMatch: 'full'
       },
       {
         path: 'analysis',

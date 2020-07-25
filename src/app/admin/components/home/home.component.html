@@ -1,10 +1,10 @@
 <div class="row">
   <div class="col-2 h-100 mt-3">
-    <div [routerLink]="['/admin/analysis']" class="mt-2 border w-100 pt-4 pb-4 btn btn-default" routerLinkActive="btn-success">
+    <div [routerLink]="['analysis']" class="mt-2 border w-100 pt-4 pb-4 btn btn-default" routerLinkActive="btn-success">
         <i class="fa fa-bar-chart fa-3x" aria-hidden="true"></i>
         <p class="font-weight-bold">Analysis</p>
     </div>
-    <div class="mt-2">
+    <div class="mt-2" *ngIf="currentUser.role.toUpperCase()=='Admin'.toUpperCase()">
       <div [routerLink]="['create-user']" class="border w-100 mt-2 pt-4 pb-4 btn btn-default" routerLinkActive="btn-success">
           <i class="fa fa-user fa-3x" aria-hidden="true"></i>
           <p class="font-weight-bold">Add User</p>

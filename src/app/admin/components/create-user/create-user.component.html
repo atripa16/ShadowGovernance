@@ -8,22 +8,22 @@
       </ng-template>
 
       <ng-template ngbPanelContent>
-        <form class="row">
+        <form  #user="ngForm" class="row">
 
           <div class="col-6">
-            <app-custom-input [type]="'text'" [label]="'First Name'" [name]="'fname'" [(ngModel)]="user.firstName"></app-custom-input>
+            <app-custom-input [type]="'text'" [label]="'First Name'" [name]="'fname'" [placeholder]="'Enter First Name'" [required]="true" [(ngModel)]="user.firstName"></app-custom-input>
             </div>
           <div class="col-6">
-            <app-custom-input [type]="'text'" [label]="'Last Name'" [name]="'lname'" [(ngModel)]="user.lastName"></app-custom-input>
+            <app-custom-input [type]="'text'" [label]="'Last Name'"  [placeholder]="'Enter Last Name'" [name]="'lname'"  [required]="true" [(ngModel)]="user.lastName"></app-custom-input>
             </div>
           <div class="col-6">
-            <app-custom-input [type]="'email'" [label]="'Email'" [name]="'email'" [(ngModel)]="user.userEmail"></app-custom-input>
+            <app-custom-input [required]="true" [placeholder]="'abc@capgemini.com'" [pattern]="'^[_a-z0-9-\\+]+(\\.[_a-z0-9-]+)*@capgemini.com$'" [label]="'Email'" [name]="'email'"  [required]="true" [(ngModel)]="user.userEmail"></app-custom-input>
            </div>
           <div class="col-6">
-            <app-custom-dropdown [options]="roles" [label]="'Type'" [name]="'type'" [(ngModel)]="user.code"></app-custom-dropdown>
+            <app-custom-dropdown [options]="roles" [label]="'Type'" [name]="'type'"  [required]="true" [(ngModel)]="user.code"></app-custom-dropdown>
             </div>
           <div class="w-100 text-center mt-4">
-            <button class="btn custom-button" (click)=createAccount()>Create Account</button>
+            <button class="btn custom-button" [disabled]="user.invalid" (click)=createAccount()>Create Account</button>
           </div>
 
         </form>
