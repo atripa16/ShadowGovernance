@@ -16,6 +16,7 @@ export class InputDropdownComponent implements OnInit, ControlValueAccessor, Aft
 
 
   @Input() label = '';
+  @Input() name = '';
   @Input() defaultKey: any;
   @Input() required: true | false = false;
   onChange: (value: any) => void;
@@ -26,7 +27,7 @@ export class InputDropdownComponent implements OnInit, ControlValueAccessor, Aft
   @Input() placeholder = '';
 
   constructor(
-    private _changeD: ChangeDetectorRef,
+    private changeD: ChangeDetectorRef,
     public elRef: ElementRef,
     private renderer: Renderer2
   ) {
@@ -57,7 +58,7 @@ export class InputDropdownComponent implements OnInit, ControlValueAccessor, Aft
   }
 
   ngAfterViewChecked(): void {
-    this._changeD.detectChanges();
+    this.changeD.detectChanges();
   }
 
   registerOnTouched(onTouched: () => void) {

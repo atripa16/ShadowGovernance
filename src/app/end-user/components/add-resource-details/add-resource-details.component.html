@@ -1,11 +1,11 @@
 <div>
   <h1 class="text-secondary m-2">Enter your details</h1>
-  <form [formGroup]="fresherDetails" class="m-2">
+  <form autocomplete="off" [formGroup]="fresherDetails" class="m-2">
     <div class="row">
       <div class="col-6">
         <app-custom-input [errorMessage]="'Please enter valid capgemini id. Eg: 123456'"
           [placeholder]="'Enter your capgemini id'" [pattern]="'^[0-9]{1,15}$'" [required]="true"
-          formControlName="capgId" [type]="'number'" [label]="'Capgemini Id'"></app-custom-input>
+          formControlName="capgId" [name]="'capgId'" [type]="'number'" [label]="'Capgemini Id'"></app-custom-input>
       </div>
       <div class="col-6">
         <button (click)="fetchEmpData()" [disabled]="isFetchDisabled" class="btn custom-button">Fetch</button>
@@ -14,14 +14,14 @@
     <div class="row">
       <div class="col-6">
         <app-custom-input [errorMessage]="'Please enter valid full name. Eg: Ajay Mehta'"
-          [placeholder]="'Enter your full name'" [required]="true" formControlName="name" [type]="'text'"
-          [label]="'Name'"></app-custom-input>
+          [placeholder]="'Enter your full name'" [required]="true" formControlName="name" [name]="'name'"
+          [type]="'text'" [label]="'Name'"></app-custom-input>
       </div>
       <div class="col-6">
         <app-custom-input [required]="true" [placeholder]="'Enter capgemini email'"
           [pattern]="'^[_a-z0-9-\\+]+(\\.[_a-z0-9-]+)*@capgemini.com$'"
-          [errorMessage]="'Please enter valid email. Eg: abc@capgemini.com'" formControlName="email" [type]="'text'"
-          [label]="'Capgemini Email'"></app-custom-input>
+          [errorMessage]="'Please enter valid email. Eg: abc@capgemini.com'" formControlName="email" [name]="'email'"
+          [type]="'text'" [label]="'Capgemini Email'"></app-custom-input>
       </div>
     </div>
     <div class="row">
@@ -31,13 +31,13 @@
           <div class="col-6">
             <div class="form-check form-check-inline p-2 m-0">
               <div class="custom-control custom-radio col-6">
-                <input (click)="setShadow($event.target.value)" class="custom-control-input" name="isShadow"
-                  formControlName="isShadow" required type="radio" id="yes" value="true">
+                <input (click)="setShadow($event.target.value)" class="custom-control-input" formControlName="isShadow"
+                  required type="radio" id="yes" value="true">
                 <label class="custom-control-label small" for="yes">Yes</label>
               </div>
               <div class="custom-control custom-radio col-6">
-                <input (click)="setShadow($event.target.value)" class="custom-control-input" name="isShadow"
-                  formControlName="isShadow" required type="radio" id="no" value="false">
+                <input (click)="setShadow($event.target.value)" class="custom-control-input" formControlName="isShadow"
+                  required type="radio" id="no" value="false">
                 <label class="custom-control-label small" for="no">No</label>
               </div>
             </div>
@@ -48,18 +48,18 @@
     <div *ngIf="inShadow">
       <div class="row">
         <div class="col-6">
-          <app-custom-dropdown [required]="true" formControlName="bu" [options]="commonDomainsModel.businessUnits"
+          <app-custom-dropdown [required]="true" formControlName="bu" [name]="'bu'" [options]="commonDomainsModel.businessUnits"
             [label]="'Business Unit (BU)'"></app-custom-dropdown>
         </div>
       </div>
       <div class="row">
         <div class="col-6">
-          <app-custom-input [required]="true" [type]="'text'" formControlName="projName"
+          <app-custom-input [required]="true" [type]="'text'" formControlName="projName" [name]="'projName'"
             [label]="'Shadow Project Name'">
           </app-custom-input>
         </div>
         <div class="col-6">
-          <app-custom-input [required]="true" [type]="'text'" formControlName="mentorName"
+          <app-custom-input [required]="true" [type]="'text'" formControlName="mentorName" [name]="'mentorName'"
             [label]="'Shadow Project Mentor'">
           </app-custom-input>
         </div>
@@ -75,12 +75,14 @@
         </div>
       </div>
       <div class="d-flex justify-content-between m-1">
-        <a (click)="prev()" routerLinkActive="icon-border" class="header-font-size btn-link btn border icon-border">
+        <button (click)="prev()" [disabled]="isFetchDisabled" routerLinkActive="icon-border"
+          class="header-font-size btn-link btn border icon-border">
           <i class="fa fa-chevron-left"></i>
-        </a>
-        <a (click)="next()" routerLinkActive="icon-border" class="header-font-size btn-link btn border icon-border">
+        </button>
+        <button (click)="next()" [disabled]="isFetchDisabled" routerLinkActive="icon-border"
+          class="header-font-size btn-link btn border icon-border">
           <i class="fa fa-chevron-right"></i>
-        </a>
+        </button>
       </div>
       <div class="row">
         <table class="w-100 table border">
@@ -95,23 +97,23 @@
           <tbody>
             <tr *ngFor="let task of fresherDetails.get('taskDesc').controls" [formGroup]='task'>
               <td>
-                <app-input-dropdown [options]="commonDomainsModel.taskDescriptions" formControlName="monday"
+                <app-input-dropdown [options]="commonDomainsModel.taskDescriptions" formControlName="monday" [name]="'monday'"
                   [placeholder]="'Choose/ Enter Task'"></app-input-dropdown>
               </td>
               <td>
-                <app-input-dropdown [options]="commonDomainsModel.taskDescriptions" formControlName="tuesday"
+                <app-input-dropdown [options]="commonDomainsModel.taskDescriptions" formControlName="tuesday" [name]="'tuesday'"
                   [placeholder]="'Choose/ Enter Task'"></app-input-dropdown>
               </td>
               <td>
-                <app-input-dropdown [options]="commonDomainsModel.taskDescriptions" formControlName="wednesday"
+                <app-input-dropdown [options]="commonDomainsModel.taskDescriptions" formControlName="wednesday" [name]="'wednesday'"
                   [placeholder]="'Choose/ Enter Task'"></app-input-dropdown>
               </td>
               <td>
-                <app-input-dropdown [options]="commonDomainsModel.taskDescriptions" formControlName="thursday"
+                <app-input-dropdown [options]="commonDomainsModel.taskDescriptions" formControlName="thursday" [name]="'thursday'"
                   [placeholder]="'Choose/ Enter Task'"></app-input-dropdown>
               </td>
               <td>
-                <app-input-dropdown [options]="commonDomainsModel.taskDescriptions" formControlName="friday"
+                <app-input-dropdown [options]="commonDomainsModel.taskDescriptions" formControlName="friday" [name]="'friday'"
                   [placeholder]="'Choose/ Enter Task'"></app-input-dropdown>
               </td>
             </tr>

@@ -1,7 +1,7 @@
+import { UserRoles } from '../Enum/user-roles.enum';
+
 export interface User {
     firstName: string;
-    lastName: string;
-    userEmail: string;
-    role: string;
+    role: UserRoles;
     token: string;
 }
