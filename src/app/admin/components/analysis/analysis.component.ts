@@ -7,6 +7,7 @@ import { CommonDomainsModel } from 'src/app/shared/models/common-domains.model';
 import { CommonDomainsApiService } from 'src/app/shared/services/common-domains-api.service';
 import { RequestFilterModel } from '../../models/RequestFilter.model';
 import { NgForm } from '@angular/forms';
+import { Excel } from '../Enum/Excel.enum';
 
 @Component({
   selector: 'app-analysis',
@@ -53,9 +54,8 @@ export class AnalysisComponent implements OnInit, AfterViewInit, AfterViewChecke
 
   search() {
     this.isFilterClicked = true;
-    const startIndex: number = this.page * this.pageSize;
-    const endIndex: number = startIndex + this.pageSize;
-    const requestModel: RequestFilterModel = this.getDataInValidFormat(this.filter, startIndex, endIndex);
+    const startIndex: number = (this.page - 1) * this.pageSize;
+    const requestModel: RequestFilterModel = this.getDataInValidFormat(this.filter, startIndex);
 
     combineLatest(this.analysisService.getAnalysisResultTotalCount(requestModel), this.analysisService.getAnalysisResult(requestModel)).
       subscribe(([recordCount, results]: [number, any]) => {
@@ -64,10 +64,10 @@ export class AnalysisComponent implements OnInit, AfterViewInit, AfterViewChecke
       });
   }
 
-  getDataInValidFormat(filterModel: FilterModel, startIndex: number, endIndex: number): RequestFilterModel {
+  getDataInValidFormat(filterModel: FilterModel, startIndex?: number): RequestFilterModel {
     const requestModel = {} as RequestFilterModel;
     requestModel.bu = filterModel.bu ? filterModel.bu : '';
-    requestModel.endIndex = endIndex;
+    requestModel.pageSize = this.pageSize;
     requestModel.from = this.formatDate(filterModel.from);
     requestModel.task = filterModel.task ? filterModel.task : '';
     requestModel.to = this.formatDate(filterModel.to);
@@ -76,6 +76,22 @@ export class AnalysisComponent implements OnInit, AfterViewInit, AfterViewChecke
   }
 
   formatDate(date: NgbDateStruct | null): string {
-    return date ? date.day + this.DELIMITER + date.month + this.DELIMITER + date.year : '';
+    return date ? date.year + this.DELIMITER + date.month + this.DELIMITER + date.day : '';
+  }
+
+  excelDownload() {
+    const requestModel: RequestFilterModel = this.getDataInValidFormat(this.filter);
+
+    this.analysisService.downloadExcelFile(requestModel).subscribe(
+      (excelBlob) => { this.downloadFile(excelBlob); }
+    );
+  }
+  downloadFile(data: any) {
+    const blob = new Blob([data], { type: 'application/vnd.ms-excel' });
+    const element = document.createElement('a');
+    element.href = window.URL.createObjectURL(blob);
+    element.download = Excel.excelName;
+    document.body.appendChild(element);
+    element.click();
   }
 }

@@ -4,5 +4,5 @@ export interface RequestFilterModel {
     bu: string;
     task: string;
     startIndex: number;
-    endIndex: number;
+    pageSize: number;
 }
