@@ -14,8 +14,8 @@ export class AuthenticationApiService {
 
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
-  readonly CHANGE_PASSWORD_URL = environment.apiUrl + '/changepasswordurl';
-  readonly LOGIN_URL = environment.apiUrl + '/loginurl';
+  readonly CHANGE_PASSWORD_URL = environment.apiUrl + '/changePassword';
+  readonly LOGIN_URL = environment.apiUrl + '/authenticate';
 
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
