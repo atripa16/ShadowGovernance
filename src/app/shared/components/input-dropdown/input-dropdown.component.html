@@ -1,13 +1,16 @@
 <div class="field-wrap ">
-  <label class="label-sec ml-1" [for]="name" *ngIf="label"> {{label |titlecase}} <span *ngIf='required'> * </span></label>
+  <label class="label-sec ml-1" [for]="name" *ngIf="label"> {{label |titlecase}} <span *ngIf='required'> *
+    </span></label>
   <div class="outer remove-margin" (blur)="removeShowOptions()">
-    <input [name]="name" class="form-control box-Shadow rounded-0" [id]="name"  [placeholder]="placeholder"  [(ngModel)]=searchValue (ngModelChange)="searchValueChange($event)"
-    autocomplete="off" (focus)="addShowOptions()" >
+    <input [disabled]="disabled" [name]="name" class="form-control box-Shadow rounded-0" [id]="name"
+      [placeholder]="placeholder" [(ngModel)]=searchValue (ngModelChange)="searchValueChange($event)" autocomplete="off"
+      (focus)="addShowOptions()">
     <div class="options-control" *ngIf="showOptions !== undefined && showOptions !== null && showOptions?.length > 0">
       <ng-container *ngFor="let choice of showOptions">
         <ng-container
           *ngIf="choice.code !== undefined && choice.description !== undefined && choice.code !== null && choice.description !== null;else stringOnlyValue">
-          <div class="option"  (click)="selectChoice(choice)"><i class="fa fa-check fa-1px" aria-hidden="true" *ngIf="choice.description== searchValue"></i> {{choice.description }}</div>
+          <div class="option" (click)="selectChoice(choice)"><i class="fa fa-check fa-1px" aria-hidden="true"
+              *ngIf="choice.description== searchValue"></i> {{choice.description }}</div>
         </ng-container>
         <ng-template #stringOnlyValue>
           <option (click)="selectChoice(choice)">{{choice.description}}</option>

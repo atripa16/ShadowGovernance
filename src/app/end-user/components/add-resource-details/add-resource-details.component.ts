@@ -30,7 +30,7 @@ export class AddResourceDetailsComponent implements OnInit {
   isRemoveTaskDisabled: boolean;
   inShadow: boolean;
   calendarDays = [
-    'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'
+    'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'
   ];
   fresherDetails = new FormGroup({
     capgId: new FormControl(''),
@@ -56,6 +56,18 @@ export class AddResourceDetailsComponent implements OnInit {
       currentWeekDates.push(currDay.date);
     });
     return currentWeekDates;
+  }
+
+  isTaskFieldDisabled(date: string): boolean {
+    return moment(date, 'YYYY-MM-DD').isAfter(moment());
+  }
+
+  isNextTaskButtonDisabled(date: string): boolean {
+    for (let i = 0; i < 7; i++) {
+      if (moment(date, 'YYYY-MM-DD').add(i + 1, 'days').isAfter(moment()) === true) {
+        return true;
+      }
+    }
   }
 
   ngOnInit() {
