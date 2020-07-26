@@ -42,7 +42,6 @@ export class UserComponent implements OnInit {
   }
 
   changePassword(): void {
-    console.log('opening change pasword');
     this.ngbModal.open(ChangePasswordComponent, { centered: true });
   }
 

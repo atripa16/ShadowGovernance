@@ -1,13 +1,11 @@
-import { ErrorHandler, Injector, Injectable } from '@angular/core';
+import { ErrorHandler, Injectable, Injector } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { AuthenticationApiService } from 'src/app/core/services/authentication-api.service';
 import { ErrorComponent } from '../components/error/error.component';
 import { Errors } from '../enums/errors.enum';
-import { Router } from '@angular/router';
-import { AuthenticationApiService } from 'src/app/core/services/authentication-api.service';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class GlobalErrorHandler implements ErrorHandler {
 
     private ngbModal: NgbModal;
@@ -30,7 +28,6 @@ export class GlobalErrorHandler implements ErrorHandler {
             this.openModal('Please Login to continue');
             this.router.navigate(['end-user']);
         }
-        throw error;
     }
 
     private openModal(message: string) {
