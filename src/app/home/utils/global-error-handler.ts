@@ -30,6 +30,7 @@ export class GlobalErrorHandler implements ErrorHandler {
             this.openModal('Please Login to continue');
             this.router.navigate(['end-user']);
         }
+        throw error;
     }
 
     private openModal(message: string) {

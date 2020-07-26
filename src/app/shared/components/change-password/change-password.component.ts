@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbActiveModal, NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenticationApiService } from 'src/app/core/services/authentication-api.service';
-import { ChangePasswordModel } from '../../models/change-password.model';
+import { ChangePasswordModel } from '../../../admin/models/change-password.model';
 import { SuccessComponent } from 'src/app/home/components/success/success.component';
 
 @Component({
