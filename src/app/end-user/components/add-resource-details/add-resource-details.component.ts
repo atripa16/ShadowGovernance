@@ -226,16 +226,26 @@ export class AddResourceDetailsComponent implements OnInit {
    * @param taskInfo Stores the Task information
    */
   setTaskData(taskInfo: TaskDescription[]): void {
+    this.taskArr = this.fresherDetails.get('taskDesc') as FormArray;
+    while (this.taskArr.length !== 0) {
+      this.taskArr.removeAt(0);
+    }
     const taskDetails: any[] = [];
-    taskInfo.forEach(currTask => {
-      const taskDetail = {};
-      taskDetail['friday'] = currTask.friday.description;
-      taskDetail['monday'] = currTask.monday.description;
-      taskDetail['tuesday'] = currTask.tuesday.description;
-      taskDetail['wednesday'] = currTask.wednesday.description;
-      taskDetail['thursday'] = currTask.thursday.description;
+    taskInfo.forEach((currTask, index) => {
+      this.addRow();
+      const taskDetail = {
+        monday: '',
+        tuesday: '',
+        wednesday: '',
+        thursday: '',
+        friday: '',
+      };
+      taskDetail.friday = currTask.friday.description;
+      taskDetail.monday = currTask.monday.description;
+      taskDetail.tuesday = currTask.tuesday.description;
+      taskDetail.wednesday = currTask.wednesday.description;
+      taskDetail.thursday = currTask.thursday.description;
       taskDetails.push(taskDetail);
-
     });
     this.fresherDetails.controls.taskDesc.patchValue(taskDetails);
   }
