@@ -161,9 +161,18 @@ export class AddResourceDetailsComponent implements OnInit {
   }
 
   setTaskData(taskInfo: TaskDescription[]): void {
-    this.fresherDetails.patchValue({
-      taskDesc: taskInfo
+    const taskDetails: any[] = [];
+    taskInfo.forEach(currTask => {
+      const taskDetail = {};
+      taskDetail['friday'] = currTask.friday.description;
+      taskDetail['monday'] = currTask.monday.description;
+      taskDetail['tuesday'] = currTask.tuesday.description;
+      taskDetail['wednesday'] = currTask.wednesday.description;
+      taskDetail['thursday'] = currTask.thursday.description;
+      taskDetails.push(taskDetail);
+
     });
+    this.fresherDetails.controls.taskDesc.patchValue(taskDetails);
   }
 
   insertEmpData() {
