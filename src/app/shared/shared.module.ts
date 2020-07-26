@@ -17,6 +17,7 @@ import { InputDropdownComponent } from './components/input-dropdown/input-dropdo
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     NgbModule
   ],
   exports: [

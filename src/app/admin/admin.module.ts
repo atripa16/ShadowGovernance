@@ -7,12 +7,14 @@ import { AnalysisComponent } from './components/analysis/analysis.component';
 import { SharedModule } from '../shared/shared.module';
 import { AnalysisApiService } from './services/analysis-api.service';
 import { HomeComponent } from './components/home/home.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 @NgModule({
   declarations: [
     CreateUserComponent,
     AnalysisComponent,
-    HomeComponent
+    HomeComponent,
+    ChangePasswordComponent
   ],
   imports: [
     CommonModule,
@@ -21,6 +23,9 @@ import { HomeComponent } from './components/home/home.component';
   ],
   providers: [
     AnalysisApiService
+  ],
+  entryComponents: [
+    ChangePasswordComponent
   ]
 })
 export class AdminModule { }

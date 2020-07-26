@@ -13,8 +13,7 @@ import { ChangePasswordComponent } from './admin/components/change-password/chan
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ChangePasswordComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
