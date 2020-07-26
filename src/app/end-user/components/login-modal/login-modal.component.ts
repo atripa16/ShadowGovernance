@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { first } from 'rxjs/operators';
 import { LoginModel } from 'src/app/core/models/login.model';
 import { AuthenticationApiService } from 'src/app/core/services/authentication-api.service';
-import { ErrorComponent } from 'src/app/home/components/error/error.component';
 
 @Component({
   selector: 'app-login-modal',
@@ -36,15 +35,10 @@ export class LoginModalComponent implements OnInit {
       .pipe(first())
       .subscribe(data => {
         if (data.role === 'Admin') {
-          this.route.navigate(['/user/analyst']);
+          this.route.navigate(['user/admin']);
         } else {
-          this.route.navigate([this.returnUrl]);
+          this.route.navigate(['user/analysis']);
         }
-      },
-        err => {
-          const ngbModalRef: NgbModalRef = this.ngbModal.open(ErrorComponent,
-            { centered: true, backdrop: 'static', keyboard: false });
-          ngbModalRef.componentInstance.errorMessage = err.message;
-        });
+      });
   }
 }

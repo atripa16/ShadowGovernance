@@ -3,14 +3,15 @@ import { Routes, RouterModule } from '@angular/router';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { AnalysisComponent } from './components/analysis/analysis.component';
 import { GetUserRole } from './Resolver/get-user-roles.resolver';
-import { AuthGuard } from './guards/auth-guard.service';
 import { HomeComponent } from './components/home/home.component';
+import { AdminAuthGuard } from './guards/admin-auth-guard.service';
+import { AnalystAuthGuard } from './guards/analyst-auth.guard';
 
 const routes: Routes = [
   {
     path: 'admin',
     component: HomeComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AdminAuthGuard],
     children: [
       {
         path: '',
@@ -31,7 +32,7 @@ const routes: Routes = [
   {
     path: 'analysis',
     component: HomeComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AnalystAuthGuard],
     children: [
       {
         path: '',

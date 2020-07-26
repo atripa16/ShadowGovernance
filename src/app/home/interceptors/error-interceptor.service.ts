@@ -17,12 +17,10 @@ export class ErrorInterceptorService implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       catchError((httpErrorResponse: HttpErrorResponse) => {
-        let errorMessage = '';
         if (httpErrorResponse.status > 400) {
-          errorMessage = httpErrorResponse.error.message;
           const ngbModalRef: NgbModalRef = this.ngbModal.open(ErrorComponent,
             { centered: true, backdrop: 'static', keyboard: false });
-          ngbModalRef.componentInstance.errorMessage = errorMessage;
+          ngbModalRef.componentInstance.errorMessage = httpErrorResponse.error.message;
         }
         return throwError(httpErrorResponse);
       })

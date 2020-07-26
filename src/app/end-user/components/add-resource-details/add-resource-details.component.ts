@@ -63,7 +63,6 @@ export class AddResourceDetailsComponent implements OnInit {
       this.commonDomainsModel = commonDomainsModel;
     });
     const now = moment();
-    console.log(now.get('day'));
     // If it's sunday then show previous week records
     if (now.get('day') === 0) {
       this.setCurrWeekInfo(moment(now).subtract(2, 'days'));
@@ -113,7 +112,7 @@ export class AddResourceDetailsComponent implements OnInit {
   }
 
   prev() {
-    this.setCurrWeekInfo(moment(this.currWeekInfo[0].date, 'DD/MM/YYYY').subtract(2, 'days'));
+    this.setCurrWeekInfo(moment(this.currWeekInfo[0].date, 'YYYY-MM-DD').subtract(2, 'days'));
     this.endUserApiService.loadCurrWeekTasks(this.fresherDetails.controls.capgId.value, this.currDatesArray())
       .subscribe((taskInfo: TaskDescription[]) => {
         this.setTaskData(taskInfo);
@@ -121,7 +120,7 @@ export class AddResourceDetailsComponent implements OnInit {
   }
 
   next() {
-    this.setCurrWeekInfo(moment(this.currWeekInfo[4].date, 'DD/MM/YYYY').add(2, 'days'));
+    this.setCurrWeekInfo(moment(this.currWeekInfo[4].date, 'YYYY-MM-DD').add(2, 'days'));
     this.endUserApiService.loadCurrWeekTasks(this.fresherDetails.controls.capgId.value, this.currDatesArray())
       .subscribe((taskInfo: TaskDescription[]) => {
         this.setTaskData(taskInfo);
@@ -131,7 +130,7 @@ export class AddResourceDetailsComponent implements OnInit {
   setCurrWeekInfo(currentDate: moment.Moment) {
     for (let index = 0; index < 5; index++) {
       this.currWeekInfo[index].day = this.calendarDays[index];
-      this.currWeekInfo[index].date = currentDate.clone().startOf('week').add(index + 1, 'day').format('DD/MM/YYYY');
+      this.currWeekInfo[index].date = currentDate.clone().startOf('week').add(index + 1, 'day').format('YYYY-MM-DD');
     }
   }
 
