@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { AuthenticationApiService } from '../../core/services/authentication-api.service';
-import { User } from '../../core/models/user.model';
-import { LoginModalComponent } from 'src/app/end-user/components/login-modal/login-modal.component';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Errors } from 'src/app/home/enums/errors.enum';
+import { User } from '../../core/models/user.model';
+import { AuthenticationApiService } from '../../core/services/authentication-api.service';
 
 
 @Injectable({ providedIn: 'root' })
@@ -20,17 +20,27 @@ export class AdminAuthGuard implements CanActivate {
       if (currentUser.role === 'Admin') {
         return true;
       } else {
-        // show message not authorize to access this page
-        this.router.navigate([route.url]);
+        throw new Error(Errors.NOT_AUTHORIZE);
       }
-      // logged in so return true
-      return true;
-    } else {
-      this.ngbModal.open(LoginModalComponent, { centered: true });
-      // open loginform
     }
-    // not logged in so redirect to login page with the return url
-    this.router.navigate(['/end-user'], { queryParams: { returnUrl: state.url } });
-    return false;
+    throw new Error(Errors.NOT_AUTHENTICATED);
   }
+
+  //   if (currentUser) {
+  //     if (currentUser.role === 'Admin') {
+  //       return true;
+  //     } else {
+  //       // show message not authorize to access this page
+  //       this.router.navigate([route.url]);
+  //     }
+  //     // logged in so return true
+  //     return true;
+  //   } else {
+  //     this.ngbModal.open(LoginModalComponent, { centered: true });
+  //     // open loginform
+  //   }
+  //   // not logged in so redirect to login page with the return url
+  //   this.router.navigate(['/end-user'], { queryParams: { returnUrl: state.url } });
+  //   return false;
+  // }
 }
