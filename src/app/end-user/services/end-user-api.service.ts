@@ -22,14 +22,14 @@ export class EndUserApiService {
 
 
   fetchEndUserDetails(id: number, dates: string[]): Observable<EmployeeInfo> {
-    const httpParams = new HttpParams().append('id', id.toString())
-      .append('dates', dates.toString());
+    const httpParams = new HttpParams().set('id', id.toString())
+      .set('dates', dates.toString());
     return this.http.get<EmployeeInfo>(this.FETCH_END_USER_DOMAINS, { params: httpParams });
   }
 
   loadCurrWeekTasks(id: number, dates: string[]): Observable<TaskDescription[]> {
-    const httpParams = new HttpParams().append('id', id.toString())
-      .append('dates', dates.toString());
+    const httpParams = new HttpParams().set('id', id.toString())
+      .set('dates', dates.toString());
     return this.http.get<TaskDescription[]>(this.LOAD_CURR_WEEK_TASKS, { params: httpParams });
   }
 

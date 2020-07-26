@@ -17,10 +17,9 @@ export class GetUserRole implements Resolve<OptionModel[]> {
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Observable<OptionModel[]> {
-        return of([{code:'code', description:"desc"}]);
-        // this.addUser.getRoles().pipe(map(data => data),
-        //     catchError((error) => {
-        //         return empty();
-        //     }));
+        return this.addUser.getRoles().pipe(map(data => data),
+            catchError((error) => {
+                return empty();
+            }));
     }
 }

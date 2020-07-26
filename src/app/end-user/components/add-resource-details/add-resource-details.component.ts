@@ -63,7 +63,13 @@ export class AddResourceDetailsComponent implements OnInit {
       this.commonDomainsModel = commonDomainsModel;
     });
     const now = moment();
-    this.setCurrWeekInfo(now);
+    console.log(now.get('day'));
+    // If it's sunday then show previous week records
+    if (now.get('day') === 0) {
+      this.setCurrWeekInfo(moment(now).subtract(2, 'days'));
+    } else {
+      this.setCurrWeekInfo(now);
+    }
     this.fresherDetails.valueChanges.subscribe((formData) => {
       if (formData.capgId) {
         this.isFetchDisabled = false;
