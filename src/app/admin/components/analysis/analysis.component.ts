@@ -6,6 +6,7 @@ import { AnalysisApiService } from 'src/app/admin/services/analysis-api.service'
 import { CommonDomainsModel } from 'src/app/shared/models/common-domains.model';
 import { CommonDomainsApiService } from 'src/app/shared/services/common-domains-api.service';
 import { RequestFilterModel } from '../../models/RequestFilter.model';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-analysis',
@@ -19,7 +20,7 @@ export class AnalysisComponent implements OnInit, AfterViewInit, AfterViewChecke
   page = 1;
   pageSize = 10;
   collectionSize = this.resultTable.length;
-  filter: FilterModel = {} as FilterModel;
+  filter: FilterModel = { bu: '', from: null, task: '', to: null };
   isFilterClicked = false;
   activeIds = [];
   @ViewChild('filterAccordion') filterAccordion: NgbAccordion;
@@ -44,6 +45,10 @@ export class AnalysisComponent implements OnInit, AfterViewInit, AfterViewChecke
     this.commonDomainsApiService.loadCommonDomains().subscribe((commonDomainsModel: CommonDomainsModel) => {
       this.commonDomainsModel = commonDomainsModel;
     });
+  }
+
+  clear(filterForm: NgForm): void {
+    filterForm.resetForm();
   }
 
   search() {

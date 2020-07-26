@@ -9,10 +9,12 @@ import { EndUserModule } from './end-user/end-user.module';
 import { HomeModule } from './home/home.module';
 import { fakeBackendProvider } from './core/interceptors/fake-backend-interceptor.service'
 import { GlobalErrorHandler } from './home/utils/global-error-handler';
+import { ChangePasswordComponent } from './admin/components/change-password/change-password.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

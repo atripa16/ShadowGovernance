@@ -12,25 +12,19 @@ import { AuthenticationApiService } from 'src/app/core/services/authentication-a
 })
 export class LoginModalComponent implements OnInit {
 
-  returnUrl: string;
-
   constructor(
     public modal: NgbActiveModal,
-    private ngbModal: NgbModal,
     private route: Router,
-    private activatedRoute: ActivatedRoute,
     private authenticationService: AuthenticationApiService
   ) { }
 
   loginModel: LoginModel = {} as LoginModel;
 
   ngOnInit() {
-    this.returnUrl = this.activatedRoute.snapshot.queryParams.returnUrl || '/user/admin';
   }
 
   login(response: string) {
     this.modal.close(response);
-    // this.route.navigate(['admin']);
     this.authenticationService.login(this.loginModel)
       .pipe(first())
       .subscribe(data => {

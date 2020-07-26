@@ -4,6 +4,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LoginModel } from '../models/login.model';
 import { User } from '../models/user.model';
+import { ChangePasswordModel } from 'src/app/admin/models/change-password.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +14,8 @@ export class AuthenticationApiService {
 
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
+  readonly CHANGE_PASSWORD_URL = environment.apiUrl + '/changepasswordurl';
+  readonly LOGIN_URL = environment.apiUrl + '/loginurl';
 
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
@@ -27,7 +31,7 @@ export class AuthenticationApiService {
   }
 
   login(loginInfo: LoginModel): Observable<User> {
-    return this.http.post<User>(`/users/authenticate`, loginInfo)
+    return this.http.post<User>(this.LOGIN_URL, loginInfo)
       .pipe(map(user => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('currentUser', JSON.stringify(user));
@@ -40,5 +44,9 @@ export class AuthenticationApiService {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
+  }
+
+  changePassword(passwordInfo: ChangePasswordModel): Observable<void> {
+    return this.http.post<void>(this.CHANGE_PASSWORD_URL, passwordInfo);
   }
 }
