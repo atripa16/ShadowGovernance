@@ -59,15 +59,34 @@ export class AddResourceDetailsComponent implements OnInit {
   }
 
   isTaskFieldDisabled(date: string): boolean {
-    return moment(date, 'YYYY-MM-DD').isAfter(moment());
+    return this.getMoment(date).isAfter(moment());
   }
 
+  /**
+   * Resets the form
+   */
+  resetForm(): void {
+    this.fresherDetails.reset();
+  }
+
+  /**
+   * Checks whether the next week tasks button should be disabled or not
+   * @param date Stores the date in string
+   */
   isNextTaskButtonDisabled(date: string): boolean {
     for (let i = 0; i < 7; i++) {
-      if (moment(date, 'YYYY-MM-DD').add(i + 1, 'days').isAfter(moment()) === true) {
+      if (this.getMoment(date).add(i + 1, 'days').isAfter(moment()) === true) {
         return true;
       }
     }
+  }
+
+  /**
+   * Formats date from string to moment object
+   * @param date accepts date in string
+   */
+  getMoment(date: string): moment.Moment {
+    return moment(date, 'YYYY-MM-DD');
   }
 
   ngOnInit() {
@@ -95,6 +114,10 @@ export class AddResourceDetailsComponent implements OnInit {
     });
   }
 
+  /**
+   * Decides whether to show shadow details forms or not
+   * @param isShadow stores the value of isShadow field
+   */
   setShadow(isShadow: string) {
     if (isShadow === 'true') {
       this.inShadow = true;
@@ -103,6 +126,9 @@ export class AddResourceDetailsComponent implements OnInit {
     }
   }
 
+  /**
+   * Adds a new row of FormGroup for tasks
+   */
   createRow() {
     return new FormGroup({
       monday: new FormControl(),
@@ -113,32 +139,48 @@ export class AddResourceDetailsComponent implements OnInit {
     });
   }
 
+  /**
+   * Add new row to enter tasks.
+   */
   addRow() {
     this.taskArr = this.fresherDetails.get('taskDesc') as FormArray;
     this.taskArr.push(this.createRow());
   }
 
+  /**
+   * Deletes the last row
+   */
   deleteRow() {
     this.taskArr = this.fresherDetails.get('taskDesc') as FormArray;
     this.taskArr.removeAt(this.taskArr.length - 1);
   }
 
+  /**
+   * Fetches the previous week task records
+   */
   prev() {
-    this.setCurrWeekInfo(moment(this.currWeekInfo[0].date, 'YYYY-MM-DD').subtract(2, 'days'));
+    this.setCurrWeekInfo(this.getMoment(this.currWeekInfo[0].date).subtract(2, 'days'));
     this.endUserApiService.loadCurrWeekTasks(this.fresherDetails.controls.capgId.value, this.currDatesArray())
       .subscribe((taskInfo: TaskDescription[]) => {
         this.setTaskData(taskInfo);
       });
   }
 
+  /**
+   * Fetches the next week task records
+   */
   next() {
-    this.setCurrWeekInfo(moment(this.currWeekInfo[4].date, 'YYYY-MM-DD').add(2, 'days'));
+    this.setCurrWeekInfo(this.getMoment(this.currWeekInfo[4].date).add(2, 'days'));
     this.endUserApiService.loadCurrWeekTasks(this.fresherDetails.controls.capgId.value, this.currDatesArray())
       .subscribe((taskInfo: TaskDescription[]) => {
         this.setTaskData(taskInfo);
       });
   }
 
+  /**
+   * Calculates and store the current week information(date and day)
+   * @param currentDate stores the start date for the week
+   */
   setCurrWeekInfo(currentDate: moment.Moment) {
     for (let index = 0; index < 5; index++) {
       this.currWeekInfo[index].day = this.calendarDays[index];
@@ -146,6 +188,9 @@ export class AddResourceDetailsComponent implements OnInit {
     }
   }
 
+  /**
+   * Fetches the data of the Employee based on capgemini Id
+   */
   fetchEmpData(): void {
     this.endUserApiService.fetchEndUserDetails(this.fresherDetails.controls.capgId.value,
       this.currDatesArray()).subscribe((empData: EmployeeInfo) => {
@@ -160,6 +205,10 @@ export class AddResourceDetailsComponent implements OnInit {
       });
   }
 
+  /**
+   * Sets the data coming from the backend to the form
+   * @param empData Stores the employee data
+   */
   patchFormData(empData: EmployeeInfo): void {
     this.fresherDetails.patchValue({
       name: empData.name,
@@ -172,6 +221,10 @@ export class AddResourceDetailsComponent implements OnInit {
     this.setTaskData(empData.taskDesc);
   }
 
+  /**
+   * Sets the task details for the current week in the form
+   * @param taskInfo Stores the Task information
+   */
   setTaskData(taskInfo: TaskDescription[]): void {
     const taskDetails: any[] = [];
     taskInfo.forEach(currTask => {
@@ -187,6 +240,9 @@ export class AddResourceDetailsComponent implements OnInit {
     this.fresherDetails.controls.taskDesc.patchValue(taskDetails);
   }
 
+  /**
+   * Inserts the Employee records in the database.
+   */
   insertEmpData() {
     this.employeeInfo = { ...this.fresherDetails.value };
     this.employeeInfo.date = this.currDatesArray();

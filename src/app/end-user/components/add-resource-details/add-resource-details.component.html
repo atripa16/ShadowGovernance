@@ -1,5 +1,7 @@
 <div>
-  <h1 class="text-secondary m-2">Enter your details</h1>
+  <div class="row w-100 my-2">
+  <h2 class="text-secondary mx-1 mb-4">Enter your details</h2>
+  </div>
   <form autocomplete="off" [formGroup]="fresherDetails" class="m-2">
     <div class="row">
       <div class="col-6">
@@ -48,18 +50,18 @@
     <div *ngIf="inShadow">
       <div class="row">
         <div class="col-6">
-          <app-custom-dropdown [required]="true" formControlName="bu" [name]="'bu'"
-            [options]="commonDomainsModel.businessUnits" [label]="'Business Unit (BU)'"></app-custom-dropdown>
+          <app-custom-dropdown [placeholder]="'Select business unit'" [errorMessage]="'Please select your business unit'" [required]="true" formControlName="bu" [name]="'bu'"
+            [options]="commonDomainsModel.businessUnits" [label]="'Business Unit(BU)'"></app-custom-dropdown>
         </div>
       </div>
       <div class="row">
         <div class="col-6">
-          <app-custom-input [required]="true" [type]="'text'" formControlName="projName" [name]="'projName'"
+          <app-custom-input [required]="true" [errorMessage]="'Please Enter shadow project name'" [placeholder]="'Enter shadow project name'" [type]="'text'" formControlName="projName" [name]="'projName'"
             [label]="'Shadow Project Name'">
           </app-custom-input>
         </div>
         <div class="col-6">
-          <app-custom-input [required]="true" [type]="'text'" formControlName="mentorName" [name]="'mentorName'"
+          <app-custom-input [required]="true" [errorMessage]="'Please Enter project mentor'" [placeholder]="'Enter project mentor name'" [type]="'text'" formControlName="mentorName" [name]="'mentorName'"
             [label]="'Shadow Project Mentor'">
           </app-custom-input>
         </div>
@@ -79,8 +81,8 @@
           class="header-font-size btn-link btn border icon-border">
           <i class="fa fa-chevron-left"></i>
         </button>
-        <button (click)="next()" [disabled]="isFetchDisabled || isNextTaskButtonDisabled(currWeekInfo[0].date)" routerLinkActive="icon-border"
-          class="header-font-size btn-link btn border icon-border">
+        <button (click)="next()" [disabled]="isFetchDisabled || isNextTaskButtonDisabled(currWeekInfo[0].date)"
+          routerLinkActive="icon-border" class="header-font-size btn-link btn border icon-border">
           <i class="fa fa-chevron-right"></i>
         </button>
       </div>
@@ -109,7 +111,7 @@
     </div>
   </form>
   <div class="text-right w-100 custom-margin">
-    <button type="button" class="btn custom-button">Reset</button>
+    <button type="button" (click)="resetForm()" class="btn custom-button">Reset</button>
     <button type="button" [disabled]="fresherDetails.invalid" (click)="insertEmpData()"
       class="btn custom-button">Submit</button>
   </div>

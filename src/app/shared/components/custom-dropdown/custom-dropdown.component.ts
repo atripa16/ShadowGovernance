@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, ViewChild, AfterContentChecked, AfterViewChecked } from '@angular/core';
 import { ControlValueAccessor, NgModel, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -12,21 +12,22 @@ import { ControlValueAccessor, NgModel, NG_VALUE_ACCESSOR } from '@angular/forms
     styleUrls: ['./custom-dropdown.component.scss']
 })
 
-export class CustomDropdownComponent implements OnInit, ControlValueAccessor {
+export class CustomDropdownComponent implements OnInit, ControlValueAccessor, AfterViewChecked {
 
     @Input() label = '';
-    @Input() name=''
+    @Input() name = '';
     @Input() required: true | false = false;
     @ViewChild('modelRef') modelRef: NgModel;
     onChange: (value: any) => void;
     onTouched: () => void;
     value: string;
     @Input() disabled: true | false;
-    @Input() errorMessage: string = '';
+    @Input() errorMessage = '';
+    @Input() placeholder = '';
     @Input() options: any[] = [];
 
     constructor(
-        private _changeD: ChangeDetectorRef
+        private changeD: ChangeDetectorRef
     ) {
 
     }
@@ -36,7 +37,7 @@ export class CustomDropdownComponent implements OnInit, ControlValueAccessor {
     }
 
     ngAfterViewChecked(): void {
-        this._changeD.detectChanges();
+        this.changeD.detectChanges();
     }
 
     writeValue(value: string): void {
