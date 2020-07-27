@@ -209,7 +209,7 @@ export class AddResourceDetailsComponent implements OnInit {
         this.fresherDetails.controls.isShadow.setValue(empData.isShadow);
         this.fresherDetails.controls.projName.setValue(empData.projName);
         this.fresherDetails.controls.mentorName.setValue(empData.mentorName);
-        this.fresherDetails.controls.taskDesc.setValue(empData.taskDesc);
+        this.setTaskData(empData.taskDesc);
       });
   }
 
@@ -226,7 +226,6 @@ export class AddResourceDetailsComponent implements OnInit {
       projName: empData.projName,
       mentorName: empData.mentorName,
     });
-    this.setTaskData(empData.taskDesc);
   }
 
   /**
@@ -239,23 +238,27 @@ export class AddResourceDetailsComponent implements OnInit {
       this.taskArr.removeAt(0);
     }
     const taskDetails: any[] = [];
-    taskInfo.forEach((currTask, index) => {
+    if (taskInfo.length > 0) {
+      taskInfo.forEach((currTask, index) => {
+        this.addRow();
+        const taskDetail = {
+          monday: '',
+          tuesday: '',
+          wednesday: '',
+          thursday: '',
+          friday: '',
+        };
+        taskDetail.friday = currTask.friday.description;
+        taskDetail.monday = currTask.monday.description;
+        taskDetail.tuesday = currTask.tuesday.description;
+        taskDetail.wednesday = currTask.wednesday.description;
+        taskDetail.thursday = currTask.thursday.description;
+        taskDetails.push(taskDetail);
+      });
+      this.fresherDetails.controls.taskDesc.patchValue(taskDetails);
+    } else {
       this.addRow();
-      const taskDetail = {
-        monday: '',
-        tuesday: '',
-        wednesday: '',
-        thursday: '',
-        friday: '',
-      };
-      taskDetail.friday = currTask.friday.description;
-      taskDetail.monday = currTask.monday.description;
-      taskDetail.tuesday = currTask.tuesday.description;
-      taskDetail.wednesday = currTask.wednesday.description;
-      taskDetail.thursday = currTask.thursday.description;
-      taskDetails.push(taskDetail);
-    });
-    this.fresherDetails.controls.taskDesc.patchValue(taskDetails);
+    }
   }
 
   /**
