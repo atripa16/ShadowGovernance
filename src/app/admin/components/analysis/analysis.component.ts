@@ -52,10 +52,13 @@ export class AnalysisComponent implements OnInit, AfterViewInit, AfterViewChecke
     filterForm.resetForm();
   }
 
-  search() {
+  search(page?: number) {
+    if (page) {
+      this.page = page;
+
+    }
     this.isFilterClicked = true;
-    const startIndex: number = (this.page - 1) * this.pageSize;
-    const requestModel: RequestFilterModel = this.getDataInValidFormat(this.filter, startIndex);
+    const requestModel: RequestFilterModel = this.getDataInValidFormat(this.filter);
 
     combineLatest(this.analysisService.getAnalysisResultTotalCount(requestModel), this.analysisService.getAnalysisResult(requestModel)).
       subscribe(([recordCount, results]: [number, any]) => {
@@ -64,14 +67,14 @@ export class AnalysisComponent implements OnInit, AfterViewInit, AfterViewChecke
       });
   }
 
-  getDataInValidFormat(filterModel: FilterModel, startIndex?: number): RequestFilterModel {
+  getDataInValidFormat(filterModel: FilterModel): RequestFilterModel {
     const requestModel = {} as RequestFilterModel;
     requestModel.bu = filterModel.bu ? filterModel.bu : '';
     requestModel.pageSize = this.pageSize;
     requestModel.from = this.formatDate(filterModel.from);
     requestModel.task = filterModel.task ? filterModel.task : '';
     requestModel.to = this.formatDate(filterModel.to);
-    requestModel.startIndex = startIndex;
+    requestModel.startIndex = this.page - 1;
     return requestModel;
   }
 
