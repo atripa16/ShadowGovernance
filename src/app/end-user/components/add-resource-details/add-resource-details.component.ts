@@ -9,6 +9,7 @@ import { WeekModel } from '../../models/week.model';
 import { EndUserApiService } from '../../services/end-user-api.service';
 import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { SuccessComponent } from 'src/app/home/components/success/success.component';
+import { tap, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-resource-details',
@@ -90,7 +91,14 @@ export class AddResourceDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.commonDomainsApiService.loadCommonDomains().subscribe((commonDomainsModel: CommonDomainsModel) => {
+    this.commonDomainsApiService.loadCommonDomains().pipe(
+      map(
+        (data: CommonDomainsModel) => {
+          data.defaultId = '6';
+          return data;
+        }
+      )
+    ).subscribe((commonDomainsModel: CommonDomainsModel) => {
       this.commonDomainsModel = commonDomainsModel;
     });
     const now = moment();
@@ -256,6 +264,7 @@ export class AddResourceDetailsComponent implements OnInit {
   insertEmpData() {
     this.employeeInfo = { ...this.fresherDetails.value };
     this.employeeInfo.date = this.currDatesArray();
+    console.log('data in table', this.employeeInfo);
     this.endUserApiService.insertEndUserDetails(this.employeeInfo).subscribe(() => {
       const ngbModalRef: NgbModalRef = this.ngbModal.open(SuccessComponent, { centered: true, backdrop: 'static', keyboard: false });
       ngbModalRef.componentInstance.successMessage = 'Details Inserted Successfully!';

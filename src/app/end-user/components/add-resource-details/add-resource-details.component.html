@@ -102,9 +102,9 @@
           <tbody>
             <tr *ngFor="let task of fresherDetails.get('taskDesc').controls" [formGroup]='task'>
               <td *ngFor="let currWeek of currWeekInfo;let i = index">
-                <app-input-dropdown [options]="commonDomainsModel.taskDescriptions"
-                  [disabled]="isTaskFieldDisabled(currWeek.date)" [formControlName]="calendarDays[i]"
-                  [name]="calendarDays[i]" [placeholder]="'Choose/ Enter Task'">
+                <app-input-dropdown [defaultKey]="'commonDomainsModel.defaultId'"
+                  [options]="commonDomainsModel.taskDescriptions" [disabled]="isTaskFieldDisabled(currWeek.date)"
+                  [formControlName]="calendarDays[i]" [name]="calendarDays[i]" [placeholder]="'Choose/ Enter Task'">
                 </app-input-dropdown>
               </td>
             </tr>

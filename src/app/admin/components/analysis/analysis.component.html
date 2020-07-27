@@ -18,12 +18,12 @@
               <app-date [label]="'To'" [name]="'to'" [minDate]="filter.from" [(ngModel)]="filter.to"></app-date>
             </div>
             <div class="col-6">
-              <app-custom-dropdown [placeholder]="'Select BU'" [options]="commonDomainsModel.businessUnits" [label]="'Business Unit (BU)'"
-                [name]="'bu'" [(ngModel)]="filter.bu"></app-custom-dropdown>
+              <app-custom-dropdown [placeholder]="'Select BU'" [options]="commonDomainsModel.businessUnits"
+                [label]="'Business Unit (BU)'" [name]="'bu'" [(ngModel)]="filter.bu"></app-custom-dropdown>
             </div>
             <div class="col-6">
-              <app-custom-dropdown [placeholder]="'Select Task'" [options]="commonDomainsModel.taskDescriptions" [label]="'Task'" [name]="'task'"
-                [(ngModel)]="filter.task"></app-custom-dropdown>
+              <app-custom-dropdown [placeholder]="'Select Task'" [options]="commonDomainsModel.taskDescriptions"
+                [label]="'Task'" [name]="'task'" [(ngModel)]="filter.task"></app-custom-dropdown>
             </div>
             <div class="w-100 text-center mt-4">
               <button class="btn custom-button" (click)="clear(filterForm)">Clear</button>
@@ -59,22 +59,18 @@
             </thead>
             <tbody>
               <tr *ngFor="let colVal of resultTable">
-                <td class="  table-col-size-md text-truncate text-nowrap" placement="top" [ngbTooltip]="colVal?.name">
+                <td class="  table-col-size-md text-truncate text-nowrap">
                   {{colVal?.name}}</td>
-                <td class="  table-col-size-md text-truncate text-nowrap" placement="top" [ngbTooltip]="colVal?.capgId">
+                <td class="  table-col-size-md text-truncate text-nowrap">
                   {{colVal?.capgId}}</td>
-                <td class="  table-col-size-md text-truncate text-nowrap" placement="top"
-                  [ngbTooltip]="colVal?.capgEmail">{{colVal?.email}}</td>
-                <td class="  table-col-size-md text-truncate text-nowrap" placement="top" [ngbTooltip]="colVal?.bu">
+                <td class="  table-col-size-md text-truncate text-nowrap">{{colVal?.email}}</td>
+                <td class="  table-col-size-md text-truncate text-nowrap">
                   {{colVal?.bu}}</td>
-                <td class="  table-col-size-md text-truncate text-nowrap" placement="top"
-                  [ngbTooltip]="colVal?.shadowProjectName">{{colVal?.projName}}</td>
-                <td class="  table-col-size-md text-truncate text-nowrap" placement="top"
-                  [ngbTooltip]="colVal?.shadowProjectMentor">{{colVal?.mentorName}}</td>
-                <td class="  table-col-size-md text-truncate text-nowrap" placement="top" [ngbTooltip]="colVal?.date">
+                <td class="  table-col-size-md text-truncate text-nowrap">{{colVal?.projName}}</td>
+                <td class="  table-col-size-md text-truncate text-nowrap">{{colVal?.mentorName}}</td>
+                <td class="  table-col-size-md text-truncate text-nowrap">
                   {{colVal?.date}}</td>
-                <td class="  table-col-size-md text-truncate text-nowrap" placement="top"
-                  [ngbTooltip]="colVal?.taskDescription">{{colVal?.taskDesc}}</td>
+                <td class="  table-col-size-md text-truncate text-nowrap">{{colVal?.taskDesc}}</td>
               </tr>
             </tbody>
           </table>
