@@ -4,7 +4,7 @@ export interface EmployeeInfo {
     bu: string;
     capgId: string;
     email: string;
-    isShadow: boolean;
+    isShadow: string;
     name: string;
     projName: string;
     mentorName: string;

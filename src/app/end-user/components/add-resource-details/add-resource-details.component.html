@@ -32,16 +32,7 @@
           <label for="capgeminiEmailId" class="control-label col-6">Are you in Shadow *?:</label>
           <div class="col-6">
             <div class="form-check form-check-inline p-2 m-0">
-              <div class="custom-control custom-radio col-6">
-                <input (click)="setShadow($event.target.value)" class="custom-control-input" formControlName="isShadow"
-                  required type="radio" id="yes" value="true">
-                <label class="custom-control-label small" for="yes">Yes</label>
-              </div>
-              <div class="custom-control custom-radio col-6">
-                <input (click)="setShadow($event.target.value)" class="custom-control-input" formControlName="isShadow"
-                  required type="radio" id="no" value="false">
-                <label class="custom-control-label small" for="no">No</label>
-              </div>
+              <app-customcheckbox (change)="inShadow=$event" formControlName="isShadow"></app-customcheckbox>
             </div>
           </div>
         </div>

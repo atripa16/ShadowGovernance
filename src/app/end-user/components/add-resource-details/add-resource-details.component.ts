@@ -38,7 +38,7 @@ export class AddResourceDetailsComponent implements OnInit {
     name: new FormControl(''),
     email: new FormControl(''),
     bu: new FormControl(''),
-    isShadow: new FormControl('false'),
+    isShadow: new FormControl(),
     projName: new FormControl(''),
     mentorName: new FormControl(''),
     taskDesc: new FormArray([this.createRow()])
@@ -126,13 +126,7 @@ export class AddResourceDetailsComponent implements OnInit {
    * Decides whether to show shadow details forms or not
    * @param isShadow stores the value of isShadow field
    */
-  setShadow(isShadow: string) {
-    if (isShadow === 'true') {
-      this.inShadow = true;
-    } else {
-      this.inShadow = false;
-    }
-  }
+  
 
   /**
    * Adds a new row of FormGroup for tasks
@@ -206,7 +200,7 @@ export class AddResourceDetailsComponent implements OnInit {
         this.fresherDetails.controls.name.setValue(empData.name);
         this.fresherDetails.controls.email.setValue(empData.email);
         this.fresherDetails.controls.bu.setValue(empData.bu);
-        this.fresherDetails.controls.isShadow.setValue(empData.isShadow);
+        this.fresherDetails.controls.isShadow.setValue(empData.isShadow.toLowerCase() === 'Y'.toLowerCase() ? true : false);
         this.fresherDetails.controls.projName.setValue(empData.projName);
         this.fresherDetails.controls.mentorName.setValue(empData.mentorName);
         this.setTaskData(empData.taskDesc);
