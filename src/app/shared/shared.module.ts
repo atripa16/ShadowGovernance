@@ -6,13 +6,15 @@ import { CustomInputComponent } from './components/custom-input/custom-input.com
 import { CustomDateComponent } from './components/custom-date/custom-date.component';
 import { CustomDropdownComponent } from './components/custom-dropdown/custom-dropdown.component';
 import { InputDropdownComponent } from './components/input-dropdown/input-dropdown.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 @NgModule({
   declarations: [
     InputDropdownComponent,
     CustomInputComponent,
     CustomDropdownComponent,
-    CustomDateComponent
+    CustomDateComponent,
+    ChangePasswordComponent
   ],
   imports: [
     CommonModule,
@@ -28,6 +30,9 @@ import { InputDropdownComponent } from './components/input-dropdown/input-dropdo
     CustomInputComponent,
     CustomDropdownComponent,
     CustomDateComponent
+  ],
+  entryComponents: [
+    ChangePasswordComponent
   ]
 })
 export class SharedModule { }

@@ -4,11 +4,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
+import { fakeBackendProvider } from './core/interceptors/fake-backend-interceptor.service';
 import { JwtInterceptor } from './core/interceptors/jwt-interceptor.service';
 import { EndUserModule } from './end-user/end-user.module';
 import { HomeModule } from './home/home.module';
 import { GlobalErrorHandler } from './home/utils/global-error-handler';
-import { ChangePasswordComponent } from './admin/components/change-password/change-password.component';
 
 @NgModule({
   declarations: [

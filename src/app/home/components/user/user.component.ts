@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { AuthenticationApiService } from 'src/app/core/services/authentication-api.service';
 import { LoginModalComponent } from 'src/app/end-user/components/login-modal/login-modal.component';
 import { User } from 'src/app/core/models/user.model';
+import { ChangePasswordComponent } from 'src/app/shared/components/change-password/change-password.component';
 
 @Component({
   selector: 'app-user',
@@ -38,6 +39,10 @@ export class UserComponent implements OnInit {
 
   openLoginModal(): void {
     this.ngbModal.open(LoginModalComponent, { centered: true });
+  }
+
+  changePassword(): void {
+    this.ngbModal.open(ChangePasswordComponent, { centered: true });
   }
 
 }

@@ -25,22 +25,4 @@ export class AdminAuthGuard implements CanActivate {
     }
     throw new Error(Errors.NOT_AUTHENTICATED);
   }
-
-  //   if (currentUser) {
-  //     if (currentUser.role === 'Admin') {
-  //       return true;
-  //     } else {
-  //       // show message not authorize to access this page
-  //       this.router.navigate([route.url]);
-  //     }
-  //     // logged in so return true
-  //     return true;
-  //   } else {
-  //     this.ngbModal.open(LoginModalComponent, { centered: true });
-  //     // open loginform
-  //   }
-  //   // not logged in so redirect to login page with the return url
-  //   this.router.navigate(['/end-user'], { queryParams: { returnUrl: state.url } });
-  //   return false;
-  // }
 }

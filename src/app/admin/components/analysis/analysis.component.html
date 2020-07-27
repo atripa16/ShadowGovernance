@@ -64,17 +64,17 @@
                 <td class="  table-col-size-md text-truncate text-nowrap" placement="top" [ngbTooltip]="colVal?.capgId">
                   {{colVal?.capgId}}</td>
                 <td class="  table-col-size-md text-truncate text-nowrap" placement="top"
-                  [ngbTooltip]="colVal?.capgEmail">{{colVal?.capgEmail}}</td>
+                  [ngbTooltip]="colVal?.capgEmail">{{colVal?.email}}</td>
                 <td class="  table-col-size-md text-truncate text-nowrap" placement="top" [ngbTooltip]="colVal?.bu">
                   {{colVal?.bu}}</td>
                 <td class="  table-col-size-md text-truncate text-nowrap" placement="top"
-                  [ngbTooltip]="colVal?.shadowProjectName">{{colVal?.shadowProjectName}}</td>
+                  [ngbTooltip]="colVal?.shadowProjectName">{{colVal?.projName}}</td>
                 <td class="  table-col-size-md text-truncate text-nowrap" placement="top"
-                  [ngbTooltip]="colVal?.shadowProjectMentor">{{colVal?.shadowProjectMentor}}</td>
+                  [ngbTooltip]="colVal?.shadowProjectMentor">{{colVal?.mentorName}}</td>
                 <td class="  table-col-size-md text-truncate text-nowrap" placement="top" [ngbTooltip]="colVal?.date">
                   {{colVal?.date}}</td>
                 <td class="  table-col-size-md text-truncate text-nowrap" placement="top"
-                  [ngbTooltip]="colVal?.taskDescription">{{colVal?.taskDescription}}</td>
+                  [ngbTooltip]="colVal?.taskDescription">{{colVal?.taskDesc}}</td>
               </tr>
             </tbody>
           </table>
@@ -96,6 +96,6 @@
     </ngb-panel>
   </ngb-accordion>
   <div class="w-100 text-right mt-2">
-    <button class="btn custom-button" *ngIf="resultTable.length>0">Export</button>
+    <button class="btn custom-button" *ngIf="resultTable.length>0" (click)="excelDownload()">Export</button>
   </div>
 </div>
