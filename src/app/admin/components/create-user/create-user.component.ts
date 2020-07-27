@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { OptionModel } from 'src/app/core/models/option.model';
 import { AddUserApiService } from '../../services/add-user-api.service';
 import { User } from 'src/app/core/models/user.model';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-create-user',
@@ -26,7 +27,10 @@ export class CreateUserComponent implements OnInit {
     });
   }
 
-  createAccount() {
-    this.addUserApiService.registerUser(this.user).subscribe();
+  createAccount(user: NgForm) {
+    console.log('model', this.user);
+    console.log('form', user.value);
+
+    this.addUserApiService.registerUser(user.value).subscribe();
   }
 }

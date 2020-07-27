@@ -19,7 +19,7 @@ export class CommonDomainsApiService {
   loadCommonDomains(): Observable<CommonDomainsModel> {
     return this.http.get<CommonDomainsModel>(this.LOAD_ADD_USERS_DOMAINS)
       .pipe(
-        shareReplay(1)
+        // shareReplay(1)
       );
   }
 

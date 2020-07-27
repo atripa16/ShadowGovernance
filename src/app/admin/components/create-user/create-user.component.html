@@ -1,31 +1,36 @@
 <div class="p-2 mt-3">
   <ngb-accordion #acc="ngbAccordion" activeIds="AccountDetails">
     <ngb-panel id="AccountDetails">
-      <ng-template ngbPanelHeader >
+      <ng-template ngbPanelHeader>
         <div class="d-flex align-items-center justify-content-between ">
           <h5 class="text-header">Account Details</h5>
         </div>
       </ng-template>
 
       <ng-template ngbPanelContent>
-        <form  #user="ngForm" class="row">
+        <form #user="ngForm" (ngSubmit)="createAccount(user)" class="row">
 
           <div class="col-6">
-            <app-custom-input [type]="'text'" [label]="'First Name'" [name]="'fname'" [placeholder]="'Enter First Name'" [required]="true" [(ngModel)]="user.firstName"></app-custom-input>
-            </div>
-          <div class="col-6">
-            <app-custom-input [type]="'text'" [label]="'Last Name'"  [placeholder]="'Enter Last Name'" [name]="'lname'"  [required]="true" [(ngModel)]="user.lastName"></app-custom-input>
-            </div>
-          <div class="col-6">
-            <app-custom-input [required]="true" [placeholder]="'abc@capgemini.com'" [pattern]="'^[_a-z0-9-\\+]+(\\.[_a-z0-9-]+)*@capgemini.com$'" [label]="'Email'" [name]="'email'"  [required]="true" [(ngModel)]="user.userEmail"></app-custom-input>
-           </div>
-          <div class="col-6">
-            <app-custom-dropdown [options]="roles" [label]="'Type'" [name]="'type'"  [required]="true" [(ngModel)]="user.code"></app-custom-dropdown>
-            </div>
-          <div class="w-100 text-center mt-4">
-            <button class="btn custom-button" [disabled]="user.invalid" (click)=createAccount()>Create Account</button>
+            <app-custom-input [type]="'text'" [label]="'First Name'" [name]="'firstName'" [placeholder]="'Enter First Name'"
+              [required]="true" [(ngModel)]="user.firstName"></app-custom-input>
           </div>
-
+          <div class="col-6">
+            <app-custom-input [type]="'text'" [label]="'Last Name'" [placeholder]="'Enter Last Name'" [name]="'lastName'"
+              [required]="true" [(ngModel)]="user.lastName"></app-custom-input>
+          </div>
+          <div class="col-6">
+            <app-custom-input [required]="true" [placeholder]="'abc@capgemini.com'"
+              [pattern]="'^[_a-z0-9-\\+]+(\\.[_a-z0-9-]+)*@gmail.com$'" [label]="'Email'" [name]="'userEmail'"
+              [required]="true" [(ngModel)]="user.userEmail"></app-custom-input>
+          </div>
+          <div class="col-6">
+            <app-custom-dropdown [options]="roles" [label]="'Type'" [name]="'role'" [required]="true"
+              [(ngModel)]="user.role"></app-custom-dropdown>
+          </div>
+          <div class="w-100 text-center mt-4">
+            <button class="btn custom-button" [disabled]="user.invalid" type="submit">Create
+              Account</button>
+          </div>
         </form>
       </ng-template>
     </ngb-panel>
