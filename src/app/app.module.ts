@@ -24,7 +24,7 @@ import { GlobalErrorHandler } from './home/utils/global-error-handler';
   ],
   providers: [
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
-    // { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

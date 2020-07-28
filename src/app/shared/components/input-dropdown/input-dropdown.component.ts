@@ -82,7 +82,7 @@ export class InputDropdownComponent implements OnInit, ControlValueAccessor, Aft
 
   selectChoice(choice) {
     if (choice.description) {
-      this.writeValue(choice.description);
+      this.writeValue(choice);
       this.removeShowOptions();
     } else {
       this.writeValue(choice);

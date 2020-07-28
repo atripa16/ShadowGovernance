@@ -12,7 +12,7 @@ export class EndUserApiService {
 
   readonly LOAD_CURR_WEEK_TASKS = environment.apiUrl + '/getTasksForSelectedWeek';
 
-  readonly FETCH_END_USER_DOMAINS = environment.apiUrl + '/getEmployee/';
+  readonly FETCH_END_USER_DOMAINS = environment.apiUrl + '/getEmployee';
 
   readonly INSERT_END_USER_DETAILS = environment.apiUrl + '/addEmployee';
 
@@ -24,7 +24,7 @@ export class EndUserApiService {
   fetchEndUserDetails(id: number, dates: string[]): Observable<EmployeeInfo> {
     const httpParams = new HttpParams().set('id', id.toString())
       .set('dates', dates.toString());
-    return this.http.get<EmployeeInfo>(this.FETCH_END_USER_DOMAINS, { params: httpParams });
+    return this.http.get<EmployeeInfo>(this.FETCH_END_USER_DOMAINS, {params : httpParams});
   }
 
   loadCurrWeekTasks(id: number, dates: string[]): Observable<TaskDescription[]> {
