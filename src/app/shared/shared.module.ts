@@ -8,6 +8,7 @@ import { CustomDropdownComponent } from './components/custom-dropdown/custom-dro
 import { InputDropdownComponent } from './components/input-dropdown/input-dropdown.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { CustomCheckboxComponent } from './components/checkbox/custom-checkbox.component';
+import { Search } from './components/input-dropdown/search.pipe';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { CustomCheckboxComponent } from './components/checkbox/custom-checkbox.c
     CustomDropdownComponent,
     CustomDateComponent,
     ChangePasswordComponent,
-    CustomCheckboxComponent
+    CustomCheckboxComponent,
+    Search
   ],
   imports: [
     CommonModule,

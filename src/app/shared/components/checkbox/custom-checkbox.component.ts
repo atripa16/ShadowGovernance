@@ -35,6 +35,7 @@ export class CustomCheckboxComponent implements OnInit, ControlValueAccessor, Af
 
     writeValue(value: boolean): void {
         this.value = value;
+        this.changes.emit(value);
     }
 
     registerOnTouched(onTouched: () => void) {
@@ -50,6 +51,7 @@ export class CustomCheckboxComponent implements OnInit, ControlValueAccessor, Af
     }
 
     valueChange(value) {
+        debugger
         this.onChange(value);
         this.changes.emit(value)
     }
