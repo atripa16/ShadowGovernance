@@ -19,7 +19,7 @@ export class CustomCheckboxComponent implements OnInit, ControlValueAccessor, Af
     onChange: (value: any) => void;
     onTouched: () => void;
     value = false;
-    @Output() change = new EventEmitter<Boolean>();
+    @Output() changes = new EventEmitter<boolean>();
     @Input() disabled: true | false;
 
     constructor(private _changeD: ChangeDetectorRef) {
@@ -50,8 +50,8 @@ export class CustomCheckboxComponent implements OnInit, ControlValueAccessor, Af
     }
 
     valueChange(value) {
-        this.change.emit(value);
         this.onChange(value);
+        this.changes.emit(value)
     }
 
 

@@ -1,6 +1,6 @@
 <div class="pf_field pf_field--consent pf-required" data-validate="checkboxes">
     <div class="pf_consent__wrapper">
-        <input type="checkbox" id="_pf_356649_1857" name="_pf_356649_1857[]" [disabled]="disabled" [(ngModel)]="value" (click)=valueChange(value) (change)="valueChange(value)" >
+        <input type="checkbox" id="_pf_356649_1857" name="_pf_356649_1857[]" [disabled]="disabled" [(ngModel)]="value" (ngModelChange)="valueChange($event)" >
         <label for="_pf_356649_1857" >
             <span *ngIf="label">{{label}}</span>
         </label>
