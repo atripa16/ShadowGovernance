@@ -69,6 +69,9 @@ export class AddResourceDetailsComponent implements OnInit {
    */
   resetForm(): void {
     this.fresherDetails.reset();
+    while (this.taskArr.length > 1) {
+      this.taskArr.removeAt(0);
+    }
   }
 
   /**
@@ -256,7 +259,6 @@ export class AddResourceDetailsComponent implements OnInit {
   insertEmpData() {
     this.employeeInfo = { ...this.fresherDetails.value };
     this.employeeInfo.date = this.currDatesArray();
-    console.log('data in table', this.employeeInfo);
     this.endUserApiService.insertEndUserDetails(this.employeeInfo).subscribe(() => {
       const ngbModalRef: NgbModalRef = this.ngbModal.open(SuccessComponent, { centered: true, backdrop: 'static', keyboard: false });
       ngbModalRef.componentInstance.successMessage = 'Details Inserted Successfully!';

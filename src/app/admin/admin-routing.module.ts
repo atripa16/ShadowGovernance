@@ -23,7 +23,7 @@ const routes: Routes = [
       {
         path: 'create-user',
         component: CreateUserComponent,
-        // resolve: { roles: GetUserRole }
+        resolve: { roles: GetUserRole }
       },
       {
         path: 'analysis',

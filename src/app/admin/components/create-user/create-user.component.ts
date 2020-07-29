@@ -28,9 +28,6 @@ export class CreateUserComponent implements OnInit {
   }
 
   createAccount(user: NgForm) {
-    console.log('model', this.user);
-    console.log('form', user.value);
-
     this.addUserApiService.registerUser(user.value).subscribe();
   }
 }

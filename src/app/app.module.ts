@@ -23,7 +23,7 @@ import { GlobalErrorHandler } from './home/utils/global-error-handler';
     CoreModule,
   ],
   providers: [
-    // { provide: ErrorHandler, useClass: GlobalErrorHandler },
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     fakeBackendProvider
   ],
