@@ -8,24 +8,24 @@
       </ng-template>
 
       <ng-template ngbPanelContent>
-        <form #user="ngForm" (ngSubmit)="createAccount(user)" class="row">
+        <form #userForm="ngForm" (ngSubmit)="createAccount(userForm)" class="row">
 
           <div class="col-6">
-            <app-custom-input [type]="'text'" [label]="'First Name'" [name]="'firstName'" [placeholder]="'Enter First Name'"
-              [required]="true" [(ngModel)]="user.firstName"></app-custom-input>
+            <app-custom-input [errorMessage]="'Please enter first name'" [type]="'text'" [label]="'First Name'" [name]="'firstName'"
+              [placeholder]="'Enter First Name'" [required]="true" [(ngModel)]="user.firstName"></app-custom-input>
           </div>
           <div class="col-6">
-            <app-custom-input [type]="'text'" [label]="'Last Name'" [placeholder]="'Enter Last Name'" [name]="'lastName'"
-              [required]="true" [(ngModel)]="user.lastName"></app-custom-input>
+            <app-custom-input [errorMessage]="'Please enter last name'" [type]="'text'" [label]="'Last Name'" [placeholder]="'Enter Last Name'"
+              [name]="'lastName'" [required]="true" [(ngModel)]="user.lastName"></app-custom-input>
           </div>
           <div class="col-6">
-            <app-custom-input [required]="true" [placeholder]="'abc@capgemini.com'"
+            <app-custom-input [errorMessage]="'Please enter email'" [required]="true" [placeholder]="'abc@capgemini.com'"
               [pattern]="'^[_a-z0-9-\\+]+(\\.[_a-z0-9-]+)*@gmail.com$'" [label]="'Email'" [name]="'userEmail'"
               [required]="true" [(ngModel)]="user.userEmail"></app-custom-input>
           </div>
           <div class="col-6">
-            <app-custom-dropdown [options]="roles" [label]="'Type'" [name]="'role'" [required]="true"
-              [(ngModel)]="user.role"></app-custom-dropdown>
+            <app-custom-dropdown [errorMessage]="'Please select Role'" [placeholder]="'Select Role'" [options]="roles"
+              [label]="'Type'" [name]="'role'" [required]="true" [(ngModel)]="user.role"></app-custom-dropdown>
           </div>
           <div class="w-100 text-center mt-4">
             <button class="btn custom-button" [disabled]="user.invalid" type="submit">Create

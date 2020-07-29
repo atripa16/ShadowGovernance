@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { NgbActiveModal, NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenticationApiService } from 'src/app/core/services/authentication-api.service';
 import { ChangePasswordModel } from '../../../admin/models/change-password.model';
-import { SuccessComponent } from 'src/app/home/components/success/success.component';
+import { SuccessComponent } from 'src/app/home/modals/success/success.component';
 
 @Component({
   selector: 'app-change-password',

@@ -1,4 +1,4 @@
-import { AfterViewChecked, ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, Input, OnInit, ViewChild, HostListener } from '@angular/core';
 import { ControlValueAccessor, NgModel, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
@@ -61,6 +61,5 @@ export class CustomDateComponent implements OnInit, ControlValueAccessor, AfterV
     valueChange(value) {
         this.onChange(value);
     }
-
 
 }

@@ -1,0 +1,19 @@
+<div class="custom-border">
+  <div class="modal-header">
+    <h4 class="modal-title text-uppercase" id="modal-title">Confirm</h4>
+  </div>
+  <div class="modal-body my-2">
+    <div>
+      <p class="text-center m-0">
+        <b>Are you sure?</b>
+      </p>
+      <p class="text-center m-0">
+        <b>you will be logged out!</b>
+      </p>
+    </div>
+  </div>
+  <div class="border-top text-center">
+    <button (click)="ngbActiveModal.close('no')" class="btn btn-success my-2 mr-1 col-5">No</button>
+    <button (click)="ngbActiveModal.close('yes')" class="btn btn-success my-2 col-5">Yes</button>
+  </div>
+</div>

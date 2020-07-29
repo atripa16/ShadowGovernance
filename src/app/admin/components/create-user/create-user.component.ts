@@ -12,7 +12,7 @@ import { NgForm } from '@angular/forms';
 })
 export class CreateUserComponent implements OnInit {
 
-  user: User = {} as User;
+  user: User = { firstName: '', lastName: '', role: null, userEmail: '' };
 
   roles: OptionModel = {} as OptionModel;
 

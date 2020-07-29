@@ -8,7 +8,7 @@ import { TaskDescription } from '../../models/task-description.model';
 import { WeekModel } from '../../models/week.model';
 import { EndUserApiService } from '../../services/end-user-api.service';
 import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { SuccessComponent } from 'src/app/home/components/success/success.component';
+import { SuccessComponent } from 'src/app/home/modals/success/success.component';
 import { tap, map } from 'rxjs/operators';
 
 @Component({
@@ -33,11 +33,12 @@ export class AddResourceDetailsComponent implements OnInit {
   calendarDays = [
     'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'
   ];
+
   fresherDetails = new FormGroup({
     capgId: new FormControl(''),
     name: new FormControl(''),
     email: new FormControl(''),
-    bu: new FormControl(''),
+    bu: new FormControl(null),
     isShadow: new FormControl(),
     projName: new FormControl(''),
     mentorName: new FormControl(''),
@@ -121,12 +122,6 @@ export class AddResourceDetailsComponent implements OnInit {
       }
     });
   }
-
-  /**
-   * Decides whether to show shadow details forms or not
-   * @param isShadow stores the value of isShadow field
-   */
-  
 
   /**
    * Adds a new row of FormGroup for tasks

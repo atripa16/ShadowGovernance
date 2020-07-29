@@ -6,12 +6,14 @@ import { GetUserRole } from './Resolver/get-user-roles.resolver';
 import { HomeComponent } from './components/home/home.component';
 import { AdminAuthGuard } from './guards/admin-auth-guard.service';
 import { AnalystAuthGuard } from './guards/analyst-auth.guard';
+import { LogoutGuard } from './guards/logout.guard';
 
 const routes: Routes = [
   {
     path: 'admin',
     component: HomeComponent,
     canActivate: [AdminAuthGuard],
+    canDeactivate: [LogoutGuard],
     children: [
       {
         path: '',
@@ -21,7 +23,7 @@ const routes: Routes = [
       {
         path: 'create-user',
         component: CreateUserComponent,
-        resolve: { roles: GetUserRole }
+        // resolve: { roles: GetUserRole }
       },
       {
         path: 'analysis',
@@ -33,6 +35,7 @@ const routes: Routes = [
     path: 'analysis',
     component: HomeComponent,
     canActivate: [AnalystAuthGuard],
+    canDeactivate: [LogoutGuard],
     children: [
       {
         path: '',

@@ -21,7 +21,7 @@ export class AnalysisComponent implements OnInit, AfterViewInit, AfterViewChecke
   page = 1;
   pageSize = 10;
   collectionSize = this.resultTable.length;
-  filter: FilterModel = { bu: '', from: null, task: '', to: null };
+  filter: FilterModel = { bu: null, from: null, task: null, to: null };
   isFilterClicked = false;
   activeIds = [];
   @ViewChild('filterAccordion') filterAccordion: NgbAccordion;

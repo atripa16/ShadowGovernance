@@ -2,7 +2,7 @@ import { ErrorHandler, Injectable, Injector } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenticationApiService } from 'src/app/core/services/authentication-api.service';
-import { ErrorComponent } from '../components/error/error.component';
+import { ErrorComponent } from '../modals/error/error.component';
 import { Errors } from '../enums/errors.enum';
 
 @Injectable()

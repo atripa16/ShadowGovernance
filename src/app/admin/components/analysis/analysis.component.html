@@ -15,7 +15,7 @@
               <app-date [label]="'From'" [name]="'from'" [(ngModel)]="filter.from"></app-date>
             </div>
             <div class="col-6">
-              <app-date [label]="'To'" [name]="'to'" [minDate]="filter.from" [(ngModel)]="filter.to"></app-date>
+              <app-date [label]="'To'" [errorMessage]="'To date cannot be less than From'" [name]="'to'" [minDate]="filter.from" [(ngModel)]="filter.to"></app-date>
             </div>
             <div class="col-6">
               <app-custom-dropdown [placeholder]="'Select BU'" [options]="commonDomainsModel.businessUnits"

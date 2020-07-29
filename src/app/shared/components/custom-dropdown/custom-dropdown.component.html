@@ -7,7 +7,7 @@
     <select class="form-control box-Shadow rounded-0" [name]='name' [required]="required" [id]="name" [(ngModel)]=value
         (ngModelChange)="valueChange($event)" [disabled]='disabled' #modelRef="ngModel"
         [ngClass]="{'errorStyle':(modelRef.control?.errors && (modelRef.control.touched || modelRef.control.dirty))}">
-        <option [value]="''" selected>{{placeholder}}</option>
+        <option value="null" selected>{{placeholder}}</option>
         <option *ngFor="let choice of options" [value]="choice.code">{{choice.description}}</option>
     </select>
     <div *ngIf="modelRef.control.errors && (modelRef.control.touched || modelRef.control.dirty)">
