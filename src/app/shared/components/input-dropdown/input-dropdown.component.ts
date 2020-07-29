@@ -47,14 +47,18 @@ export class InputDropdownComponent implements OnInit, ControlValueAccessor, Aft
     let isContainVal = true;
     if (isNullOrUndefined(value) || typeof (value) === 'string') {
       this.searchValue = value;
-    } else {
+    } else if (!isNullOrUndefined(value.description)) {
+      this.searchValue = value.description;
+    } else{
       this.searchValue = '';
     }
 
     this.options.forEach(choice => {
       if (choice.description === this.searchValue) {
         isContainVal = false;
-        // this.onChange({ code: choice.code, description: value });
+        if (this.onChange !== undefined && this.onChange != null) {
+        this.onChange({ code: choice.code, description: value });
+        }
       }
     });
     if (this.onChange !== undefined && this.onChange != null) {

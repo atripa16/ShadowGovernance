@@ -20,7 +20,7 @@ export class ErrorInterceptorService implements HttpInterceptor {
         if (httpErrorResponse.status > 400) {
           const ngbModalRef: NgbModalRef = this.ngbModal.open(ErrorComponent,
             { centered: true, backdrop: 'static', keyboard: false });
-          ngbModalRef.componentInstance.errorMessage = httpErrorResponse.error.message;
+          ngbModalRef.componentInstance.errorMessage = httpErrorResponse.error;
         }
         return throwError(httpErrorResponse);
       })

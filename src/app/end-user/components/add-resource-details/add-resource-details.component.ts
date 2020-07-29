@@ -233,21 +233,8 @@ export class AddResourceDetailsComponent implements OnInit {
     if (taskInfo.length > 0) {
       taskInfo.forEach((currTask, index) => {
         this.addRow();
-        const taskDetail = {
-          monday: '',
-          tuesday: '',
-          wednesday: '',
-          thursday: '',
-          friday: '',
-        };
-        taskDetail.friday = currTask.friday.description;
-        taskDetail.monday = currTask.monday.description;
-        taskDetail.tuesday = currTask.tuesday.description;
-        taskDetail.wednesday = currTask.wednesday.description;
-        taskDetail.thursday = currTask.thursday.description;
-        taskDetails.push(taskDetail);
-      });
-      this.fresherDetails.controls.taskDesc.patchValue(taskDetails);
+       });
+      this.fresherDetails.controls.taskDesc.patchValue(taskInfo);
     } else {
       this.addRow();
     }
@@ -264,5 +251,20 @@ export class AddResourceDetailsComponent implements OnInit {
       ngbModalRef.componentInstance.successMessage = 'Details Inserted Successfully!';
     });
   }
+
+  //  /**
+  //  * This method will disable user from typing number in name field
+  //  * @param type stores the type of the field
+  //  * @param code stores the keyCode of the event
+  //  * @param event stores the event
+  //  */
+  // @HostListener('window:keydown', ['$event.target.type', '$event.keyCode', '$event'])
+  // preventNumericFields(type: string, code: number, event: Event): void {
+  //   if (type === 'number' && [69, 187, 188, 189, 190].includes(code)) {
+  //     // prevent: "e", "=", ",", "-", "."
+  //     event.preventDefault();
+  //   }
+  //   49 -57 0-9
+  // }
 
 }

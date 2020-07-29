@@ -29,6 +29,7 @@ export class ChangePasswordComponent implements OnInit {
     this.modal.close(response);
     this.authenticationService.changePassword(this.changePasswordModel)
       .subscribe(() => {
+        console.log('password changed');
         const ngbModalRef: NgbModalRef = this.ngbModal.open(SuccessComponent, { centered: true, backdrop: 'static', keyboard: false });
         ngbModalRef.componentInstance.successMessage = 'Password changed Successfully!';
       });

@@ -51,9 +51,8 @@ export class CustomCheckboxComponent implements OnInit, ControlValueAccessor, Af
     }
 
     valueChange(value) {
-        debugger
         this.onChange(value);
-        this.changes.emit(value)
+        this.changes.emit(value);
     }
 
 
