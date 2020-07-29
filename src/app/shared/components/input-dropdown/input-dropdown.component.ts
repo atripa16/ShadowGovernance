@@ -23,7 +23,7 @@ export class InputDropdownComponent implements OnInit, ControlValueAccessor, Aft
   onChange: (value: any) => void;
   onTouched: () => void;
   @Input() options: any[] = [];
-  searchValue :any;
+  searchValue: any;
   showOptions: any[] = [];
   @Input() placeholder = '';
   @Input() disabled: boolean;
@@ -41,22 +41,20 @@ export class InputDropdownComponent implements OnInit, ControlValueAccessor, Aft
   }
 
   writeValue(value: any): void {
-    
     if (!this.options) {
       this.options = [];
     }
     let isContainVal = true;
-    if(isNullOrUndefined(value) || typeof(value) === 'string' ){
-    this.searchValue = value;
+    if (isNullOrUndefined(value) || typeof (value) === 'string') {
+      this.searchValue = value;
+    } else {
+      this.searchValue = '';
     }
-    else{
-      this.searchValue=''
-    }
-    
+
     this.options.forEach(choice => {
       if (choice.description === this.searchValue) {
         isContainVal = false;
-        this.onChange({ code: choice.code, description: value });
+        // this.onChange({ code: choice.code, description: value });
       }
     });
     if (this.onChange !== undefined && this.onChange != null) {
@@ -90,7 +88,7 @@ export class InputDropdownComponent implements OnInit, ControlValueAccessor, Aft
 
   selectChoice(choice) {
     if (choice.description) {
-      this.writeValue(choice);
+      this.writeValue(choice.description);
       this.removeShowOptions();
     } else {
       this.writeValue(choice);

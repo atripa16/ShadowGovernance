@@ -198,7 +198,7 @@ export class AddResourceDetailsComponent implements OnInit {
         this.fresherDetails.controls.name.setValue(empData.name);
         this.fresherDetails.controls.email.setValue(empData.email);
         this.fresherDetails.controls.bu.setValue(empData.bu);
-        this.fresherDetails.controls.isShadow.setValue(empData.isShadow.toLowerCase() === 'Y'.toLowerCase() ? true : false);
+        this.fresherDetails.controls.isShadow.setValue(empData.isShadow);
         this.fresherDetails.controls.projName.setValue(empData.projName);
         this.fresherDetails.controls.mentorName.setValue(empData.mentorName);
         this.setTaskData(empData.taskDesc);
