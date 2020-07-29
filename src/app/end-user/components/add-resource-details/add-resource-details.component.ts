@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
 import { CommonDomainsModel } from 'src/app/shared/models/common-domains.model';
@@ -233,7 +233,7 @@ export class AddResourceDetailsComponent implements OnInit {
     if (taskInfo.length > 0) {
       taskInfo.forEach((currTask, index) => {
         this.addRow();
-       });
+      });
       this.fresherDetails.controls.taskDesc.patchValue(taskInfo);
     } else {
       this.addRow();
@@ -252,19 +252,18 @@ export class AddResourceDetailsComponent implements OnInit {
     });
   }
 
-  //  /**
-  //  * This method will disable user from typing number in name field
-  //  * @param type stores the type of the field
-  //  * @param code stores the keyCode of the event
-  //  * @param event stores the event
-  //  */
-  // @HostListener('window:keydown', ['$event.target.type', '$event.keyCode', '$event'])
-  // preventNumericFields(type: string, code: number, event: Event): void {
-  //   if (type === 'number' && [69, 187, 188, 189, 190].includes(code)) {
-  //     // prevent: "e", "=", ",", "-", "."
-  //     event.preventDefault();
-  //   }
-  //   49 -57 0-9
-  // }
+  /**
+   * This method will disable user from typing number and special characters in name field
+   * @param id stores the id of the field
+   * @param code stores the keyCode of the event
+   * @param event stores the event
+   */
+  @HostListener('window:keydown', ['$event.target.id', '$event.keyCode', '$event'])
+  preventNameField(id: string, code: number, event: Event): void {
+    if (id === 'name' && (code >= 48 && code <= 57) || [187, 188, 189, 190, 192, 191, 186, 222, 219, 221].includes(code)) {
+      // prevent: "e", "=", ",", "-", "."
+      event.preventDefault();
+    }
+  }
 
 }
