@@ -1,5 +1,6 @@
 import { AfterViewChecked, ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnInit, Renderer2 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-input-dropdown',
@@ -22,7 +23,7 @@ export class InputDropdownComponent implements OnInit, ControlValueAccessor, Aft
   onChange: (value: any) => void;
   onTouched: () => void;
   @Input() options: any[] = [];
-  searchValue = '';
+  searchValue :any;
   showOptions: any[] = [];
   @Input() placeholder = '';
   @Input() disabled: boolean;
@@ -39,12 +40,19 @@ export class InputDropdownComponent implements OnInit, ControlValueAccessor, Aft
 
   }
 
-  writeValue(value: string): void {
+  writeValue(value: any): void {
+    
     if (!this.options) {
       this.options = [];
     }
     let isContainVal = true;
-    this.searchValue = value;
+    if(!isNullOrUndefined(value)&& !value.description ){
+    this.searchValue = typeof(value) === 'string'? value: value.description;
+    }
+    else{
+      this.searchValue=''
+    }
+    
     this.options.forEach(choice => {
       if (choice.description === this.searchValue) {
         isContainVal = false;
@@ -71,7 +79,7 @@ export class InputDropdownComponent implements OnInit, ControlValueAccessor, Aft
   }
 
   setDisabledState?(isDisabled: boolean): void {
-   this.disabled = isDisabled;
+    this.disabled = isDisabled;
   }
 
   searchValueChange(value) {
