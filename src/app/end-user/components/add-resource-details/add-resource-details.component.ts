@@ -10,6 +10,7 @@ import { EndUserApiService } from '../../services/end-user-api.service';
 import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { SuccessComponent } from 'src/app/home/modals/success/success.component';
 import { tap, map } from 'rxjs/operators';
+import { OptionModel } from 'src/app/core/models/option.model';
 
 @Component({
   selector: 'app-add-resource-details',
@@ -98,7 +99,15 @@ export class AddResourceDetailsComponent implements OnInit {
     this.commonDomainsApiService.loadCommonDomains().pipe(
       map(
         (data: CommonDomainsModel) => {
-          data.defaultId = '6';
+          const desc: OptionModel[] = [];
+          data.taskDescriptions.forEach(element => {
+            if (element.description.toUpperCase() === 'OTHER') {
+              data.defaultId = element.code;
+            } else {
+              desc.push(element);
+            }
+          });
+          data.taskDescriptions = desc;
           return data;
         }
       )
@@ -258,12 +267,12 @@ export class AddResourceDetailsComponent implements OnInit {
    * @param code stores the keyCode of the event
    * @param event stores the event
    */
-  @HostListener('window:keydown', ['$event.target.id', '$event.keyCode', '$event'])
-  preventNameField(id: string, code: number, event: Event): void {
-    if (id === 'name' && (code >= 48 && code <= 57) || [187, 188, 189, 190, 192, 191, 186, 222, 219, 221].includes(code)) {
-      // prevent: "e", "=", ",", "-", "."
-      event.preventDefault();
-    }
-  }
+  // @HostListener('window:keydown', ['$event.target.id', '$event.keyCode', '$event'])
+  // preventNameField(id: string, code: number, event: Event): void {
+  //   if (id === 'name' && (code >= 48 && code <= 57) || [187, 188, 189, 190, 192, 191, 186, 222, 219, 221].includes(code)) {
+  //     // prevent: "e", "=", ",", "-", "."
+  //     event.preventDefault();
+  //   }
+  // }
 
 }

@@ -28,7 +28,7 @@ export class LogoutGuard implements CanDeactivate<HomeComponent> {
         shouldRedirect$.next(true);
         shouldRedirect$.complete();
       } else {
-        shouldRedirect$.next(true);
+        shouldRedirect$.next(false);
         shouldRedirect$.complete();
       }
     });
