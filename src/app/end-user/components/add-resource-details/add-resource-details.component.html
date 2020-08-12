@@ -7,7 +7,8 @@
       <div class="col-6">
         <app-custom-input [errorMessage]="'Please enter valid capgemini id. Eg: 123456'"
           [placeholder]="'Enter your capgemini id'" [pattern]="'^[0-9]{1,15}$'" [required]="true"
-          formControlName="capgId" [name]="'capgId'" [type]="'number'" [label]="'Capgemini Id'"></app-custom-input>
+          formControlName="capgId" [name]="'capgId'" [type]="'number'"
+          [label]="'Capgemini Id'"></app-custom-input>
       </div>
       <div class="col-6">
         <button (click)="fetchEmpData()" [disabled]="isFetchDisabled" class="btn custom-button">Fetch</button>
@@ -60,6 +61,8 @@
           </app-custom-input>
         </div>
       </div>
+    </div>
+    <div *ngIf="inShadow">
       <div class="row">
         <div class="w-100 my-2">
           <h2 class="text-secondary my-auto d-inline">Task Description</h2>
@@ -104,7 +107,7 @@
       </div>
     </div>
   </form>
-  <div class="text-right w-100 custom-margin">
+  <div class="text-right w-100">
     <button type="button" (click)="resetForm()" class="btn custom-button">Reset</button>
     <button type="button" [disabled]="fresherDetails.invalid" (click)="insertEmpData()"
       class="btn custom-button">Submit</button>

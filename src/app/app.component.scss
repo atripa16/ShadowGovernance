@@ -1,7 +1,8 @@
-.custom-fixed-bottom{
-    bottom: 0 !important;
+.main-root {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
-
-.container{
-    min-height: 100vh !important;
+app-footer {
+    margin-top: auto;
 }

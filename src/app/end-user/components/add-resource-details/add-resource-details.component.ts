@@ -11,6 +11,7 @@ import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstra
 import { SuccessComponent } from 'src/app/home/modals/success/success.component';
 import { tap, map } from 'rxjs/operators';
 import { OptionModel } from 'src/app/core/models/option.model';
+import { empty } from 'rxjs';
 
 @Component({
   selector: 'app-add-resource-details',
@@ -69,10 +70,17 @@ export class AddResourceDetailsComponent implements OnInit {
    * Resets the form
    */
   resetForm(): void {
-    this.fresherDetails.reset();
-    while (this.taskArr.length > 1) {
-      this.taskArr.removeAt(0);
-    }
+    this.fresherDetails.controls.capgId.enable();
+    this.fresherDetails.controls.name.enable();
+    this.fresherDetails.controls.email.enable();
+    this.fresherDetails.controls.bu.enable();
+    this.fresherDetails.controls.isShadow.enable();
+    this.fresherDetails.controls.projName.enable();
+    this.fresherDetails.controls.mentorName.enable();
+    const emptyEmp: EmployeeInfo = {} as EmployeeInfo;
+    emptyEmp.bu = null;
+    this.patchFormData(emptyEmp);
+    this.setTaskData(emptyEmp.taskDesc);
   }
 
   /**
@@ -203,15 +211,36 @@ export class AddResourceDetailsComponent implements OnInit {
   fetchEmpData(): void {
     this.endUserApiService.fetchEndUserDetails(this.fresherDetails.controls.capgId.value,
       this.currDatesArray()).subscribe((empData: EmployeeInfo) => {
+        this.fresherDetails.controls.capgId.disable();
+        this.fresherDetails.controls.name.disable();
+        this.fresherDetails.controls.email.disable();
+        if (empData.mentorName) {
+          this.fresherDetails.controls.bu.disable();
+          this.fresherDetails.controls.isShadow.disable();
+          this.fresherDetails.controls.projName.disable();
+          this.fresherDetails.controls.mentorName.disable();
+        } else {
+          this.fresherDetails.controls.bu.enable();
+          this.fresherDetails.controls.isShadow.enable();
+          this.fresherDetails.controls.projName.enable();
+          this.fresherDetails.controls.mentorName.enable();
+        }
         this.patchFormData(empData);
-        this.fresherDetails.controls.name.setValue(empData.name);
-        this.fresherDetails.controls.email.setValue(empData.email);
-        this.fresherDetails.controls.bu.setValue(empData.bu);
-        this.fresherDetails.controls.isShadow.setValue(empData.isShadow);
-        this.fresherDetails.controls.projName.setValue(empData.projName);
-        this.fresherDetails.controls.mentorName.setValue(empData.mentorName);
         this.setTaskData(empData.taskDesc);
-      });
+      },
+        (err) => {
+          this.fresherDetails.controls.capgId.enable();
+          this.fresherDetails.controls.name.enable();
+          this.fresherDetails.controls.email.enable();
+          this.fresherDetails.controls.bu.enable();
+          this.fresherDetails.controls.isShadow.enable();
+          this.fresherDetails.controls.projName.enable();
+          this.fresherDetails.controls.mentorName.enable();
+          const emptyEmp: EmployeeInfo = {} as EmployeeInfo;
+          emptyEmp.bu = null;
+          this.patchFormData(emptyEmp);
+          this.setTaskData(emptyEmp.taskDesc);
+        });
   }
 
   /**
@@ -220,6 +249,7 @@ export class AddResourceDetailsComponent implements OnInit {
    */
   patchFormData(empData: EmployeeInfo): void {
     this.fresherDetails.patchValue({
+      capgId: empData.capgId,
       name: empData.name,
       email: empData.email,
       bu: empData.bu,

@@ -42,7 +42,6 @@ export class InputDropdownComponent implements OnInit, ControlValueAccessor, Aft
   }
 
   writeValue(value: any): void {
-    debugger
     if (!this.options) {
       this.options = [];
     }

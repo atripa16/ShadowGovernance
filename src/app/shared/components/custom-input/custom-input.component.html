@@ -4,8 +4,8 @@
     </label>
     <input [type]="type" [name]="name" class="form-control box-Shadow rounded-0" [required]="required" [placeholder]="placeholder" [id]="name" [(ngModel)]=value
          (ngModelChange)="valueChange($event)" [disabled]='disabled' #modelRef="ngModel" [pattern]='pattern'
-        [ngClass]="{'errorStyle':(modelRef.control?.errors && (modelRef.control.touched || modelRef.control.dirty))}">
-    <div *ngIf="modelRef.control.errors && (modelRef.control.touched || modelRef.control.dirty)">
+        [ngClass]="{'errorStyle':(modelRef.invalid && (modelRef.touched || modelRef.dirty))}">
+    <div *ngIf="modelRef.invalid && (modelRef.touched || modelRef.dirty)">
         <small class="errorText">{{errorMessage}}</small>
     </div>
 </div>

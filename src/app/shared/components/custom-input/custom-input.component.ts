@@ -32,10 +32,12 @@ export class CustomInputComponent implements OnInit, ControlValueAccessor, After
     ) { }
 
     ngOnInit(): void {
-
     }
 
     writeValue(value: string): void {
+        if (!value) {
+            this.modelRef.reset();
+        }
         this.value = value;
     }
 
