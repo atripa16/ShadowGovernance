@@ -7,17 +7,21 @@
       <div class="col-6">
         <app-custom-input [errorMessage]="'Please enter valid capgemini id. Eg: 123456'"
           [placeholder]="'Enter your capgemini id'" [pattern]="'^[0-9]{1,15}$'" [required]="true"
-          formControlName="capgId" [name]="'capgId'" [type]="'number'"
-          [label]="'Capgemini Id'"></app-custom-input>
+          formControlName="capgId" [name]="'capgId'" [type]="'number'" [label]="'Capgemini Id'"></app-custom-input>
       </div>
       <div class="col-6">
-        <button (click)="fetchEmpData()" [disabled]="isFetchDisabled" class="btn custom-button">Fetch</button>
+        <button (click)="fetchEmpData()" [disabled]="isFetchDisabled" class="btn custom-button ml-0">Fetch</button>
+      </div>
+      <div class="col-8 mb-4 pr-0">
+        <i class="fa fa-info-circle pr-1" aria-hidden="true"></i><small class="text-justify"><strong>Note: </strong>Please use the 'Fetch' button if you are already registered. Already
+          existing data will not be modified for the registered user. Also, already added tasks cannot be
+          removed/modified.</small>
       </div>
     </div>
     <div class="row">
       <div class="col-6">
         <app-custom-input [errorMessage]="'Please enter valid full name. Eg: Ajay Mehta'"
-          [placeholder]="'Enter your full name'" [required]="true" formControlName="name" [name]="'name'"
+          [placeholder]="'Enter your full name'" [required]="true" formControlName="name" [name]="'empName'"
           [type]="'text'" [label]="'Name'"></app-custom-input>
       </div>
       <div class="col-6">
@@ -97,7 +101,7 @@
             <tr *ngFor="let task of fresherDetails.get('taskDesc').controls" [formGroup]='task'>
               <td *ngFor="let currWeek of currWeekInfo;let i = index">
                 <app-input-dropdown [defaultKey]="commonDomainsModel.defaultId"
-                  [options]="commonDomainsModel.taskDescriptions" [disabled]="isTaskFieldDisabled(currWeek.date)"
+                  [options]="commonDomainsModel.taskDescriptions" [disabled]="isTaskFieldDisabled(currWeek.date, calendarDays[i])"
                   [formControlName]="calendarDays[i]" [name]="calendarDays[i]" [placeholder]="'Choose/ Enter Task'">
                 </app-input-dropdown>
               </td>

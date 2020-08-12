@@ -62,8 +62,8 @@ export class AddResourceDetailsComponent implements OnInit {
     return currentWeekDates;
   }
 
-  isTaskFieldDisabled(date: string): boolean {
-    return this.getMoment(date).isAfter(moment());
+  isTaskFieldDisabled(date: string, controlName: string): boolean {
+    return this.getMoment(date).isAfter(moment()) || !!this.fresherDetails.controls[controlName].value;
   }
 
   /**
@@ -298,12 +298,12 @@ export class AddResourceDetailsComponent implements OnInit {
    * @param code stores the keyCode of the event
    * @param event stores the event
    */
-  // @HostListener('window:keydown', ['$event.target.id', '$event.keyCode', '$event'])
-  // preventNameField(id: string, code: number, event: Event): void {
-  //   if (id === 'name' && (code >= 48 && code <= 57) || [187, 188, 189, 190, 192, 191, 186, 222, 219, 221].includes(code)) {
-  //     // prevent: "e", "=", ",", "-", "."
-  //     event.preventDefault();
-  //   }
-  // }
+  @HostListener('window:keydown', ['$event.target.id', '$event.keyCode', '$event'])
+  preventNameField(id: string, code: number, event: Event): void {
+    if (id === 'empName' && (code >= 48 && code <= 57) || [187, 188, 189, 190, 192, 191, 186, 222, 219, 221].includes(code)) {
+      // prevent: "e", "=", ",", "-", "."
+      event.preventDefault();
+    }
+  }
 
 }
