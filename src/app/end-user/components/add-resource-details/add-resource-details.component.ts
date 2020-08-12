@@ -283,7 +283,7 @@ export class AddResourceDetailsComponent implements OnInit {
    * Inserts the Employee records in the database.
    */
   insertEmpData() {
-    this.employeeInfo = { ...this.fresherDetails.value };
+    this.employeeInfo = { ...this.fresherDetails.getRawValue() };
     this.employeeInfo.date = this.currDatesArray();
     this.endUserApiService.insertEndUserDetails(this.employeeInfo).subscribe((data) => {
       const ngbModalRef: NgbModalRef = this.ngbModal.open(SuccessComponent, { centered: true, backdrop: 'static', keyboard: false });
