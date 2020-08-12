@@ -33,7 +33,7 @@ export class EndUserApiService {
     return this.http.get<TaskDescription[]>(this.LOAD_CURR_WEEK_TASKS, { params: httpParams });
   }
 
-  insertEndUserDetails(employeeInfo: EmployeeInfo): Observable<void> {
-    return this.http.post<void>(this.INSERT_END_USER_DETAILS, employeeInfo);
+  insertEndUserDetails(employeeInfo: EmployeeInfo): Observable<string> {
+    return this.http.post(this.INSERT_END_USER_DETAILS, employeeInfo, {responseType: 'text'});
   }
 }

@@ -46,7 +46,7 @@ export class AuthenticationApiService {
     this.currentUserSubject.next(null);
   }
 
-  changePassword(passwordInfo: ChangePasswordModel): Observable<void> {
-    return this.http.post<void>(this.CHANGE_PASSWORD_URL, passwordInfo);
+  changePassword(passwordInfo: ChangePasswordModel): Observable<string> {
+    return this.http.post(this.CHANGE_PASSWORD_URL, passwordInfo, {responseType: 'text'});
   }
 }

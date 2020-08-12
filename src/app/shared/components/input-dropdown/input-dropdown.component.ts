@@ -1,6 +1,7 @@
 import { AfterViewChecked, ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnInit, Renderer2 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { isNullOrUndefined } from 'util';
+import { IterableChangeRecord_ } from '@angular/core/src/change_detection/differs/default_iterable_differ';
 
 @Component({
   selector: 'app-input-dropdown',
@@ -41,6 +42,7 @@ export class InputDropdownComponent implements OnInit, ControlValueAccessor, Aft
   }
 
   writeValue(value: any): void {
+    debugger
     if (!this.options) {
       this.options = [];
     }
@@ -49,21 +51,23 @@ export class InputDropdownComponent implements OnInit, ControlValueAccessor, Aft
       this.searchValue = value;
     } else if (!isNullOrUndefined(value.description)) {
       this.searchValue = value.description;
-    } else{
+    } else {
       this.searchValue = '';
     }
-
-    this.options.forEach(choice => {
-      if (choice.description === this.searchValue) {
-        isContainVal = false;
-        if (this.onChange !== undefined && this.onChange != null) {
-        this.onChange({ code: choice.code, description: value });
+    if (!isNullOrUndefined(this.searchValue) && this.searchValue !== '') {
+      this.options.forEach(choice => {
+        if (choice.description === this.searchValue) {
+          isContainVal = false;
+          if (this.onChange !== undefined && this.onChange != null) {
+            this.onChange({ code: choice.code, description: value });
+          }
         }
-      }
-    });
-    if (this.onChange !== undefined && this.onChange != null) {
-      if (isContainVal) {
-        this.onChange({ code: this.defaultKey, description: value });
+      });
+
+      if (this.onChange !== undefined && this.onChange != null) {
+        if (isContainVal) {
+          this.onChange({ code: this.defaultKey, description: value });
+        }
       }
     }
   }

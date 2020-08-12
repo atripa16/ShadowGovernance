@@ -19,7 +19,8 @@ export class AddUserApiService {
     const currentUser = this.authenticationService.currentUserValue;
 
     return this.httpClient.post(this.registerUsr, user, {
-      headers: { Authorization: `Bearer ${currentUser.token}`}
+      headers: { Authorization: `Bearer ${currentUser.token}`},
+      responseType: 'text'
     }
       );
   }
