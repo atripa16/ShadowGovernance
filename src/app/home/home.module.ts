@@ -8,6 +8,7 @@ import { SuccessComponent } from './modals/success/success.component';
 import { GlobalErrorHandler } from './utils/global-error-handler';
 import { ConfirmComponent } from './modals/confirm/confirm.component';
 import { ErrorComponent } from './modals/error/error.component';
+import { LoginModalComponent } from './components/login-modal/login-modal.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { ErrorComponent } from './modals/error/error.component';
     FooterComponent,
     ErrorComponent,
     SuccessComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    LoginModalComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +34,8 @@ import { ErrorComponent } from './modals/error/error.component';
   entryComponents: [
     ErrorComponent,
     SuccessComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    LoginModalComponent
   ]
 })
 export class HomeModule { }

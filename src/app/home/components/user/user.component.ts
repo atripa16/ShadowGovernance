@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { AuthenticationApiService } from 'src/app/core/services/authentication-api.service';
-import { LoginModalComponent } from 'src/app/end-user/components/login-modal/login-modal.component';
+import { LoginModalComponent } from 'src/app/home/components/login-modal/login-modal.component';
 import { User } from 'src/app/core/models/user.model';
 import { ChangePasswordComponent } from 'src/app/shared/components/change-password/change-password.component';
 
