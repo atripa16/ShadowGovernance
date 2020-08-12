@@ -7,12 +7,10 @@ import { RequestFilterModel } from '../models/RequestFilter.model';
 @Injectable()
 export class AnalysisApiService {
 
-
-  readonly FETCH_ANALYSIS_DOMAINS = environment.apiUrl + '/getFilterResult';//'assets/mock/admin/AnalysisResultTable.json';
+  readonly FETCH_ANALYSIS_DOMAINS = environment.apiUrl + '/getFilterResult';
   readonly LOAD_ADD_USERS_DOMAINS = environment.apiUrl + '/loadBusinessUnits';
   readonly FETCH_ANALYSIS_RESULT_COUNT = environment.apiUrl + '/getFilterResultCount';
   readonly DOWNLOAD_EXCEL = environment.apiUrl + '/downlodExcel';
-
 
   constructor(
     private http: HttpClient
@@ -20,7 +18,6 @@ export class AnalysisApiService {
 
   getAnalysisResult(filters: RequestFilterModel): Observable<any> {
     return this.http.post(this.FETCH_ANALYSIS_DOMAINS, filters);
-    //return this.http.get<any>(this.FETCH_ANALYSIS_DOMAINS);
   }
 
   getAnalysisResultTotalCount(filters: RequestFilterModel): Observable<number> {

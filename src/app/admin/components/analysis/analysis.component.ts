@@ -7,7 +7,7 @@ import { CommonDomainsModel } from 'src/app/shared/models/common-domains.model';
 import { CommonDomainsApiService } from 'src/app/shared/services/common-domains-api.service';
 import { RequestFilterModel } from '../../models/RequestFilter.model';
 import { NgForm } from '@angular/forms';
-import { Excel } from '../Enum/Excel.enum';
+import { Excel } from '../../Enum/Excel.enum';
 
 @Component({
   selector: 'app-analysis',
@@ -34,28 +34,45 @@ export class AnalysisComponent implements OnInit, AfterViewInit, AfterViewChecke
     private changeDetectorRef: ChangeDetectorRef
   ) { }
 
+  /**
+   * Detect changes after page is initialised.
+   */
   ngAfterViewChecked(): void {
     this.changeDetectorRef.detectChanges();
   }
 
+  /**
+   * Expands the accordion by default when the page is initilised by the user.
+   */
   ngAfterViewInit(): void {
     this.filterAccordion.expandAll();
   }
 
+  /**
+   * Load all the drop down values.
+   */
   ngOnInit() {
     this.commonDomainsApiService.loadCommonDomains().subscribe((commonDomainsModel: CommonDomainsModel) => {
       this.commonDomainsModel = commonDomainsModel;
     });
   }
 
+  /**
+   * Clears the form.
+   * @param filterForm contains the form instance
+   */
   clear(filterForm: NgForm): void {
     filterForm.resetForm();
   }
 
+  /**
+   * loads resultTable and collectionSize. resultTable holds the page 1 data.
+   * CollectionSize contains the total size of the records which match the filtered criteria.
+   * @param page contains the page number
+   */
   search(page?: number) {
     if (page) {
       this.page = page;
-
     }
     this.isFilterClicked = true;
     const requestModel: RequestFilterModel = this.getDataInValidFormat(this.filter);
@@ -67,6 +84,10 @@ export class AnalysisComponent implements OnInit, AfterViewInit, AfterViewChecke
       });
   }
 
+  /**
+   * Formats the model and converts it in the necessary type.
+   * @param filterModel holds the filtermodel to modify
+   */
   getDataInValidFormat(filterModel: FilterModel): RequestFilterModel {
     const requestModel = {} as RequestFilterModel;
     requestModel.bu = filterModel.bu ? filterModel.bu : '';
@@ -78,10 +99,17 @@ export class AnalysisComponent implements OnInit, AfterViewInit, AfterViewChecke
     return requestModel;
   }
 
+  /**
+   * Formats the date in the required format.
+   * @param date holds the date to format
+   */
   formatDate(date: NgbDateStruct | null): string {
     return date ? date.year + this.DELIMITER + date.month + this.DELIMITER + date.day : '';
   }
 
+  /**
+   * call downloadExcelFile api and load the excelBlob
+   */
   excelDownload() {
     const requestModel: RequestFilterModel = this.getDataInValidFormat(this.filter);
 
@@ -89,6 +117,11 @@ export class AnalysisComponent implements OnInit, AfterViewInit, AfterViewChecke
       (excelBlob) => { this.downloadFile(excelBlob); }
     );
   }
+
+  /**
+   * Downlaods the excel file with the name defined in the Excel enum.
+   * @param data contains the data to be inserted in excel file
+   */
   downloadFile(data: any) {
     const blob = new Blob([data], { type: 'application/vnd.ms-excel' });
     const element = document.createElement('a');

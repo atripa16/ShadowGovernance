@@ -4,6 +4,7 @@ import { OptionModel } from 'src/app/core/models/option.model';
 import { environment } from 'src/environments/environment';
 import { User } from 'src/app/core/models/user.model';
 import { AuthenticationApiService } from 'src/app/core/services/authentication-api.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,17 +16,17 @@ export class AddUserApiService {
 
   constructor(private httpClient: HttpClient, private authenticationService: AuthenticationApiService) { }
 
-  registerUser(user: User) {
+  registerUser(user: User): Observable<string> {
     const currentUser = this.authenticationService.currentUserValue;
 
     return this.httpClient.post(this.registerUsr, user, {
-      headers: { Authorization: `Bearer ${currentUser.token}`},
+      headers: { Authorization: `Bearer ${currentUser.token}` },
       responseType: 'text'
     }
-      );
+    );
   }
 
-  getRoles() {
+  getRoles(): Observable<OptionModel[]> {
     return this.httpClient.get<OptionModel[]>(this.roles);
   }
 }

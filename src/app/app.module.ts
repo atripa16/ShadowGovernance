@@ -18,7 +18,6 @@ import { ErrorInterceptorService } from './home/interceptors/error-interceptor.s
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    EndUserModule,
     HomeModule,
     CoreModule,
   ],
